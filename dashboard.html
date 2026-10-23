@@ -172,7 +172,7 @@
     <p>
       Integrates the dimensionless smooth (C<sup>∞</sup>) 4D system Eqs. (4)–(7) with quadratic self-feedback ratio
       R<sub>self</sub> = fb² / (fb² + (fP₀)² + σ₀²) using boundary-layer adaptive sub-stepped RK4 (Δt = 0.0005 near soft walls, Δt = 0.005 in bulk).
-      Evaluates closed-loop Routh–Hurwitz Hopf thresholds e<sub>c</sub><sup>CL</sup>(P₀, Λ<sub>eff</sub>) for P₀ &gt; 0, zero-drive Ψ-memory SNLC persistence at P₀ = 0, and single-period Poincaré integrals.
+      Evaluates closed-loop Routh–Hurwitz Hopf thresholds e<sub>c</sub><sup>CL</sup>(P₀, Λ<sub>eff</sub>) for P₀ &gt; 0, zero-drive Ψ-memory cycle-persistence threshold λ<sub>lucid,crit</sub>(x₀) at P₀ = 0, and single-period Poincaré integrals.
     </p>
   </div>
 
@@ -465,7 +465,7 @@
         banner.style.borderLeftColor = '#94a3b8';
         titleEl.innerText = `Zero-Drive Origin Collapse: Trajectory Decays to Locally Stable Origin (0,0,0,0)`;
       }
-      subEl.innerText = `At P₀ = 0 and Λ_eff = ${(lsim/9).toFixed(3)} ≤ 1, no positive interior equilibrium or Hopf bifurcation exists (roots γ* ∈ {0, −10(1−Λ_eff)/Λ_eff}). Self-sustained oscillation requires Ψ-memory coupling λ_lucid > λ_lucid,SNLC (0.0803 at Λ_eff=0; 0.0580 at Λ_eff=0.80) to bridge the γ_min ≈ 0.00036 trough.`;
+      subEl.innerText = `At P₀ = 0 and Λ_eff = ${(lsim/9).toFixed(3)} ≤ 1, no positive interior equilibrium or Hopf bifurcation exists (roots γ* ∈ {0, −10(1−Λ_eff)/Λ_eff}). Sustained oscillation from x₀ = (2.05, 95, 4, 0.05) requires Ψ-memory coupling above the basin-dependent cycle-persistence threshold λ_lucid > λ_lucid,crit(x₀) (0.0803 at Λ_eff=0; 0.0580 at Λ_eff=0.80) to bridge the γ_min ≈ 0.00036 trough.`;
     } else {
       const ratioCL = hopf.ec_cl !== null ? (e / hopf.ec_cl) : Infinity;
       if (!isOscillating) {

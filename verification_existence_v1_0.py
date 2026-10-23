@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Appendix B v1.0 — Bounded Self-Referential Dynamics in a 4D Soft-Wall ODE System:
-Post-Hopf Relaxation Cycles, Psi-Memory Persistence, Variational Floquet Multipliers,
+Post-Hopf Relaxation Cycles, Psi-Memory Persistence, Variational Floquet Analysis,
 and Pointwise Boundary Algebra
 Author: Prince Upadhyay (Symbolic, Variational & Reproducibility Verification Suite v1.0)
 
@@ -33,17 +33,24 @@ This script performs six verification layers on the dimensionless 4D soft-wall O
      gamma_floor(P_0) > 0 for P_0 > 0.
    - Compares LSODA vs. DOP853 across rtol in {10^-8, 10^-10, 10^-12} on Sigma = {gamma = 2.0, dgamma/dt > 0}
      across Regimes I, II, IIIa, IIIb, IVa, IVb (P_0=0, lam_sim=7.2, lam_lucid=0.3), and
-     IVc (P_0=0, lam_sim=0, lam_lucid=0.3), reporting 'N/A (SNLC)' for e_c^CL at P_0 = 0.
-4. 20D Variational Monodromy Floquet Multipliers, 2x2 Zero-Drive Ablation & SNLC Continuation:
+     IVc (P_0=0, lam_sim=0, lam_lucid=0.3), reporting 'None (No Eq)' for e_c^CL at P_0 = 0.
+4. 20D Variational Monodromy Floquet Multipliers, 2x2 Zero-Drive Ablation & Cycle-Persistence Threshold:
    - Integrates the exact 20D first-variation ODE (dx/dt = F(x), dPhi/dt = J_4(x)*Phi) over one period T,
-     verifying the tangent eigenvector identity ||Phi(T)*F(x_0) - F(x_0)|| / ||F(x_0)|| < 10^-8 and
-     computing the Saltation-projected 3x3 transverse return-map Jacobian DP_var without finite differences.
+     verifying the tangent eigenvector identity ||Phi(T)*F(x_0) - F(x_0)|| / ||F(x_0)|| ~ 10^-9 (< 10^-8)
+     and computing the Saltation-projected 3x3 transverse return-map Jacobian DP_var. Because eigenvalues
+     smaller than the monodromy flow-direction error (~10^-9) lie below numerical resolution, transverse
+     multipliers below the monodromy error floor are reported strictly as '< 1e-8 (below ~1e-9 monodromy
+     error floor)' (with the decoupled slow-memory multiplier mu_Psi = 2.537698e-6 >> 10^-9 resolved in
+     Regime II), while 3-initial-condition Poincare section convergence (Delta_IC ~ 10^-11 < 10^-8) provides
+     the stronger direct numerical evidence of orbital attraction.
    - Performs the 2x2 ablation at P_0 = 0, demonstrating that slow Psi-memory (lam_lucid*Psi >= 0.22 across
      the gamma ~ 3.6e-4 trough) sustains the zero-drive oscillation, whereas memoryless proportional feedback
      (lam_sim=7.2, lam_lucid=0) decays to the origin.
-   - Bisects the Saddle-Node of Limit Cycles (SNLC) birth threshold lam_lucid,SNLC at P_0 = 0 both without
-     proportional feedback (lam_lucid,SNLC(0) = 0.080341) and with Lam_eff = 0.80
-     (lam_lucid,SNLC(0.80) = 0.057974, a 27.8% threshold reduction accompanied by a 9.14x boost in P_bar_eff,T).
+   - Bisects the basin-dependent cycle-persistence threshold from x_0 = (2.05, 95.0, 4.0, 0.05),
+     lam_lucid,crit(x_0), at P_0 = 0 both without proportional feedback (lam_lucid,crit(x_0; 0) = 0.080341)
+     and with Lam_eff = 0.80 (lam_lucid,crit(x_0; 0.80) = 0.057974, a 27.8% reduction from x_0 accompanied
+     by a 9.14x increase in P_bar_eff,T; note that forward bisection from fixed x_0 measures a basin-dependent
+     persistence threshold rather than a continuation-tracked saddle-node of limit cycles).
 5. Parameter Cube Minimum vs. Maximum Corner & RK4 Soft-Wall Stiffness Audit.
 6. Offline Lean 4 Source Check (17 Theorems in `ExistenceVerification.lean`) & Quantitative Archival Digest.
 """
@@ -483,7 +490,7 @@ def run_layer3_8face_nagumo_and_multitolerance_poincare():
         assert abs(tol_results[1e-10]["peff"] - tol_results[1e-12]["peff"]) < 1e-6
 
         r10 = tol_results[1e-10]
-        ec_str = f"{ec_cl:10.4f}" if ec_cl is not None else "N/A (SNLC)"
+        ec_str = f"{ec_cl:10.4f}" if ec_cl is not None else "None(NoEq)"
         if r10["T"] == 0.0:
             T_str = "Fixed Pt"
             div_str = "   —   "
@@ -501,7 +508,7 @@ def run_layer3_8face_nagumo_and_multitolerance_poincare():
 
 def run_layer4_variational_floquet_and_p0_zero_ablation():
     print("\n" + "=" * 94)
-    print("4. 20D VARIATIONAL MONODROMY FLOQUET MULTIPLIERS, 2x2 P_0=0 ABLATION & SNLC CONTINUATION")
+    print("4. 20D VARIATIONAL MONODROMY FLOQUET MULTIPLIERS, 2x2 P_0=0 ABLATION & CYCLE PERSISTENCE")
     print("=" * 94)
 
     ics = [
@@ -558,17 +565,20 @@ def run_layer4_variational_floquet_and_p0_zero_ablation():
                               method="LSODA", rtol=1e-12, atol=1e-14)
         mu_psi_exact = float(np.exp(s_psi_int.y[4, -1]))
 
+        # Note: eigenvalues smaller than the monodromy flow-direction error ||M*f-f||/||f|| (~1e-9)
+        # lie below numerical resolution and are reported strictly as '< 1e-8'.
+        rho_3d_str = f"{rho_var_3d:.2e}" if label.startswith("Regime II ") else "<1e-8 (below ~1e-9 err floor)"
         print(
-            f"{label:<46} : 3-IC={max_ic_diff:.2e}, ||M*f-f||/||f||={tangent_rel_err:.2e}, "
-            f"rho_var(H,I)={rho_var_2d:.2e}, mu_Psi={mu_psi_exact:.2e}, rho_var(3D)={rho_var_3d:.2e}"
+            f"{label:<46} : 3-IC={max_ic_diff:.2e} (<1e-8), ||M*f-f||/||f||={tangent_rel_err:.2e}, "
+            f"rho_var(H,I)=<1e-8, mu_Psi={mu_psi_exact:.2e}, rho_var(3D)={rho_3d_str}"
         )
         assert max_ic_diff < 1e-8 and max_T_diff < 1e-8
         assert tangent_rel_err < 1e-8
-        assert rho_var_2d < 1e-9
+        assert rho_var_2d < 1e-8
         if label.startswith("Regime II "):
             assert abs(DP_var[2, 2] - mu_psi_exact) < 1e-10 and rho_var_3d < 1e-5
         else:
-            assert rho_var_3d < 1e-9
+            assert rho_var_3d < 1e-8
 
     # 2x2 Zero-Drive (P_0 = 0) Mechanism Ablation & Near-Origin Bistability Check:
     s_near_origin = solve_ivp(
@@ -586,7 +596,7 @@ def run_layer4_variational_floquet_and_p0_zero_ablation():
     no_psi_residual = float(np.linalg.norm(s_no_psi_mem.y[:, -1]))
     assert no_psi_residual < 1e-12
 
-    # Continuation / Bisection of the Saddle-Node of Limit Cycles (SNLC) threshold in lam_lucid at P_0 = 0:
+    # Bisection of the basin-dependent cycle-persistence threshold from x_0 = (2.05, 95.0, 4.0, 0.05) in lam_lucid at P_0 = 0:
     def has_sustained_cycle_p0_zero(lluc_val, lsim_val):
         s_chk = solve_ivp(
             existence_4d_ode, (0.0, 520.0), [2.05, 95.0, 4.0, 0.05],
@@ -595,7 +605,7 @@ def run_layer4_variational_floquet_and_p0_zero_ablation():
         )
         return len(s_chk.t_events[0]) >= 4 and s_chk.t_events[0][-1] > 420.0
 
-    snlc_thresholds = {}
+    cycle_persistence_thresholds = {}
     for lsim_v, key_name in [(0.0, "lam_sim_0_0"), (7.2, "lam_sim_7_2")]:
         lo, hi = 0.0, 0.20
         for _ in range(26):
@@ -604,19 +614,19 @@ def run_layer4_variational_floquet_and_p0_zero_ablation():
                 hi = mid
             else:
                 lo = mid
-        snlc_thresholds[key_name] = round(0.5 * (lo + hi), 6)
+        cycle_persistence_thresholds[key_name] = round(0.5 * (lo + hi), 6)
 
-    assert abs(snlc_thresholds["lam_sim_0_0"] - 0.080341) < 5e-6
-    assert abs(snlc_thresholds["lam_sim_7_2"] - 0.057974) < 5e-6
+    assert abs(cycle_persistence_thresholds["lam_sim_0_0"] - 0.080341) < 5e-6
+    assert abs(cycle_persistence_thresholds["lam_sim_7_2"] - 0.057974) < 5e-6
 
     print("-" * 94)
-    print("P_0 = 0 Mechanism Ablation & Saddle-Node of Limit Cycles (SNLC) Continuation:")
+    print("P_0 = 0 Mechanism Ablation & Cycle-Persistence Threshold from x_0 = (2.05, 95.0, 4.0, 0.05):")
     print(f"  1. Near-Origin IC x(0)=(1e-3)^4 (lam_sim=7.2, lam_luc=0.30) : ||x(320)||_2 = {origin_residual:.2e} (< 1e-12, locally stable origin)")
     print(f"  2. Memoryless Loop Only (lam_sim=7.2, lam_luc=0.00)         : ||x(400)||_2 = {no_psi_residual:.2e} (< 1e-12, collapses at gamma_min~3.6e-4 trough)")
     print(f"  3. Pure Psi-Memory Loop (lam_sim=0.0, lam_luc=0.30, IVc)    : SUSTAINED CYCLE (T = 17.936755, P_bar_eff,T = 0.239590, Psi_min = 0.7305)")
-    print(f"  4. Coupled Loop (lam_sim=7.2, lam_luc=0.30, IVb)            : SUSTAINED CYCLE (T = 19.387103, P_bar_eff,T = 2.190321, 9.14x flux amplification)")
-    print(f"  5. SNLC Bifurcation Threshold lam_lucid,SNLC at P_0 = 0     : {snlc_thresholds['lam_sim_0_0']:.6f} (at Lam_eff=0) -> {snlc_thresholds['lam_sim_7_2']:.6f} (at Lam_eff=0.80, -27.8%)")
-    return snlc_thresholds
+    print(f"  4. Coupled Loop (lam_sim=7.2, lam_luc=0.30, IVb)            : SUSTAINED CYCLE (T = 19.387103, P_bar_eff,T = 2.190321, 9.14x internal ODE flux ratio)")
+    print(f"  5. Cycle-Persistence Threshold lam_lucid,crit(x_0) at P_0=0 : {cycle_persistence_thresholds['lam_sim_0_0']:.6f} (at Lam_eff=0) -> {cycle_persistence_thresholds['lam_sim_7_2']:.6f} (at Lam_eff=0.80, -27.8% from x_0)")
+    return cycle_persistence_thresholds
 
 
 def run_layer5_dashboard_min_max_extremes_audit():
@@ -677,7 +687,7 @@ def strip_lean_comments(text):
     return no_line
 
 
-def run_layer6_lean_source_and_reproducibility_digest(hopf_rec, snlc_thresholds):
+def run_layer6_lean_source_and_reproducibility_digest(hopf_rec, cycle_persistence_thresholds):
     print("\n" + "=" * 94)
     print("6. OFFLINE LEAN 4 SOURCE CHECK (17 THEOREMS) & QUANTITATIVE REPRODUCIBILITY DIGEST")
     print("=" * 94)
@@ -741,7 +751,7 @@ def run_layer6_lean_source_and_reproducibility_digest(hopf_rec, snlc_thresholds)
         "lakefile_sha256": hashlib.sha256(lf_path.read_bytes()).hexdigest(),
         "lean4_theorems_verified_count": len(req_theorems),
         "exact_hopf_algebra": hopf_rec,
-        "p0_zero_snlc_thresholds": snlc_thresholds,
+        "p0_zero_cycle_persistence_thresholds_from_x0": cycle_persistence_thresholds,
     }
     repro_digest = digest_object(repro_record)
 
@@ -749,7 +759,7 @@ def run_layer6_lean_source_and_reproducibility_digest(hopf_rec, snlc_thresholds)
     print(f"Upstream Lineage DOIs            : 10.5281/zenodo.23534449 | 10.17605/OSF.IO/8CFQW | 10.17605/OSF.IO/NM5BW")
     print(f"Quantitative Reproducibility Hash: {repro_digest}")
     print("=" * 94)
-    print("STATUS: ALL 6 VERIFICATION LAYERS (HOPF POLY, SYMPY/J_4, POINCARE, VARIATIONAL FLOQUET/SNLC, MIN/MAX & LEAN) PASSED")
+    print("STATUS: ALL 6 VERIFICATION LAYERS (HOPF POLY, SYMPY/J_4, POINCARE, VARIATIONAL FLOQUET/ABLATION, MIN/MAX & LEAN) PASSED")
     print("=" * 94)
     return repro_digest
 
@@ -758,6 +768,6 @@ if __name__ == "__main__":
     hopf_rec = run_layer1_exact_hopf_and_global_polynomial_positivity()
     run_layer2_sympy_4d_closed_loop_jacobian_audit()
     run_layer3_8face_nagumo_and_multitolerance_poincare()
-    snlc_rec = run_layer4_variational_floquet_and_p0_zero_ablation()
+    persistence_rec = run_layer4_variational_floquet_and_p0_zero_ablation()
     run_layer5_dashboard_min_max_extremes_audit()
-    run_layer6_lean_source_and_reproducibility_digest(hopf_rec, snlc_rec)
+    run_layer6_lean_source_and_reproducibility_digest(hopf_rec, persistence_rec)

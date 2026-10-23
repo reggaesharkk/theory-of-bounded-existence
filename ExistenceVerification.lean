@@ -25,8 +25,8 @@ zero `nlinarith` tactics**):
    `P_0 > 0` in `dIdot_dt_4D_pos_at_boundary` and `P_0 ≥ 0` in
    `dIdot_dt_4D_nonneg_at_boundary_zero_drive`).
 4. **Pointwise Linear Comparison Lower Bounds for `γ` and `İ`** (`dgamma_dt_4D_ge_neg_decay`
-   proving `dγ/dt ≥ -b γ`, and `dIdot_dt_4D_ge_linear_floor` proving
-   `dİ/dt ≥ f P_0 - e ((İ / ε_I) M_H_4D) - g İ` on `B_4`). Continuous-time forward invariance
+   proving `-(b * γ) ≤ dγ/dt`, and `dIdot_dt_4D_ge_linear_floor` proving
+   `f P_0 - e ((İ / ε_I) M_H_4D) - g İ ≤ dİ/dt` on `B_4`). Continuous-time forward invariance
    and Grönwall / uniform `liminf` persistence follow from these pointwise inequalities via
    classical ODE comparison theorems in the accompanying manuscript.
 5. **Unified 8-Face 4D Box Pointwise Certificate** (`existence_box_8face_nagumo_certificate`).
@@ -122,12 +122,12 @@ theorem dgamma_dt_4D_nonneg_at_boundary
 
 /-- Theorem B.1b (Pointwise Linear Decay Lower Bound for γ on `B_4`):
 For any state `s` in the box (`0 ≤ s.I_dot`, `s.gamma ≤ gamma_max`, `0 < gamma_max`), the production
-term `a * s.I_dot * E_avail * (1 - s.gamma / gamma_max)` is non-negative, so `dgamma_dt_4D ≥ -b * s.gamma`. -/
+term `a * s.I_dot * E_avail * (1 - s.gamma / gamma_max)` is non-negative, so `-(b * s.gamma) ≤ dgamma_dt_4D`. -/
 theorem dgamma_dt_4D_ge_neg_decay
     (a b E_avail gamma_max : ℝ)
     (ha : 0 ≤ a) (hE : 0 ≤ E_avail) (hgmax : 0 < gamma_max)
     (s : ExistenceState) (hI : 0 ≤ s.I_dot) (hgamma_le : s.gamma ≤ gamma_max) :
-    -b * s.gamma ≤ dgamma_dt_4D a b E_avail gamma_max s := by
+    -(b * s.gamma) ≤ dgamma_dt_4D a b E_avail gamma_max s := by
   unfold dgamma_dt_4D
   have h_div_le : s.gamma / gamma_max ≤ 1 := (div_le_one hgmax).mpr hgamma_le
   have h_one_sub : 0 ≤ 1 - s.gamma / gamma_max := sub_nonneg.mpr h_div_le
@@ -246,7 +246,8 @@ theorem dHobs_dt_4D_ge_neg_M_H
 /-- Theorem B.5c (Uniform Linear Comparison Lower Bound on `dIdot_dt_4D` for `liminf İ > 0`):
 Using `0 ≤ tanh(İ / ε_I) ≤ İ / ε_I` and `-M_H_4D ≤ dHobs_dt_4D` on `B_4`, the processing rate obeys
 `f P_0 - e ((İ / ε_I) M_H_4D) - g İ ≤ dIdot_dt_4D`, supplying the uniform linear differential lower
-bound that forces `liminf_{t → ∞} İ(t) ≥ f P_0 / (g + e M_H_4D / ε_I) > 0` whenever `P_0 > 0`. -/
+bound that forces `liminf_{t → ∞} İ(t) ≥ f P_0 / (g + e M_H_4D / ε_I) > 0` whenever `P_0 > 0`.
+Proved via explicit `mul_add`, `mul_assoc`, and `mul_le_mul_of_nonneg_left`/`right` without `nlinarith`. -/
 theorem dIdot_dt_4D_ge_linear_floor
     (e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max I_erase epsH epsI : ℝ)
     (hc : 0 ≤ c) (he : 0 ≤ e) (hf : 0 ≤ f)
@@ -263,13 +264,26 @@ theorem dIdot_dt_4D_ge_linear_floor
   have hdH_lo : -M_H_4D c gamma_max H_max I_erase ≤ dHobs_dt_4D c H_max I_erase epsH s :=
     dHobs_dt_4D_ge_neg_M_H c gamma_max H_max I_erase epsH hc hgmax hHmax hIe s
       hgamma_nonneg hH_le htanh_H_le_one
-  unfold dIdot_dt_4D P_eff
+  have h_Peff_lo : P_0 ≤ P_eff P_0 lam_sim r_lrsc lam_lucid s := by
+    unfold P_eff
+    have h_sr : 0 ≤ lam_sim * r_lrsc := mul_nonneg hsim hr
+    have h_gam_term : 0 ≤ lam_sim * r_lrsc * s.gamma := mul_nonneg h_sr hgamma_nonneg
+    have h_psi_term : 0 ≤ lam_lucid * s.Psi := mul_nonneg hluc hPsi_nonneg
+    linarith
+  unfold dIdot_dt_4D
   have hdH_sum : 0 ≤ dHobs_dt_4D c H_max I_erase epsH s + M_H_4D c gamma_max H_max I_erase := by
     linarith
   have h_step1 :
       0 ≤ Real.tanh (s.I_dot / epsI) *
         (dHobs_dt_4D c H_max I_erase epsH s + M_H_4D c gamma_max H_max I_erase) :=
     mul_nonneg htanh_I_nonneg hdH_sum
+  have h_dist1 :
+      Real.tanh (s.I_dot / epsI) *
+        (dHobs_dt_4D c H_max I_erase epsH s + M_H_4D c gamma_max H_max I_erase) =
+      Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s +
+        Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase :=
+    mul_add (Real.tanh (s.I_dot / epsI))
+      (dHobs_dt_4D c H_max I_erase epsH s) (M_H_4D c gamma_max H_max I_erase)
   have h_step2 :
       Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase ≤
       (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase :=
@@ -282,16 +296,19 @@ theorem dIdot_dt_4D_ge_linear_floor
       0 ≤ e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s +
         (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase) :=
     mul_nonneg he h_step3
+  have h_dist2 :
+      e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s +
+        (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase) =
+      e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s) +
+        e * ((s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase) :=
+    mul_add e
+      (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s)
+      ((s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase)
   have h_assoc :
       e * Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s =
       e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s) :=
     mul_assoc e (Real.tanh (s.I_dot / epsI)) (dHobs_dt_4D c H_max I_erase epsH s)
-  have h_sr : 0 ≤ lam_sim * r_lrsc := mul_nonneg hsim hr
-  have h_gam_term : 0 ≤ lam_sim * r_lrsc * s.gamma := mul_nonneg h_sr hgamma_nonneg
-  have h_psi_term : 0 ≤ lam_lucid * s.Psi := mul_nonneg hluc hPsi_nonneg
-  have h_Peff_lo : P_0 ≤ P_0 + lam_sim * r_lrsc * s.gamma + lam_lucid * s.Psi := by
-    linarith
-  have h_fPeff_lo : f * P_0 ≤ f * (P_0 + lam_sim * r_lrsc * s.gamma + lam_lucid * s.Psi) :=
+  have h_fPeff_lo : f * P_0 ≤ f * P_eff P_0 lam_sim r_lrsc lam_lucid s :=
     mul_le_mul_of_nonneg_left h_Peff_lo hf
   linarith
 

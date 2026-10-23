@@ -14,6 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Verify SHA-256 manifest checksums
+        run: |
+          sha256sum -c MANIFEST_SHA256.txt
+
       - name: Install elan and build Lean 4 modules (BoundaryVerification & ExistenceVerification)
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
