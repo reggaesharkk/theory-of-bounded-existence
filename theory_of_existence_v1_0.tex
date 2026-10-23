@@ -23,8 +23,8 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\textit{P.\ Upadhyay --- The Theory of Bounded Existence (Appendix B v1.0)}}
-\fancyhead[R]{\small\textit{VRK v0.3.1 Monograph}}
+\fancyhead[L]{\small\textit{P.\ Upadhyay --- Bounded 4D Soft-Wall \& $\Psi$-Memory Dynamics}}
+\fancyhead[R]{\small\textit{Appendix B v1.0}}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 
@@ -33,7 +33,7 @@
   linkcolor=primary,
   citecolor=primary,
   urlcolor=primary,
-  pdftitle={The Theory of Bounded Existence: Self-Referential Dynamics, Offline Relaxation Cycles, and Autopoietic Closure (Appendix B v1.0)},
+  pdftitle={Bounded Self-Referential Dynamics in a 4D Soft-Wall ODE System: Post-Hopf Relaxation Cycles, Psi-Memory Persistence, Saddle-Node Cycle Bifurcation, and Pointwise Boundary Algebra (Appendix B v1.0)},
   pdfauthor={Prince Upadhyay}
 }
 
@@ -68,15 +68,14 @@
   columns=fullflexible
 }
 
-\title{\textbf{The Theory of Bounded Existence}\\[6pt]
-\large Appendix B v1.0: Self-Referential Dynamics, Offline Relaxation Cycles,\\
-$\Psi$-Readout Thresholds, and Autopoietic Closure in Lean 4}
+\title{\textbf{Bounded Self-Referential Dynamics in a 4D Soft-Wall ODE System}\\[6pt]
+\large Appendix B v1.0: Post-Hopf Relaxation Cycles, $\Psi$-Memory Persistence,\\
+Saddle-Node Cycle Bifurcation, Variational Floquet Analysis, and Pointwise Boundary Algebra}
 \author{\textbf{Prince Upadhyay}\\
 \small Independent Researcher (\texttt{starxshark@gmail.com}) $\cdot$ ORCID: \href{https://orcid.org/0009-0002-1170-4487}{0009-0002-1170-4487}\\[2pt]
-\small Verified under IntentSeal VRK v0.3.1 (\href{https://doi.org/10.5281/zenodo.23018459}{DOI: 10.5281/zenodo.23018459})\\[1pt]
 \small GitHub \& Passing CI: \href{https://github.com/reggaesharkk/theory-of-bounded-existence}{reggaesharkk/theory-of-bounded-existence}\\[1pt]
-\small Lineage: Appendix A v1.5 (\href{https://doi.org/10.5281/zenodo.23534449}{10.5281/zenodo.23534449} / \href{https://doi.org/10.5281/zenodo.23501526}{23501526})\\[1pt]
-\small $\Psi$ Benchmark (\href{https://doi.org/10.17605/OSF.IO/8CFQW}{10.17605/OSF.IO/8CFQW}) $\cdot$ LRSC (\href{https://doi.org/10.17605/OSF.IO/NM5BW}{10.17605/OSF.IO/NM5BW})}
+\small Lineage: Appendix A v1.5 (\href{https://doi.org/10.5281/zenodo.23534449}{10.5281/zenodo.23534449}) $\cdot$ VRK v0.3.1 (\href{https://doi.org/10.5281/zenodo.23018459}{10.5281/zenodo.23018459})\\[1pt]
+\small $\Psi$ Organization (\href{https://doi.org/10.17605/OSF.IO/8CFQW}{10.17605/OSF.IO/8CFQW}) $\cdot$ LRSC (\href{https://doi.org/10.17605/OSF.IO/NM5BW}{10.17605/OSF.IO/NM5BW})}
 \date{October 23, 2026}
 
 \begin{document}
@@ -84,7 +83,9 @@ $\Psi$-Readout Thresholds, and Autopoietic Closure in Lean 4}
 \thispagestyle{fancy}
 
 \begin{abstract}
-What does it mean, in plain mathematical terms, for a finite, self-reflecting dynamical system to remain viable across time without blowing up or collapsing through zero? In the original unregularized equations of Physics v1.0--v1.4 (\href{https://doi.org/10.17605/OSF.IO/N3DQU}{DOI: 10.17605/OSF.IO/N3DQU}), pushing the internal feedback gain $e$ past the Hopf stability threshold ($e > e_c$, first Lyapunov coefficient $l_1 = \frac{305328816}{1498181485}\sqrt{13/2} > 0$) caused trajectories to cross below zero in finite time ($\gamma(t) < 0$ at $t \approx 55\,\mathrm{s}$). Rather than claiming a physical ``Theory of Everything'' or machine consciousness---both of which are strictly excluded by the Global Claim Firewall of the IntentSeal Verifiable Research Kernel (VRK v0.3.1, \href{https://doi.org/10.5281/zenodo.23018459}{DOI: 10.5281/zenodo.23018459})---this monograph studies an illustrative, dimensionless 4D dynamical system (\textbf{Appendix B v1.0: The Theory of Bounded Existence}) with unit-normalized structural constants ($a=b=c=f=g=\mathcal{E}_{\mathrm{avail}}=1$). Extending the 3D soft-wall system $(\gamma, H_{\mathrm{obs}}, \dot{I})$ of Appendix A v1.5 (\href{https://doi.org/10.5281/zenodo.23534449}{DOI: 10.5281/zenodo.23534449}), we add an activity-driven feedback readout $\Psi \in [0, 1]$ motivated by Program 02 (\href{https://doi.org/10.17605/OSF.IO/8CFQW}{DOI: 10.17605/OSF.IO/8CFQW}) governed by the smooth ($C^\infty$) quadratic ratio $R_{\mathrm{self}} = \mathrm{fb}^2 / (\mathrm{fb}^2 + (f\mathcal{P}_0)^2 + \sigma_0^2)$, together with an internal feedback loop $\Lambda_{\mathrm{eff}}\gamma = \lambda_{\mathrm{sim}}r_{\mathrm{LRSC}}\gamma$ scaled by $r_{\mathrm{LRSC}} = 1/9$ (\href{https://doi.org/10.17605/OSF.IO/NM5BW}{DOI: 10.17605/OSF.IO/NM5BW}). We establish four main results: (1) an \textbf{8-Face 4D Compact Box \& Gr\"onwall Positivity Theorem} (\texttt{ANALYTIC\_THEOREM}), where \texttt{ExistenceVerification.lean} (15 theorems, zero \texttt{sorry}, zero \texttt{nlinarith}, compiled via \texttt{lake build} in GitHub Actions CI) machine-checks the pointwise vector-field boundary inequalities on all eight faces of $\mathcal{B}_4 = [0, \gamma_{\max}] \times [0, H_{\max}] \times [0, \dot{I}_{\max,4\mathrm{D}}] \times [0, 1]$ (with \texttt{existence\_box\_8face\_nagumo\_certificate} bundling $\mathcal{P}_0 > 0$ and \texttt{dIdot\_dt\_4D\_nonneg\_at\_boundary\_zero\_drive} covering $\mathcal{P}_0 = 0$), the ceiling bounds $dH_{\mathrm{obs}}/dt \le M_H$ and $\mathcal{P}_{\mathrm{eff}} \le \mathcal{P}_{\mathrm{eff},\max}$, and the pointwise slope inequality $d\gamma/dt \ge -b\gamma$, from which global forward-invariance of $\mathcal{B}_4$ and strict interior positivity $\gamma(t) \ge \gamma(0)e^{-bt} > 0$ follow by classical application of the Nagumo--Bony--Brezis theorem and Gr\"onwall's lemma; (2) a \textbf{Global Hopf Monotonicity, Block-Triangular Decoupling \& Zero-Drive Origin Stability Theorem} (\texttt{ANALYTIC\_THEOREM}) proving that in the $\epsilon_H, \epsilon_I \to 0^+$ limit on the interior positivity domain $\mathcal{P}_0 > 10/99 \approx 0.1010$ (and at $\epsilon = 0.05$ for $\mathcal{P}_0 \ge 0.105$, where $H_{\mathrm{obs}}^* \ge 3.76 > 75\epsilon_H$ suppresses the entropy-wall correction $\operatorname{sech}^2(H_{\mathrm{obs}}^*/\epsilon_H) \le 1.8 \times 10^{-65}$ and leaves only the explicit factor $1/\tanh(\mathcal{P}_0/\epsilon_I)$ with $|e_c^{\mathrm{CL}} - e_c| \le 3.74 \times 10^{-4}$), the rational threshold $e_c(\mathcal{P}_0)$ satisfies $de_c/d\mathcal{P}_0 > 0$, proving that row 4 of the equilibrium Jacobian $J_4$ is $[0,0,0,-\mu_\Psi]$ so $\lambda_{\mathrm{lucid}}$ decouples at steady state, deriving $e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$, and proving that at $\mathcal{P}_0 = 0$ the origin $(0,0,0,0)$ is locally asymptotically stable for $0 \le \Lambda_{\mathrm{eff}} < bg/(a\mathcal{E}_{\mathrm{avail}}f) = 1$ (so zero-drive oscillation in Regime IVb is a bistable interior rhythm); (3) a \textbf{Multi-Tolerance Poincar\'e, Whole-Period Integral \& Floquet Inequality Audit} (\texttt{REPRODUCED\_RESULT}) across $\mathrm{rtol} \in \{10^{-8}, 10^{-10}, 10^{-12}\}$ verifying \texttt{LSODA}/\texttt{DOP853} agreement, 3-IC convergence ($\Delta_{\mathrm{IC}} < 10^{-8}$), transverse Floquet contraction ($\rho_{\mathrm{FD,tight}}(DP_{2,H\dot{I}}) < 10^{-7}$), and single-period integral $\overline{\mathcal{P}}_{\mathrm{eff},T} = 3.266554$ in Regime IVa ($2.190321$ in Regime IVb); and (4) an exact resolution of the \textbf{Minimum vs.\ Maximum Parameter Corners}, sealed under archival consistency digest \texttt{597b9ae3679dcd2e2bf17cf7c1616c463f48424ff1fd8453395936ecba066bbc}.
+We study a dimensionless, unit-normalized 4D ordinary differential equation system $x(t) = (\gamma(t), H_{\mathrm{obs}}(t), \dot{I}(t), \Psi(t))$ that extends the 3D hyperbolic-tangent soft-wall model of Appendix A v1.5 (\href{https://doi.org/10.5281/zenodo.23534449}{DOI: 10.5281/zenodo.23534449}) by coupling a slow-decaying activity coordinate $\Psi \in [0, 1]$ driven by the smooth ($C^\infty$) quadratic feedback ratio $R_{\mathrm{self}} = \mathrm{fb}^2 / (\mathrm{fb}^2 + (f\mathcal{P}_0)^2 + \sigma_0^2)$ and an effective input flux $\mathcal{P}_{\mathrm{eff}} = \mathcal{P}_0 + \Lambda_{\mathrm{eff}}\gamma + \lambda_{\mathrm{lucid}}\Psi$ ($\Lambda_{\mathrm{eff}} = \lambda_{\mathrm{sim}}r_{\mathrm{LRSC}}$). In Lean 4 (\texttt{ExistenceVerification.lean}, 17 theorems, zero \texttt{sorry}), we machine-check the pointwise algebraic sign conditions on all eight faces of the compact box $\mathcal{B}_4 = [0, \gamma_{\max}] \times [0, H_{\max}] \times [0, \dot{I}_{\max,4\mathrm{D}}] \times [0, 1]$ together with the pointwise linear comparison bounds $d\gamma/dt \ge -b\gamma$ and $d\dot{I}/dt \ge f\mathcal{P}_0 - (g + e M_H/\epsilon_I)\dot{I}$, from which continuous-time forward invariance of $\mathcal{B}_4$, finite-time positivity $\gamma(t) \ge \gamma(0)e^{-bt} > 0$, and uniform asymptotic floors $\liminf_{t\to\infty}\dot{I}(t) \ge \dot{I}_{\mathrm{floor}}(\mathcal{P}_0) > 0$ and $\liminf_{t\to\infty}\gamma(t) \ge \gamma_{\mathrm{floor}}(\mathcal{P}_0) > 0$ (for $\mathcal{P}_0 > 0$) follow by classical Nagumo and Gr\"onwall comparison arguments.
+
+Because $R_{\mathrm{self}}$ is quadratic in $\mathrm{fb} = e\tanh(\dot{I}/\epsilon_I)\dot{H}_{\mathrm{obs}}$, both $R_{\mathrm{self}}$ and $\nabla R_{\mathrm{self}}$ vanish at any steady state ($\dot{H}_{\mathrm{obs}}^* = 0$), so $\lambda_{\mathrm{lucid}}$ decouples by construction from the equilibrium Jacobian $J_4$. For $\mathcal{P}_0 > 0$, we prove global monotonicity $de_c/d\mathcal{P}_0 > 0$ of the $\epsilon \to 0^+$ open-loop Hopf threshold on $\mathcal{P}_0 > 10/99$, derive the closed-loop threshold $e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$, and evaluate transverse Floquet multipliers on the Poincar\'e section $\Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$ by integrating the 20D first-variation monodromy equations. At zero external drive ($\mathcal{P}_0 = 0$) with $0 \le \Lambda_{\mathrm{eff}} < 1$, no positive interior equilibrium or Hopf bifurcation exists and the origin $(0,0,0,0)$ is locally asymptotically stable; a $2\times 2$ ablation and continuation in $\lambda_{\mathrm{lucid}}$ reveal that a memoryless proportional loop ($\Lambda_{\mathrm{eff}} = 0.80, \lambda_{\mathrm{lucid}} = 0$) collapses to the origin because $\gamma(t)$ drops to $\sim 3.6 \times 10^{-4}$ at the cycle trough, whereas slow $\Psi$-memory ($\Psi_{\min} \approx 0.731, \lambda_{\mathrm{lucid}}\Psi \ge 0.219$) bridges the trough and sustains a bistable periodic orbit born via a saddle-node bifurcation of limit cycles at $\lambda_{\mathrm{lucid,SNLC}}(0) = 0.080341$ (lowered by $27.8\%$ to $\lambda_{\mathrm{lucid,SNLC}}(0.80) = 0.057974$ with a $9.14\times$ boost in period-averaged flux when coupled with $\Lambda_{\mathrm{eff}} = 0.80$).
 \end{abstract}
 
 \tableofcontents
@@ -99,40 +100,40 @@ In my work across the \texttt{Reggae-shark-universe-} research program, I have l
 
 Yet between a silent stone and the whole cosmos lies a simpler, deeply human question that mathematics \emph{can} answer with complete honesty: \emph{How does a finite, self-reflecting system hold itself together over time without burning out or falling apart?}
 
-When I first watched the unregularized equations of Physics v1.0 crash at $t \approx 55\,\mathrm{s}$ (\href{https://doi.org/10.17605/OSF.IO/N3DQU}{DOI: 10.17605/OSF.IO/N3DQU}), it looked at first like a purely technical flaw in a polynomial differential equation. Once the system's internal feedback gain $e$ was turned up past a critical tipping point $e_c$, the positive first Lyapunov coefficient ($l_1 = \frac{305328816}{1498181485}\sqrt{13/2} \approx +0.519589 > 0$) pushed the system away from its steady balance without giving it a stable nearby orbit to catch it. Driven by an unchecked memory-erasure term $-\dot{I}_{\mathrm{erase}}$ and an unchecked self-feedback loop $e\,\dot{H}_{\mathrm{obs}}$, the system's internal uncertainty $H_{\mathrm{obs}}(t)$, processing speed $\dot{I}(t)$, and reconstruction capacity $\gamma(t)$ plunged straight through zero into negative numbers.
+When I first watched the unregularized equations of Physics v1.0 crash at $t \approx 55$ (\href{https://doi.org/10.17605/OSF.IO/N3DQU}{DOI: 10.17605/OSF.IO/N3DQU}), it looked at first like a purely technical flaw in a polynomial differential equation. Once the system's internal feedback gain $e$ was turned up past a critical tipping point $e_c$, the positive first Lyapunov coefficient ($l_1 = \frac{305328816}{1498181485}\sqrt{13/2} \approx +0.519589 > 0$) pushed the system away from its steady balance without giving it a stable nearby orbit to catch it. Driven by an unchecked memory-erasure term $-\dot{I}_{\mathrm{erase}}$ and an unchecked self-feedback loop $e\,\dot{H}_{\mathrm{obs}}$, the system's internal uncertainty $H_{\mathrm{obs}}(t)$, processing speed $\dot{I}(t)$, and reconstruction capacity $\gamma(t)$ plunged straight through zero into negative numbers.
 
 \begin{figure}[ht!]
 \centering
 \vspace{4pt}
-\setlength{\fboxsep}{5pt}
-\setlength{\fboxrule}{0.7pt}
-\begin{tabular}{@{}c@{\hspace{2mm}}c@{\hspace{2mm}}c@{}}
-  \fcolorbox{primary}{boxbg}{\parbox[c][56mm][t]{62mm}{%
-    \vspace{1mm}\centering\textbf{\color{primary}CERTIFIED DYNAMICAL DOMAIN}\\
-    \scriptsize\textit{(Lean 4 Formalized \& Multi-Solver Verified)}\\[2mm]
+\setlength{\fboxsep}{6.0pt}
+\setlength{\fboxrule}{0.85pt}
+\begin{tabular}{@{}c@{\hspace{1.8mm}}c@{\hspace{1.8mm}}c@{}}
+  \fcolorbox{primary}{boxbg}{\parbox[c][68mm][t]{60.0mm}{%
+    \vspace{1.2mm}\centering\textbf{\color{primary}VERIFIED MODEL SCOPE}\\[1pt]
+    \scriptsize\textit{(Lean 4 Algebra \& Variational Audit)}\\[2.2mm]
     \raggedright\footnotesize
-    $\bullet$ \textbf{Lean 4 8-Face Box $\mathcal{B}_4$:} Global invariance on $[0,\gamma_{\max}]\times[0,H_{\max}]\times[0,\dot{I}_{\max,4\mathrm{D}}]\times[0,1]$.\\[1.2mm]
-    $\bullet$ \textbf{Gr\"onwall Positivity:} $\gamma(t) \ge \gamma(0)e^{-bt} > 0$ for all finite $t \ge 0$.\\[1.2mm]
-    $\bullet$ \textbf{Exact Hopf Algebra:} $de_c/d\mathcal{P}_0 > 0$ on $\mathcal{P}_0 > 10/99$; closed-loop $e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$.\\[1.2mm]
-    $\bullet$ \textbf{Poincar\'e \& Floquet:} $\rho_{\mathrm{FD,tight}}(DP_{2,H\dot{I}}) < 10^{-7}$, 1-period $\overline{\mathcal{P}}_{\mathrm{eff},T} = 3.266554$.
+    $\bullet$ \textbf{Lean 4 Pointwise Algebra (17 Thms):} 8-face sign conditions on $\mathcal{B}_4$ plus linear floor bounds $d\gamma/dt \ge -b\gamma$ and $d\dot{I}/dt \ge f\mathcal{P}_0 - (g+e M_H/\epsilon_I)\dot{I}$.\\[1.6mm]
+    $\bullet$ \textbf{Exact Hopf \& Origin Algebra:} $de_c/d\mathcal{P}_0 > 0$ on $\mathcal{P}_0 > 10/99$; closed-loop $e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$ for $\mathcal{P}_0 > 0$; locally stable origin at $\mathcal{P}_0 = 0, \Lambda_{\mathrm{eff}} < 1$.\\[1.6mm]
+    $\bullet$ \textbf{Variational Floquet \& $\Psi$-Memory:} 20D monodromy $\rho_{\mathrm{var}}(DP_{2,H\dot{I}}) < 10^{-9}$; zero-drive cycle sustained by $\lambda_{\mathrm{lucid}}\Psi$ above $\lambda_{\mathrm{lucid,SNLC}}$.
   }}
   &
-  \parbox[c][56mm][c]{20mm}{\centering
-    {\color{warn}\rule{1.2pt}{21mm}}\\[1mm]
-    \fcolorbox{warn}{warn!12}{\parbox{16mm}{\centering\tiny\textbf{\color{warn}VRK v0.3.1\\FIREWALL}}}\\[1mm]
-    {\color{warn}\rule{1.2pt}{21mm}}
+  \parbox[c][68mm][c]{19.0mm}{\centering
+    {\color{warn}\rule{1.4pt}{26mm}}\\[1.2mm]
+    \setlength{\fboxsep}{3.5pt}%
+    \fcolorbox{warn}{warn!12}{\parbox{14.5mm}{\centering\tiny\textbf{\color{warn}SCOPE\\LIMITS}}}\\[1.2mm]
+    {\color{warn}\rule{1.4pt}{26mm}}
   }
   &
-  \fcolorbox{warn}{codebg}{\parbox[c][56mm][t]{62mm}{%
-    \vspace{1mm}\centering\textbf{\color{warn}BLOCKED EXTRAPOLATIONS}\\
-    \scriptsize\textit{(\texttt{scope.does\_not\_imply} Enforced)}\\[2mm]
+  \fcolorbox{warn}{codebg}{\parbox[c][68mm][t]{60.0mm}{%
+    \vspace{1.2mm}\centering\textbf{\color{warn}EXCLUDED OVERCLAIMS}\\[1pt]
+    \scriptsize\textit{(Explicit Mathematical \& Physical Limits)}\\[2.2mm]
     \raggedright\footnotesize
-    $\times$ \textbf{No Particle/Gravity TOE:} Does not unify gauge fields or solve Quantum Gravity (Gate 0 non-geometric bridge remains \texttt{OPEN}).\\[1.2mm]
-    $\times$ \textbf{No Metaphysical Sentience:} $\Psi(t) > 0.50$ is a mathematical readout threshold on $R_{\mathrm{self}}$, not subjective experience or qualia.\\[1.2mm]
-    $\times$ \textbf{No Clinical Sleep Equivalence:} ``Waking'' and ``Offline Cycle'' denote ODE bifurcation regimes, not clinical EEG sleep stages.
+    $\times$ \textbf{No Particle/Gravity TOE:} Dimensionless 4-ODE feedback model; does not unify gauge fields or solve Quantum Gravity.\\[1.6mm]
+    $\times$ \textbf{No Metaphysical Sentience:} $\Psi(t) > 0.50$ is an algebraic threshold controlled by $\kappa_{\mathrm{meta}}R_{\mathrm{self}}/\mu_\Psi$, not subjective awareness.\\[1.6mm]
+    $\times$ \textbf{No Validated Interval ODE Proof:} Continuous-time invariance uses classical Nagumo/Gr\"onwall theorems; Floquet multipliers are variational numerics, not interval-ODE proofs.
   }}
 \end{tabular}
-\caption{The Epistemic Bridge and Global Claim Firewall of Appendix B v1.0 under IntentSeal VRK v0.3.1 (\href{https://doi.org/10.5281/zenodo.23018459}{DOI: 10.5281/zenodo.23018459}). Formal dynamical theorems and multi-solver Poincar\'e certificates are strictly separated from unverified physical or philosophical overclaims.}
+\caption{Scope boundary of Appendix B v1.0, separating the machine-checked pointwise boundary algebra, symbolic bifurcation analysis, and 20D variational monodromy numerics from unverified physical, philosophical, or interval-arithmetic overclaims.}
 \label{fig:firewall_arch}
 \end{figure}
 
@@ -164,7 +165,7 @@ Once we know the system cannot escape its box, three clear questions open up bef
 \begin{itemize}
   \item \textbf{Question 1 (What happens when the outside world goes quiet?):} If an observer has a fixed internal sensitivity ($e = 3.60$) that is stable during strong outside input ($\mathcal{P}_0 = 5.0$), what happens to its balance when outside input drops ($\mathcal{P}_0 = 4.0$ or $\mathcal{P}_0 = 1.0$) while internal memory clearing $\dot{I}_{\mathrm{erase}}$ keeps running?
   \item \textbf{Question 2 (What is the difference between noticing an inner rhythm and steering it?):} Suppose we add a fourth variable $\Psi(t) \in [0, 1]$ that tracks how much of the system's activity comes from its own internal feedback loop versus the outside world. How does $\Psi(t)$ behave at a calm steady state versus during an oscillation? And what changes when $\Psi(t)$ is merely an observer readout ($\lambda_{\mathrm{lucid}} = 0$) versus when it feeds back to steer the processing channel ($\lambda_{\mathrm{lucid}} > 0$)?
-  \item \textbf{Question 3 (Can the system sustain itself when external drive is shut off completely?):} If outside input is reduced to a small baseline ($\mathcal{P}_0 = 1$) or shut off completely ($\mathcal{P}_0 = 0$), and the system feeds a fraction $\Lambda_{\mathrm{eff}}\gamma(t)$ of its own capacity back as its input drive, does it fade to zero or sustain an ongoing internal rhythm? We will prove that at $\mathcal{P}_0 = 0$ and $\Lambda_{\mathrm{eff}} = 0.80 < 1$, \emph{both fates coexist}: the silent origin $(0,0,0,0)$ is locally stable for tiny starting states near zero, while larger starting states inside the box lock into a self-sustaining periodic rhythm.
+  \item \textbf{Question 3 (What actually keeps the rhythm alive when external drive is shut off completely at $\mathcal{P}_0 = 0$?):} When $\mathcal{P}_0 = 0$ and $0 \le \Lambda_{\mathrm{eff}} < 1$, no positive interior equilibrium or Hopf bifurcation exists, and the silent origin $(0,0,0,0)$ is locally asymptotically stable. If we rely only on instantaneous proportional feedback $\Lambda_{\mathrm{eff}}\gamma(t)$ ($\lambda_{\mathrm{sim}} = 7.20, \lambda_{\mathrm{lucid}} = 0$), the oscillation \emph{dies to the origin}, because $\gamma(t)$ drops to $\sim 3.6 \times 10^{-4}$ during the deep erasure trough and starves $\dot{I}(t)$ of input drive. By contrast, because $\Psi(t)$ decays slowly ($\mu_\Psi = 0.60$), it stays above $\Psi_{\min} \approx 0.731$ across the trough so that $\lambda_{\mathrm{lucid}}\Psi(t) \ge 0.219$ acts as a \textbf{slow capacitive memory reservoir} that re-ignites the next burst. Continuation in $\lambda_{\mathrm{lucid}}$ shows that this zero-drive cycle is born via a \textbf{saddle-node bifurcation of limit cycles (SNLC)} at $\lambda_{\mathrm{lucid,SNLC}}(0) = 0.080341$, which is lowered by $27.8\%$ to $\lambda_{\mathrm{lucid,SNLC}}(0.80) = 0.057974$ (with a $9.14\times$ boost in period-averaged flux $\overline{\mathcal{P}}_{\mathrm{eff},T}$) when $\Lambda_{\mathrm{eff}} = 0.80$ amplifies the recovery stroke.
 \end{itemize}
 
 \takeaway{A Note on Plain Language, Unit Normalization, and Mathematical Scope}{Equations~\eqref{eq:B1}--\eqref{eq:B4} define an \textbf{illustrative, dimensionless 4D dynamical system} with unit-normalized structural constants ($a=b=c=f=g=\mathcal{E}_{\mathrm{avail}}=1$), constructed to explore the mathematical mechanics of bounded self-referential feedback rather than to serve as an empirical model of physical or biological systems. Phrases like \emph{waking-type steady state}, \emph{offline relaxation cycle}, \emph{high-$\Psi$ readout}, and \emph{autopoietic closure} are used solely as descriptive labels for specific bifurcation regimes of these differential equations. In particular, because $\Psi^* = 0$ at every steady state ($\dot{H}_{\mathrm{obs}}^* = 0$), $\Psi(t)$ measures departure from equilibrium driven by internal feedback $\mathrm{fb}^2$ relative to $(f\mathcal{P}_0)^2 + \sigma_0^2$, and crosses $0.50$ simply when the feedback ratio $R_{\mathrm{self}}$ is large enough that $\kappa_{\mathrm{meta}}R_{\mathrm{self}}(1-\Psi)$ outpaces decay $\mu_\Psi\Psi$.}
@@ -180,10 +181,10 @@ By using a \textbf{single, smooth quadratic ratio} $R_{\mathrm{self}} = \mathrm{
 \label{def:system4d}
 Let the state of the system at time $t \ge 0$ be $x(t) = (\gamma(t), H_{\mathrm{obs}}(t), \dot{I}(t), \Psi(t)) \in \mathbb{R}^4$, where:
 \begin{itemize}
-  \item $\gamma(t) \in [0, \gamma_{\max}]$ is the internal reconstruction capacity ($\mathrm{s}^{-1}$), measuring how well the system maintains its internal model,
-  \item $H_{\mathrm{obs}}(t) \in [0, H_{\max}]$ is the observer's internal entropy or uncertainty (bits),
-  \item $\dot{I}(t) \in [0, \dot{I}_{\max,4\mathrm{D}}]$ is the information processing rate ($\mathrm{s}^{-1}$),
-  \item $\Psi(t) \in [0, 1]$ is the self-feedback readout coordinate (motivated by the self-modeling discriminator of Program 02, \href{https://doi.org/10.17605/OSF.IO/8CFQW}{DOI: 10.17605/OSF.IO/8CFQW}), tracking the share of activity driven from within.
+  \item $\gamma(t) \in [0, \gamma_{\max}]$ is the dimensionless internal reconstruction capacity,
+  \item $H_{\mathrm{obs}}(t) \in [0, H_{\max}]$ is the dimensionless internal entropy or uncertainty coordinate,
+  \item $\dot{I}(t) \in [0, \dot{I}_{\max,4\mathrm{D}}]$ is the dimensionless processing rate coordinate,
+  \item $\Psi(t) \in [0, 1]$ is the dimensionless slow-memory / self-feedback coordinate (motivated by the self-modeling discriminator of Program 02, \href{https://doi.org/10.17605/OSF.IO/8CFQW}{DOI: 10.17605/OSF.IO/8CFQW}), which tracks non-equilibrium derivative-feedback activity and acts as a slow capacitive buffer when $\lambda_{\mathrm{lucid}} > 0$.
 \end{itemize}
 For strictly positive structural constants $a, b, c, f, g, \mathcal{E}_{\mathrm{avail}}, \gamma_{\max}, H_{\max}, \dot{I}_{\mathrm{erase}}, \epsilon_H, \epsilon_I, \sigma_0, \mu_\Psi > 0$ and non-negative control settings $e, \mathcal{P}_0, \lambda_{\mathrm{sim}}, r_{\mathrm{LRSC}}, \lambda_{\mathrm{lucid}}, \kappa_{\mathrm{meta}} \ge 0$, define the effective input drive $\mathcal{P}_{\mathrm{eff}}(\gamma, \Psi)$, the internal derivative-feedback signal $\mathrm{fb}(\gamma, H_{\mathrm{obs}}, \dot{I})$, and the smooth quadratic self-feedback ratio $R_{\mathrm{self}}(\gamma, H_{\mathrm{obs}}, \dot{I})$ by:
 \begin{align}
@@ -301,28 +302,40 @@ Then:
   \label{eq:exp_lower}
   \gamma(t) \ge \gamma(0)e^{-bt} > 0, \qquad H_{\mathrm{obs}}(t) \ge H_{\mathrm{obs}}(0)e^{-(c\gamma_{\max} + \dot{I}_{\mathrm{erase}}/\epsilon_H)t} > 0, \qquad \Psi(t) \ge \Psi(0)e^{-\mu_\Psi t} > 0.
   \end{equation}
-  Furthermore, when $\mathcal{P}_0 > 0$, $\dot{I}(t) > 0$ for all $t \ge 0$, and the long-time floor is strictly positive ($\liminf_{t\to\infty}\dot{I}(t) > 0$ and $\liminf_{t\to\infty}\gamma(t) > 0$).
+  Furthermore, when $\mathcal{P}_0 > 0$, since $0 \le \tanh(\dot{I}/\epsilon_I) \le \dot{I}/\epsilon_I$, $dH_{\mathrm{obs}}/dt \ge -\dot{I}_{\mathrm{erase}} \ge -M_H$, and $\mathcal{P}_{\mathrm{eff}} \ge \mathcal{P}_0$ on $\mathcal{B}_4$, the processing rate obeys the uniform linear differential lower bound (\texttt{dIdot\_dt\_4D\_ge\_linear\_floor}):
+  \begin{equation}
+  \label{eq:Idot_linear_floor}
+  \frac{d\dot{I}}{dt} \ge f\mathcal{P}_0 - \left(g + \frac{e M_H}{\epsilon_I}\right)\dot{I}(t),
+  \end{equation}
+  which guarantees uniform asymptotic persistence away from the floor:
+  \begin{equation}
+  \label{eq:liminf_floors}
+  \begin{aligned}
+  \liminf_{t\to\infty}\dot{I}(t) &\ge \dot{I}_{\mathrm{floor}}(\mathcal{P}_0) := \frac{f\mathcal{P}_0}{g + e M_H/\epsilon_I} > 0, \\
+  \liminf_{t\to\infty}\gamma(t) &\ge \gamma_{\mathrm{floor}}(\mathcal{P}_0) := \frac{a\mathcal{E}_{\mathrm{avail}}\dot{I}_{\mathrm{floor}}(\mathcal{P}_0)\gamma_{\max}}{b\gamma_{\max} + a\mathcal{E}_{\mathrm{avail}}\dot{I}_{\mathrm{floor}}(\mathcal{P}_0)} > 0.
+  \end{aligned}
+  \end{equation}
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-The pointwise vector-field boundary inequalities on all eight lower and upper faces of $\mathcal{B}_4$, the ceiling bounds $dH_{\mathrm{obs}}/dt \le M_H$ and $\mathcal{P}_{\mathrm{eff}} \le \mathcal{P}_{\mathrm{eff},\max}$, and the pointwise slope inequality $d\gamma/dt \ge -b\gamma$ are machine-checked in the Lean 4 module \texttt{ExistenceVerification.lean} (15 theorems, zero \texttt{sorry} axioms, zero \texttt{nlinarith} tactics), from which global trajectory invariance $x(t) \in \mathcal{B}_4$ and strict interior positivity follow by classical application of the Nagumo--Bony--Brezis subtangentiality theorem and Gr\"onwall's lemma:
+The 17 pointwise vector-field boundary and linear-comparison inequalities on $\mathcal{B}_4$---comprising all eight lower and upper faces, the entropy-rate bounds $-M_H \le dH_{\mathrm{obs}}/dt \le M_H$ (\texttt{dHobs\_dt\_4D\_ge\_neg\_M\_H} and \texttt{dHobs\_dt\_4D\_le\_M\_H}), the flux bound $\mathcal{P}_{\mathrm{eff}} \le \mathcal{P}_{\mathrm{eff},\max}$ (\texttt{P\_eff\_le\_P\_eff\_max}), and the linear comparison bounds $d\gamma/dt \ge -b\gamma$ (\texttt{dgamma\_dt\_4D\_ge\_neg\_decay}) and $d\dot{I}/dt \ge f\mathcal{P}_0 - (g + e M_H/\epsilon_I)\dot{I}$ (\texttt{dIdot\_dt\_4D\_ge\_linear\_floor})---are machine-checked in \texttt{ExistenceVerification.lean} (zero \texttt{sorry} axioms, zero \texttt{nlinarith} tactics), from which continuous-time trajectory invariance $x(t) \in \mathcal{B}_4$ and strict interior persistence follow by classical application of the Nagumo--Bony--Brezis subtangentiality theorem and Gr\"onwall's comparison lemma:
 \begin{itemize}
   \item \textbf{Faces 1 \& 2 ($\gamma = 0$ and $\gamma = \gamma_{\max}$):} At $\gamma = 0$ with $\dot{I} \ge 0$, $d\gamma/dt = a\dot{I}\mathcal{E}_{\mathrm{avail}} \ge 0$ (\texttt{dgamma\_dt\_4D\_nonneg\_at\_boundary}). At $\gamma = \gamma_{\max}$, $1 - \gamma_{\max}/\gamma_{\max} = 0$, so $d\gamma/dt = -b\gamma_{\max} < 0$ (\texttt{dgamma\_dt\_4D\_neg\_at\_ceiling}).
   \item \textbf{Faces 3 \& 4 ($H_{\mathrm{obs}} = 0$ and $H_{\mathrm{obs}} = H_{\max}$):} At $H_{\mathrm{obs}} = 0$, $\tanh(0/\epsilon_H) = 0$, so $dH_{\mathrm{obs}}/dt = c\gamma H_{\max} \ge 0$ (\texttt{dHobs\_dt\_4D\_nonneg\_at\_boundary}). At $H_{\mathrm{obs}} = H_{\max}$, $dH_{\mathrm{obs}}/dt = -\dot{I}_{\mathrm{erase}}\tanh(H_{\max}/\epsilon_H) < 0$ (\texttt{dHobs\_dt\_4D\_neg\_at\_ceiling}).
   \item \textbf{Faces 5 \& 6 ($\dot{I} = 0$ and $\dot{I} = \dot{I}_{\max,4\mathrm{D}}$):} At $\dot{I} = 0$, $\tanh(0/\epsilon_I) = 0$, so $d\dot{I}/dt = f(\mathcal{P}_0 + \lambda_{\mathrm{sim}}r_{\mathrm{LRSC}}\gamma + \lambda_{\mathrm{lucid}}\Psi)$, which is $\ge 0$ for all $\mathcal{P}_0 \ge 0$ (\texttt{dIdot\_dt\_4D\_nonneg\_at\_boundary\_zero\_drive}) and strictly $> 0$ for $\mathcal{P}_0 > 0$ (\texttt{dIdot\_dt\_4D\_pos\_at\_boundary}). On $\mathcal{B}_4$, $0 \le \gamma \le \gamma_{\max}$ and $0 \le H_{\mathrm{obs}}$ imply $dH_{\mathrm{obs}}/dt \le c\gamma_{\max}H_{\max} \le M_H$ (\texttt{dHobs\_dt\_4D\_le\_M\_H}), and $\gamma \le \gamma_{\max}, \Psi \le 1$ imply $\mathcal{P}_{\mathrm{eff}} \le \mathcal{P}_{\mathrm{eff},\max}$ (\texttt{P\_eff\_le\_P\_eff\_max}). Chaining these bounds inside \texttt{dIdot\_dt\_4D\_nonpos\_at\_ceiling} yields $\left.d\dot{I}/dt\right|_{\dot{I}=\dot{I}_{\max,4\mathrm{D}}} \le e M_H + f\mathcal{P}_{\mathrm{eff},\max} - g\dot{I}_{\max,4\mathrm{D}} = 0$.
   \item \textbf{Faces 7 \& 8 ($\Psi = 0$ and $\Psi = 1$):} By \texttt{R\_self\_sq\_nonneg}, the state-dependent ratio $R_{\mathrm{self}}(s) = \mathrm{fb}(s)^2/(\mathrm{fb}(s)^2 + (f\mathcal{P}_0)^2 + \sigma_0^2)$ satisfies $R_{\mathrm{self}}(s) \ge 0$ for every $s \in \mathbb{R}^4$. Hence at $\Psi = 0$, $d\Psi/dt = \kappa_{\mathrm{meta}}R_{\mathrm{self}}(s) \ge 0$ (\texttt{dPsi\_dt\_4D\_nonneg\_at\_boundary}), and at $\Psi = 1$, $d\Psi/dt = -\mu_\Psi < 0$ (\texttt{dPsi\_dt\_4D\_neg\_at\_ceiling}).
 \end{itemize}
-For Part 2, since $0 \le \gamma(t) \le \gamma_{\max}$ and $\dot{I}(t) \ge 0$ on $\mathcal{B}_4$, the production term $a\dot{I}\mathcal{E}_{\mathrm{avail}}(1 - \gamma/\gamma_{\max}) \ge 0$, which yields $d\gamma/dt \ge -b\gamma$ (\texttt{dgamma\_dt\_4D\_ge\_neg\_decay}). Similarly, for $H_{\mathrm{obs}} \ge 0$, $\tanh(H_{\mathrm{obs}}/\epsilon_H) \le H_{\mathrm{obs}}/\epsilon_H$, so $dH_{\mathrm{obs}}/dt = c\gamma H_{\max} - c\gamma H_{\mathrm{obs}} - \dot{I}_{\mathrm{erase}}\tanh(H_{\mathrm{obs}}/\epsilon_H) \ge -(c\gamma_{\max} + \dot{I}_{\mathrm{erase}}/\epsilon_H)H_{\mathrm{obs}}$. For $\Psi \in [0, 1]$, $\kappa_{\mathrm{meta}}R_{\mathrm{self}}(1-\Psi) \ge 0$ implies $d\Psi/dt \ge -\mu_\Psi\Psi$. Integrating these three linear differential inequalities gives Eq.~\eqref{eq:exp_lower}. Finally, when $\mathcal{P}_0 > 0$, $\left.d\dot{I}/dt\right|_{\dot{I}=0} \ge f\mathcal{P}_0 > 0$ ensures $\dot{I}(t)$ cannot cross or rest at $0$, which in turn forces $\liminf_{t\to\infty}\gamma(t) > 0$.
+For Part 2, since $0 \le \gamma(t) \le \gamma_{\max}$ and $\dot{I}(t) \ge 0$ on $\mathcal{B}_4$, the production term $a\dot{I}\mathcal{E}_{\mathrm{avail}}(1 - \gamma/\gamma_{\max}) \ge 0$, which yields $d\gamma/dt \ge -b\gamma$ (\texttt{dgamma\_dt\_4D\_ge\_neg\_decay}). Similarly, for $H_{\mathrm{obs}} \ge 0$, $\tanh(H_{\mathrm{obs}}/\epsilon_H) \le H_{\mathrm{obs}}/\epsilon_H$, so $dH_{\mathrm{obs}}/dt = c\gamma H_{\max} - c\gamma H_{\mathrm{obs}} - \dot{I}_{\mathrm{erase}}\tanh(H_{\mathrm{obs}}/\epsilon_H) \ge -(c\gamma_{\max} + \dot{I}_{\mathrm{erase}}/\epsilon_H)H_{\mathrm{obs}}$. For $\Psi \in [0, 1]$, $\kappa_{\mathrm{meta}}R_{\mathrm{self}}(1-\Psi) \ge 0$ implies $d\Psi/dt \ge -\mu_\Psi\Psi$. Integrating these three linear differential inequalities gives Eq.~\eqref{eq:exp_lower}. Finally, on $\mathcal{B}_4$, $c\gamma(H_{\max} - H_{\mathrm{obs}}) \ge 0$ and $\tanh(H_{\mathrm{obs}}/\epsilon_H) \le 1$ imply $dH_{\mathrm{obs}}/dt \ge -\dot{I}_{\mathrm{erase}} \ge -M_H$ (\texttt{dHobs\_dt\_4D\_ge\_neg\_M\_H}). Combining $0 \le \tanh(\dot{I}/\epsilon_I) \le \dot{I}/\epsilon_I$ with $dH_{\mathrm{obs}}/dt \ge -M_H$ and $\mathcal{P}_{\mathrm{eff}} \ge \mathcal{P}_0$ yields Eq.~\eqref{eq:Idot_linear_floor} (\texttt{dIdot\_dt\_4D\_ge\_linear\_floor}). By standard linear ODE comparison, Eq.~\eqref{eq:Idot_linear_floor} forces $\liminf_{t\to\infty}\dot{I}(t) \ge \dot{I}_{\mathrm{floor}}(\mathcal{P}_0) > 0$, and substituting $\dot{I}(t) \ge \dot{I}_{\mathrm{floor}}(\mathcal{P}_0) - \varepsilon$ into Eq.~\eqref{eq:B1} forces $\liminf_{t\to\infty}\gamma(t) \ge \gamma_{\mathrm{floor}}(\mathcal{P}_0) > 0$.
 \end{proof}
 
 \begin{remark}[Exact Scope of the Lean 4 Formalization, Classical ODE Step, and Box Ceiling $\dot{I}_{\max,4\mathrm{D}}$]
 \label{rem:lean_scope}
 To keep the formal claims completely transparent, three points should be noted:
 \begin{enumerate}
-  \item \textbf{Pointwise Vector-Field Inequalities in Lean 4 vs.\ Classical Nagumo/Gr\"onwall Step:} \texttt{ExistenceVerification.lean} formalizes the algebraic vector field $F_{\mathrm{exist}}(s)$ over Mathlib's $\mathbb{R}$ and machine-checks the 15 pointwise sign and ceiling inequalities on the boundary faces and interior of $\mathcal{B}_4$: \texttt{R\_self\_sq\_nonneg} (proving non-negativity of the state-dependent function \texttt{R\_self\_sq} from \texttt{sq\_nonneg}, \texttt{add\_nonneg}, and \texttt{div\_nonneg}), the derived ceiling bounds \texttt{dHobs\_dt\_4D\_le\_M\_H} and \texttt{P\_eff\_le\_P\_eff\_max}, the eight face theorems, and the linear decay comparison \texttt{dgamma\_dt\_4D\_ge\_neg\_decay} ($d\gamma/dt \ge -b\gamma$). The unified theorem \texttt{existence\_box\_8face\_nagumo\_certificate} bundles the $\mathcal{P}_0 > 0$ case (where Face 5 is strictly positive, $d\dot{I}/dt|_{\dot{I}=0} > 0$), while the separate theorem \texttt{dIdot\_dt\_4D\_nonneg\_at\_boundary\_zero\_drive} certifies Face 5 non-negativity ($d\dot{I}/dt|_{\dot{I}=0} \ge 0$) for all $\mathcal{P}_0 \ge 0$ (including $\mathcal{P}_0 = 0$). Passing from these machine-checked pointwise inequalities to continuous-time ODE trajectory invariance $x(t) \in \mathcal{B}_4$ and $\gamma(t) \ge \gamma(0)e^{-bt} > 0$ rests on the classical Nagumo--Bony--Brezis subtangentiality theorem and Gr\"onwall's lemma applied to the smooth ($C^\infty$) vector field.
-  \item \textbf{Offline Python Source Gate vs.\ Toolchain Compilation (\texttt{lake build}):} Layer 6 of \texttt{verification\_existence\_v1\_0.py} performs a fast offline static audit (verifying comment-stripped absence of \texttt{sorry} and \texttt{nlinarith}, presence of all 15 theorem declarations and \texttt{\#print axioms}, and \texttt{lakefile.lean} target registration) so that readers without a local Lean 4 installation can run the Python verification script standalone. Full Lean 4 type-checking and compilation of both \texttt{BoundaryVerification} and \texttt{ExistenceVerification} is executed via \texttt{lake build} under \texttt{leanprover/lean4:v4.36.0-rc1} (Mathlib \texttt{10156080d0e7}) and automated in \texttt{verify\_ci.yml} (\href{https://github.com/reggaesharkk/theory-of-bounded-existence/actions}{GitHub Actions CI}).
-  \item \textbf{Conservative Analytical Ceiling $\dot{I}_{\max,4\mathrm{D}}$ vs.\ Dynamical Trajectory Peak:} The analytical ceiling $\dot{I}_{\max,4\mathrm{D}} = (e M_H + f\mathcal{P}_{\mathrm{eff},\max})/g$ (which equals $3644.1\,\mathrm{s}^{-1}$ in Regime IVa) is an a priori worst-case Nagumo bound obtained by bounding $\tanh(\cdot) \le 1$ and $\dot{H}_{\mathrm{obs}} \le M_H = c\gamma_{\max}H_{\max} + \dot{I}_{\mathrm{erase}} = 1010$. Along actual post-Hopf relaxation orbits, $\gamma(t)$ and $H_{\max} - H_{\mathrm{obs}}(t)$ never peak simultaneously, so the observed trajectory maximum is roughly an order of magnitude smaller ($\max_t \dot{I}(t) \approx 268.4\,\mathrm{s}^{-1}$).
+  \item \textbf{Pointwise Vector-Field Inequalities in Lean 4 vs.\ Classical Nagumo/Gr\"onwall Step:} \texttt{ExistenceVerification.lean} formalizes the algebraic vector field $F_{\mathrm{exist}}(s)$ over Mathlib's $\mathbb{R}$ and machine-checks the 17 pointwise sign, ceiling, and linear-comparison inequalities on the boundary faces and interior of $\mathcal{B}_4$: \texttt{R\_self\_sq\_nonneg} (proving non-negativity of the state-dependent function \texttt{R\_self\_sq} from \texttt{sq\_nonneg}, \texttt{add\_nonneg}, and \texttt{div\_nonneg}), the derived ceiling bounds \texttt{dHobs\_dt\_4D\_le\_M\_H} and \texttt{P\_eff\_le\_P\_eff\_max}, the eight face theorems, and the linear decay comparison \texttt{dgamma\_dt\_4D\_ge\_neg\_decay} ($d\gamma/dt \ge -b\gamma$). The unified theorem \texttt{existence\_box\_8face\_nagumo\_certificate} bundles the $\mathcal{P}_0 > 0$ case (where Face 5 is strictly positive, $d\dot{I}/dt|_{\dot{I}=0} > 0$), while the separate theorem \texttt{dIdot\_dt\_4D\_nonneg\_at\_boundary\_zero\_drive} certifies Face 5 non-negativity ($d\dot{I}/dt|_{\dot{I}=0} \ge 0$) for all $\mathcal{P}_0 \ge 0$ (including $\mathcal{P}_0 = 0$). Passing from these machine-checked pointwise inequalities to continuous-time ODE trajectory invariance $x(t) \in \mathcal{B}_4$ and $\gamma(t) \ge \gamma(0)e^{-bt} > 0$ rests on the classical Nagumo--Bony--Brezis subtangentiality theorem and Gr\"onwall's lemma applied to the smooth ($C^\infty$) vector field.
+  \item \textbf{Offline Python Source Gate vs.\ Toolchain Compilation (\texttt{lake build}):} Layer 6 of \texttt{verification\_existence\_v1\_0.py} performs a fast offline static audit (verifying comment-stripped absence of \texttt{sorry} and \texttt{nlinarith}, presence of all 17 theorem declarations and \texttt{\#print axioms}, and \texttt{lakefile.lean} target registration) so that readers without a local Lean 4 installation can run the Python verification script standalone. Full Lean 4 type-checking and compilation of both \texttt{BoundaryVerification} and \texttt{ExistenceVerification} is executed via \texttt{lake build} under \texttt{leanprover/lean4:v4.36.0-rc1} (Mathlib \texttt{10156080d0e7}) and automated in \texttt{verify\_ci.yml} (\href{https://github.com/reggaesharkk/theory-of-bounded-existence/actions}{GitHub Actions CI}).
+  \item \textbf{Conservative Analytical Ceiling $\dot{I}_{\max,4\mathrm{D}}$ vs.\ Dynamical Trajectory Peak:} The analytical ceiling $\dot{I}_{\max,4\mathrm{D}} = (e M_H + f\mathcal{P}_{\mathrm{eff},\max})/g$ (which equals $3644.1$ in Regime IVa) is an a priori worst-case Nagumo bound obtained by bounding $\tanh(\cdot) \le 1$ and $\dot{H}_{\mathrm{obs}} \le M_H = c\gamma_{\max}H_{\max} + \dot{I}_{\mathrm{erase}} = 1010$. Along actual post-Hopf relaxation orbits, $\gamma(t)$ and $H_{\max} - H_{\mathrm{obs}}(t)$ never peak simultaneously, so the observed trajectory maximum is roughly an order of magnitude smaller ($\max_t \dot{I}(t) \approx 268.4$).
 \end{enumerate}
 \end{remark}
 
@@ -365,7 +378,7 @@ To keep the formal claims completely transparent, three points should be noted:
   % Poincare Section Plane Sigma (vertical line from y=18 to y=42.5, label cleanly above at y=46)
   \put(68,18){\color{accent}\linethickness{0.5mm}\line(0,1){24.5}}
   \put(68,39){\circle*{2}}
-  \put(83,46){\makebox(0,0)[c]{\scriptsize\textbf{\color{accent}Poincar\'e Section $\Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$ ($\rho_{\mathrm{FD,tight}}(DP_{2,H\dot{I}}) < 10^{-7}$)}}}
+  \put(83,46){\makebox(0,0)[c]{\scriptsize\textbf{\color{accent}Poincar\'e Section $\Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$ ($\rho_{\mathrm{var}}(DP_{2,H\dot{I}}) < 10^{-9}$)}}}
 \end{picture}
 \caption{Geometric cross-section of the 8-face compact trapping box $\mathcal{B}_4$. All eight boundary and ceiling faces point inward (Theorem~\ref{thm:existence_8face}). When $e > e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$, the interior equilibrium $(\gamma^*, H_{\mathrm{obs}}^*, \dot{I}^*, \Psi^*=0)$ is linearly unstable (Theorem~\ref{thm:dream_bifurcation}), and trajectories in the interior basin converge numerically onto an attracting periodic orbit intersecting $\Sigma = \{\gamma=2.0, \dot{\gamma}>0\}$.}
 \label{fig:box_poincare}
@@ -435,7 +448,7 @@ Consider the smooth 4D system Eqs.~\eqref{eq:B1}--\eqref{eq:B4} with quadratic s
   &\quad + 99060000\mathcal{P}_0^3 + 241100000\mathcal{P}_0^2 + 188000000\mathcal{P}_0 + 40000000 > 0.
   \end{aligned}
   \end{equation}
-  At finite gate widths $\epsilon_H = \epsilon_I = \epsilon = 0.05$ on $\mathcal{P}_0 > 10/99$, Eq.~\eqref{eq:ec_closed_loop} relates to Eq.~\eqref{eq:ec_rational_poly} via the two-gate identity $e_c^{\mathrm{CL}}(\mathcal{P}_0, 0) = \left[e_c(\mathcal{P}_0) + O\!\left(\epsilon_H^{-1}\operatorname{sech}^2(H_{\mathrm{obs},\mathrm{sw}}^*/\epsilon_H)\right)\right] / \tanh(\mathcal{P}_0/\epsilon_I)$. Because $H_{\mathrm{obs},\mathrm{v1.4}}^*(\mathcal{P}_0) = 100 - (10+\mathcal{P}_0)/\mathcal{P}_0$ rises rapidly above zero once $\mathcal{P}_0 > 10/99$, by $\mathcal{P}_0 = 0.105$ we already have $H_{\mathrm{obs},\mathrm{sw}}^* = 3.7619\,\mathrm{bits} > 75\epsilon_H$, so the entropy-wall perturbation $\operatorname{sech}^2(H_{\mathrm{obs},\mathrm{sw}}^*/\epsilon_H) = 1.78 \times 10^{-65}$ vanishes to machine precision and $e_c^{\mathrm{CL}}(\mathcal{P}_0, 0)\tanh(\mathcal{P}_0/\epsilon_I)$ agrees with $e_c(\mathcal{P}_0)$ to $10^{-64}$ (while the multiplicative factor $1/\tanh(\mathcal{P}_0/\epsilon_I)$ yields $|e_c^{\mathrm{CL}} - e_c| = 3.74 \times 10^{-4}$ at $\mathcal{P}_0 = 0.105$, $1.78 \times 10^{-5}$ at $\mathcal{P}_0 = 0.20$, and $< 10^{-16}$ for $\mathcal{P}_0 \ge 1.0$). Conversely, for $0 < \mathcal{P}_0 \le 10/99$ (such as the Minimum Corner $\mathcal{P}_0 = 0.10$ where $H_{\mathrm{obs},\mathrm{v1.4}}^* = -1 < 0$), the system resides inside the $O(\epsilon_H)$ boundary layer ($H_{\mathrm{obs},\mathrm{sw}}^* = 0.1295\,\mathrm{bits}$) where Eq.~\eqref{eq:ec_closed_loop} gives $e_c^{\mathrm{CL}}(0.10, 0) = 0.099132$. At fixed observer gain $e = 18/5 = 3.60$:
+  At finite gate widths $\epsilon_H = \epsilon_I = \epsilon = 0.05$ on $\mathcal{P}_0 > 10/99$, Eq.~\eqref{eq:ec_closed_loop} relates to Eq.~\eqref{eq:ec_rational_poly} via the two-gate identity $e_c^{\mathrm{CL}}(\mathcal{P}_0, 0) = \left[e_c(\mathcal{P}_0) + O\!\left(\epsilon_H^{-1}\operatorname{sech}^2(H_{\mathrm{obs},\mathrm{sw}}^*/\epsilon_H)\right)\right] / \tanh(\mathcal{P}_0/\epsilon_I)$. Because $H_{\mathrm{obs},\mathrm{v1.4}}^*(\mathcal{P}_0) = 100 - (10+\mathcal{P}_0)/\mathcal{P}_0$ rises rapidly above zero once $\mathcal{P}_0 > 10/99$, by $\mathcal{P}_0 = 0.105$ we already have $H_{\mathrm{obs},\mathrm{sw}}^* = 3.7619 > 75\epsilon_H$, so the entropy-wall perturbation $\operatorname{sech}^2(H_{\mathrm{obs},\mathrm{sw}}^*/\epsilon_H) = 1.78 \times 10^{-65}$ vanishes to machine precision and $e_c^{\mathrm{CL}}(\mathcal{P}_0, 0)\tanh(\mathcal{P}_0/\epsilon_I)$ agrees with $e_c(\mathcal{P}_0)$ to $10^{-64}$ (while the multiplicative factor $1/\tanh(\mathcal{P}_0/\epsilon_I)$ yields $|e_c^{\mathrm{CL}} - e_c| = 3.74 \times 10^{-4}$ at $\mathcal{P}_0 = 0.105$, $1.78 \times 10^{-5}$ at $\mathcal{P}_0 = 0.20$, and $< 10^{-16}$ for $\mathcal{P}_0 \ge 1.0$). Conversely, for $0 < \mathcal{P}_0 \le 10/99$ (such as the Minimum Corner $\mathcal{P}_0 = 0.10$ where $H_{\mathrm{obs},\mathrm{v1.4}}^* = -1 < 0$), the system resides inside the $O(\epsilon_H)$ boundary layer ($H_{\mathrm{obs},\mathrm{sw}}^* = 0.1295$) where Eq.~\eqref{eq:ec_closed_loop} gives $e_c^{\mathrm{CL}}(0.10, 0) = 0.099132$. At fixed observer gain $e = 18/5 = 3.60$:
   \begin{align}
   e_c(5) &= \frac{377}{84} \approx 4.48809524 > e = \frac{18}{5} = 3.60, \\
   e_c(4) &= \frac{12069}{4025} \approx 2.99850932 > e_c(1) = \frac{97461}{364100} \approx 0.26767646.
@@ -468,133 +481,243 @@ Verified symbolically with zero residual in Layers 1 and 2 of \texttt{verificati
 \begin{figure}[ht!]
 \centering
 \vspace{4pt}
-\setlength{\unitlength}{1mm}
-\begin{picture}(165,68)
-  % Axes for Control Parameter Plane (P_0, e)
-  \put(18,8){\vector(1,0){138}}
-  \put(18,8){\vector(0,1){55}}
-  \put(154,3){\makebox(0,0)[r]{\scriptsize\textbf{Sensory Input Drive $\mathcal{P}_0$}}}
-  \put(15,61){\makebox(0,0)[r]{\scriptsize\textbf{Gain $e$}}}
+\setlength{\unitlength}{1bp}
+\begin{picture}(460,222)
+  % Native PDF vector graphics layer (1 bp = 1 PDF point)
+  \put(0,0){\pdfliteral{
+    q
+      % Soft shaded background regions
+      0.992 0.965 0.965 rg
+      45.00 198.75 m 45.00 30.31 l 51.06 30.32 l 55.48 30.61 l 59.91 30.94 l 64.33 31.33 l 68.76 31.77 l 73.18 32.25 l 77.61 32.79 l 82.03 33.38 l 86.45 34.01 l 90.88 34.70 l 95.30 35.44 l 99.73 36.22 l 104.15 37.06 l 108.58 37.95 l 113.00 38.88 l 117.42 39.87 l 121.85 40.90 l 126.27 41.98 l 130.70 43.11 l 135.12 44.29 l 139.55 45.52 l 143.97 46.79 l 148.39 48.11 l 152.82 49.48 l 157.24 50.89 l 161.67 52.35 l 166.09 53.86 l 170.52 55.42 l 174.94 57.02 l 179.36 58.66 l 183.79 60.35 l 188.21 62.09 l 192.64 63.87 l 197.06 65.70 l 201.48 67.57 l 205.91 69.48 l 210.33 71.44 l 214.76 73.44 l 219.18 75.49 l 223.61 77.58 l 228.03 79.71 l 232.45 81.89 l 236.88 84.11 l 241.30 86.37 l 245.73 88.67 l 250.15 91.02 l 254.58 93.41 l 259.00 95.84 l 263.42 98.31 l 267.85 100.83 l 272.27 103.38 l 276.70 105.98 l 281.12 108.61 l 285.55 111.29 l 289.97 114.01 l 294.39 116.77 l 298.82 119.57 l 303.24 122.41 l 307.67 125.29 l 312.09 128.21 l 316.52 131.17 l 320.94 134.17 l 325.36 137.21 l 329.79 140.29 l 334.21 143.41 l 338.64 146.57 l 343.06 149.76 l 347.48 153.00 l 351.91 156.28 l 356.33 159.59 l 360.76 162.94 l 365.18 166.33 l 369.61 169.76 l 374.03 173.23 l 378.45 176.73 l 382.88 180.28 l 387.30 183.86 l 391.73 187.48 l 396.15 191.14 l 400.58 194.83 l 405.00 198.56 l 405.00 198.75 l h f
+      0.955 0.985 0.968 rg
+      51.06 30.00 m 51.06 30.32 l 55.48 30.61 l 59.91 30.94 l 64.33 31.33 l 68.76 31.77 l 73.18 32.25 l 77.61 32.79 l 82.03 33.38 l 86.45 34.01 l 90.88 34.70 l 95.30 35.44 l 99.73 36.22 l 104.15 37.06 l 108.58 37.95 l 113.00 38.88 l 117.42 39.87 l 121.85 40.90 l 126.27 41.98 l 130.70 43.11 l 135.12 44.29 l 139.55 45.52 l 143.97 46.79 l 148.39 48.11 l 152.82 49.48 l 157.24 50.89 l 161.67 52.35 l 166.09 53.86 l 170.52 55.42 l 174.94 57.02 l 179.36 58.66 l 183.79 60.35 l 188.21 62.09 l 192.64 63.87 l 197.06 65.70 l 201.48 67.57 l 205.91 69.48 l 210.33 71.44 l 214.76 73.44 l 219.18 75.49 l 223.61 77.58 l 228.03 79.71 l 232.45 81.89 l 236.88 84.11 l 241.30 86.37 l 245.73 88.67 l 250.15 91.02 l 254.58 93.41 l 259.00 95.84 l 263.42 98.31 l 267.85 100.83 l 272.27 103.38 l 276.70 105.98 l 281.12 108.61 l 285.55 111.29 l 289.97 114.01 l 294.39 116.77 l 298.82 119.57 l 303.24 122.41 l 307.67 125.29 l 312.09 128.21 l 316.52 131.17 l 320.94 134.17 l 325.36 137.21 l 329.79 140.29 l 334.21 143.41 l 338.64 146.57 l 343.06 149.76 l 347.48 153.00 l 351.91 156.28 l 356.33 159.59 l 360.76 162.94 l 365.18 166.33 l 369.61 169.76 l 374.03 173.23 l 378.45 176.73 l 382.88 180.28 l 387.30 183.86 l 391.73 187.48 l 396.15 191.14 l 400.58 194.83 l 405.00 198.56 l 417.00 198.56 l 417.00 30.00 l h f
 
-  % Open-loop Hopf curve e_c(P_0):
-  % Segment 1: (18,9) to (98,29) [slope 4:1]; Segment 2: (98,29) to (138,53) [slope 5:3]
-  % Crosses e = 3.60 (y = 34) at x = 106.3 (between P_0 = 4 at x = 98 and P_0 = 5 at x = 118)
-  \put(18,9){\color{primary}\linethickness{0.5mm}\line(4,1){80}}
-  \put(98,29){\color{primary}\linethickness{0.5mm}\line(5,3){40}}
-  \put(136,57){\makebox(0,0)[r]{\scriptsize\textbf{\color{primary}Open-Loop Hopf Locus $e_c(\mathcal{P}_0)$ ($de_c/d\mathcal{P}_0 > 0$ on $\mathcal{P}_0 > 10/99$)}}}
+      % Subtle dashed reference grid
+      0.84 0.86 0.89 RG
+      0.45 w
+      [2 2] 0 d
+      105.00 30.00 m 105.00 198.75 l S
+      45.00 57.00 m 417.00 57.00 l S
+      165.00 30.00 m 165.00 198.75 l S
+      45.00 84.00 m 417.00 84.00 l S
+      225.00 30.00 m 225.00 198.75 l S
+      45.00 111.00 m 417.00 111.00 l S
+      285.00 30.00 m 285.00 198.75 l S
+      45.00 138.00 m 417.00 138.00 l S
+      345.00 30.00 m 345.00 198.75 l S
+      45.00 165.00 m 417.00 165.00 l S
+      405.00 30.00 m 405.00 198.75 l S
+      45.00 192.00 m 417.00 192.00 l S
+      [] 0 d
 
-  % Fixed Gain Line e = 3.60 at y = 34
-  \put(18,34){\color{warn}\linethickness{0.35mm}\line(1,0){136}}
-  \put(154,36.5){\makebox(0,0)[r]{\scriptsize\textbf{\color{warn}Observer Gain $e = 3.60$}}}
+      % Axes and ticks
+      0.15 0.15 0.15 RG
+      0.85 w
+      45 30 m 432 30 l S
+      45 30 m 45 206 l S
+      % Arrowheads on axes
+      0.15 0.15 0.15 rg
+      436 30 m 429 32.6 l 429 27.4 l h f
+      45 210 m 42.4 203 l 47.6 203 l h f
+      0.7 w
+      45.00 30.00 m 45.00 26.00 l S
+      45.00 30.00 m 41.00 30.00 l S
+      105.00 30.00 m 105.00 26.00 l S
+      45.00 57.00 m 41.00 57.00 l S
+      165.00 30.00 m 165.00 26.00 l S
+      45.00 84.00 m 41.00 84.00 l S
+      225.00 30.00 m 225.00 26.00 l S
+      45.00 111.00 m 41.00 111.00 l S
+      285.00 30.00 m 285.00 26.00 l S
+      45.00 138.00 m 41.00 138.00 l S
+      345.00 30.00 m 345.00 26.00 l S
+      45.00 165.00 m 41.00 165.00 l S
+      405.00 30.00 m 405.00 26.00 l S
+      45.00 192.00 m 41.00 192.00 l S
 
-  % Region banners in open whitespace
-  \put(21,53){\makebox(0,0)[l]{\scriptsize\textbf{\color{warn}POST-HOPF RELAXATION CYCLE ($e > e_c^{\mathrm{CL}}$)}}}
-  \put(98,15){\makebox(0,0)[l]{\scriptsize\textbf{\color{accent}STABLE FIXED POINT ($e < e_c^{\mathrm{CL}}, \Psi^* = 0$)}}}
+      % Dashed vertical comparison segments at P_0 = 4 and P_0 = 5
+      0.059 0.298 0.506 RG
+      0.75 w
+      [2.5 2] 0 d
+      285.00 127.20 m 285.00 110.96 l S
+      345.00 127.20 m 345.00 151.18 l S
+      [] 0 d
 
-  % Regime Markers along e = 3.60 (y = 34):
-  % 1. IVb at P_0 = 0 (x = 18, y = 34): label above-right at (21, 40.5)
-  \put(18,34){\circle*{2}}
-  \put(18,34){\line(1,2){2.5}}
-  \put(21,40.5){\makebox(0,0)[l]{\scriptsize\textbf{Regime IVb} ($\mathcal{P}_0=0$, Bistable)}}
+      % Smooth Open-Loop Hopf Curve e_c(P_0)
+      0.059 0.298 0.506 RG
+      1.55 w
+      1 J 1 j
+      51.06 30.32 m 55.48 30.61 l 59.91 30.94 l 64.33 31.33 l 68.76 31.77 l 73.18 32.25 l 77.61 32.79 l 82.03 33.38 l 86.45 34.01 l 90.88 34.70 l 95.30 35.44 l 99.73 36.22 l 104.15 37.06 l 108.58 37.95 l 113.00 38.88 l 117.42 39.87 l 121.85 40.90 l 126.27 41.98 l 130.70 43.11 l 135.12 44.29 l 139.55 45.52 l 143.97 46.79 l 148.39 48.11 l 152.82 49.48 l 157.24 50.89 l 161.67 52.35 l 166.09 53.86 l 170.52 55.42 l 174.94 57.02 l 179.36 58.66 l 183.79 60.35 l 188.21 62.09 l 192.64 63.87 l 197.06 65.70 l 201.48 67.57 l 205.91 69.48 l 210.33 71.44 l 214.76 73.44 l 219.18 75.49 l 223.61 77.58 l 228.03 79.71 l 232.45 81.89 l 236.88 84.11 l 241.30 86.37 l 245.73 88.67 l 250.15 91.02 l 254.58 93.41 l 259.00 95.84 l 263.42 98.31 l 267.85 100.83 l 272.27 103.38 l 276.70 105.98 l 281.12 108.61 l 285.55 111.29 l 289.97 114.01 l 294.39 116.77 l 298.82 119.57 l 303.24 122.41 l 307.67 125.29 l 312.09 128.21 l 316.52 131.17 l 320.94 134.17 l 325.36 137.21 l 329.79 140.29 l 334.21 143.41 l 338.64 146.57 l 343.06 149.76 l 347.48 153.00 l 351.91 156.28 l 356.33 159.59 l 360.76 162.94 l 365.18 166.33 l 369.61 169.76 l 374.03 173.23 l 378.45 176.73 l 382.88 180.28 l 387.30 183.86 l 391.73 187.48 l 396.15 191.14 l 400.58 194.83 l 405.00 198.56 l S
 
-  % 2. IVa at P_0 = 1 (x = 38, y = 34): label below at (35, 26.5) (well above blue curve at y = 14)
-  \put(38,34){\circle*{2}}
-  \put(38,34){\line(0,-1){5}}
-  \put(34,26.5){\makebox(0,0)[l]{\scriptsize\textbf{Regime IVa} ($\mathcal{P}_0=1, e_c^{\mathrm{CL}}=1.39$)}}
+      % Fixed Observer Gain Line e = 3.60 (y = 127.20)
+      0.647 0.165 0.165 RG
+      1.35 w
+      45.00 127.20 m 422.00 127.20 l S
 
-  % 3. Regimes II, IIIa/b at P_0 = 4 (x = 98, y = 34 > y_curve = 29): label above at (98, 45.5)
-  \put(98,34){\circle*{2}}
-  \put(98,34){\line(0,1){9}}
-  \put(114,45.5){\makebox(0,0)[r]{\scriptsize\textbf{Regimes II, IIIa/b} ($\mathcal{P}_0=4, e_c=3.00$)}}
+      % Leader lines for callouts
+      0.20 0.20 0.20 RG
+      0.75 w
+      % IVb (45, 127.2) -> (55, 145)
+      45.00 127.20 m 53.00 137.00 l S
+      % IVa (105, 127.2) -> (105, 107)
+      105.00 127.20 m 105.00 107.00 l S
+      % II, IIIa/b (285, 127.2) -> (265, 145)
+      285.00 127.20 m 275.00 149.00 l S
+      % I (345, 127.2) -> (345, 107)
+      345.00 127.20 m 345.00 107.00 l S
+      % Min Corner (51.0, 32.7) -> (55, 69)
+      51.00 32.70 m 55.00 69.00 l S
+      % Max Corner (405.0, 192.0) -> (386, 198)
+      405.00 192.00 m 386.00 198.00 l S
 
-  % 4. Regime I at P_0 = 5 (x = 118, y = 34 < y_curve = 41): label below at (110, 26.5)
-  \put(118,34){\circle*{2}}
-  \put(118,34){\line(0,-1){5}}
-  \put(108,26.5){\makebox(0,0)[l]{\scriptsize\textbf{Regime I} ($\mathcal{P}_0=5, e_c=4.49$)}}
+      % Pointer from Open-Loop Hopf Locus label to curve at P_0 = 5.65 (384, 171.5)
+      0.059 0.298 0.506 RG
+      0.75 w
+      301.00 173.00 m 369.00 171.60 l S
+      0.059 0.298 0.506 rg
+      373.50 171.50 m 367.50 173.80 l 367.60 169.30 l h f
+    Q
+  }}
 
-  % 5. Minimum Corner at (20, 10)
-  \put(20,10){\circle*{2}}
-  \put(24,10.5){\makebox(0,0)[l]{\scriptsize\textbf{Min Corner} ($0.1, 0.1, e_c^{\mathrm{CL}}=0.0991$)}}
+  % X-axis numerical labels
+  \put(45,19){\makebox(0,0)[c]{\scriptsize $0$}}
+  \put(105,19){\makebox(0,0)[c]{\scriptsize $1$}}
+  \put(165,19){\makebox(0,0)[c]{\scriptsize $2$}}
+  \put(225,19){\makebox(0,0)[c]{\scriptsize $3$}}
+  \put(285,19){\makebox(0,0)[c]{\scriptsize $4$}}
+  \put(345,19){\makebox(0,0)[c]{\scriptsize $5$}}
+  \put(405,19){\makebox(0,0)[c]{\scriptsize $6$}}
+  \put(434,6){\makebox(0,0)[r]{\scriptsize\textbf{Sensory Input Drive $\mathcal{P}_0$}}}
 
-  % 6. Maximum Corner at (138, 48)
-  \put(138,48){\circle*{2}}
-  \put(140,46.5){\makebox(0,0)[l]{\scriptsize\textbf{Max Corner} ($6, 6$)}}
+  % Y-axis numerical labels
+  \put(38,30){\makebox(0,0)[r]{\scriptsize $0$}}
+  \put(38,57){\makebox(0,0)[r]{\scriptsize $1$}}
+  \put(38,84){\makebox(0,0)[r]{\scriptsize $2$}}
+  \put(38,111){\makebox(0,0)[r]{\scriptsize $3$}}
+  \put(38,138){\makebox(0,0)[r]{\scriptsize $4$}}
+  \put(38,165){\makebox(0,0)[r]{\scriptsize $5$}}
+  \put(38,192){\makebox(0,0)[r]{\scriptsize $6$}}
+  \put(38,208){\makebox(0,0)[r]{\scriptsize\textbf{Gain $e$}}}
+
+  % Region Banners & Curve Label (non-overlapping)
+  \put(54,193){\makebox(0,0)[l]{\scriptsize\textbf{\color{warn}POST-HOPF RELAXATION CYCLE ($e > e_c^{\mathrm{CL}}$)}}}
+  \put(54,173){\makebox(0,0)[l]{\scriptsize\textbf{\color{primary}Open-Loop Hopf Locus $e_c(\mathcal{P}_0)$ ($de_c/d\mathcal{P}_0 > 0$ on $\mathcal{P}_0 > 10/99$)}}}
+  \put(228,46){\makebox(0,0)[l]{\scriptsize\textbf{\color{accent}STABLE FIXED POINT ($e < e_c^{\mathrm{CL}}, \Psi^* = 0$)}}}
+
+  % Observer Gain Label
+  \put(422,134){\makebox(0,0)[r]{\scriptsize\textbf{\color{warn}Observer Gain $e = 3.60$}}}
+
+  % Points along e = 3.60 & Hopf curve
+  \put(45,127.2){\circle*{5.2}}
+  \put(105,127.2){\circle*{5.2}}
+  \put(285,127.2){\circle*{5.2}}
+  \put(285,110.96){\color{primary}\circle*{4.2}}
+  \put(345,127.2){\circle*{5.2}}
+  \put(345,151.18){\color{primary}\circle*{4.2}}
+  \put(51.0,32.7){\circle*{5.2}}
+  \put(405.0,192.0){\circle*{5.2}}
+
+  % Callout Labels (guaranteed non-overlapping)
+  \put(54,140){\makebox(0,0)[l]{\scriptsize\textbf{Regimes IVb/c} ($\mathcal{P}_0=0$, SNLC)}}
+  \put(54,100){\makebox(0,0)[l]{\scriptsize\textbf{Regime IVa} ($\mathcal{P}_0=1, e_c^{\mathrm{CL}}=1.39$)}}
+  \put(190,154){\makebox(0,0)[l]{\scriptsize\textbf{Regimes II, IIIa/b} ($\mathcal{P}_0=4, e_c=3.00$)}}
+  \put(345,100){\makebox(0,0)[c]{\scriptsize\textbf{Regime I} ($\mathcal{P}_0=5, e_c=4.49$)}}
+  \put(54,75){\makebox(0,0)[l]{\scriptsize\textbf{Min Corner} ($0.1, 0.1, e_c^{\mathrm{CL}}=0.0991$)}}
+  \put(383,200){\makebox(0,0)[r]{\scriptsize\textbf{Max Corner} ($6, 6;\; e_c^{\mathrm{CL}}=21.96$)}}
 \end{picture}
-\caption{Bifurcation phase diagram in the $(\mathcal{P}_0, e)$ control plane showing the strictly increasing open-loop Hopf curve $e_c(\mathcal{P}_0)$ (Theorem~\ref{thm:dream_bifurcation}), the fixed observer gain slice $e = 3.60$ spanning Regimes I--IVb, and the Minimum and Maximum parameter corners.}
+\caption{Bifurcation phase diagram in the $(\mathcal{P}_0, e)$ control plane showing the strictly increasing open-loop Hopf curve $e_c(\mathcal{P}_0)$ (Theorem~\ref{thm:dream_bifurcation}), the fixed observer gain slice $e = 3.60$ spanning Regimes I--IVb, and the Minimum and Maximum parameter corners (at the Maximum corner, closed-loop feedback $\Lambda_{\mathrm{eff}}=10/9$ raises $e_c^{\mathrm{CL}}$ to $21.96 \gg 6$, stabilizing the fixed point).}
 \label{fig:bifurcation_plane}
 \end{figure}
 
-\section{Multi-Tolerance Poincar\'e, Whole-Period Integral, Floquet \& \texorpdfstring{$\mathcal{P}_0 = 0$}{P0 = 0} Bistability Audit}
+\section{Poincar\'e Integrals, 20D Variational Floquet Multipliers \& the \texorpdfstring{$\mathcal{P}_0 = 0$}{P0 = 0} \texorpdfstring{$\Psi$}{Psi}-Memory SNLC Mechanism}
 \label{sec:poincare}
 
-When we measure the average value of a quantity along an oscillation, how we take that average matters. An adaptive solver like \texttt{LSODA} or \texttt{DOP853} automatically takes tiny steps around sharp turns (where $\dot{H}_{\mathrm{obs}}$ and $\dot{I}$ change fast) and much bigger steps across slow, flat stretches. If we simply take the plain average of the numbers in the solver's array, the sharp corners get counted too many times, and changing the solver tolerance shifts the answer!
+When we measure the average value of a quantity along an oscillation, how we take that average matters. An adaptive solver like \texttt{LSODA} or \texttt{DOP853} automatically takes tiny steps around sharp turns (where $\dot{H}_{\mathrm{obs}}$ and $\dot{I}$ change fast) and much bigger steps across slow, flat stretches. If we simply take the plain average of the numbers in the solver's array, the sharp corners get counted too many times, and changing the solver tolerance shifts the answer.
 
-To get a rock-solid number that never depends on step spacing or window length, Layer 3 of \texttt{verification\_existence\_v1\_0.py} integrates two exact accumulators right alongside the 4D state variables:
+To obtain a step-size-invariant integral, Layer 3 of \texttt{verification\_existence\_v1\_0.py} integrates two exact accumulators alongside the 4D state variables:
 \begin{equation}
 \label{eq:aug_integrals}
 \frac{d z_5}{dt} = \mathcal{P}_{\mathrm{eff}}(\gamma(t), \Psi(t)), \qquad \frac{d z_6}{dt} = \operatorname{div} F_{\mathrm{exist}}(x(t)) = \frac{\partial \dot{\gamma}}{\partial \gamma} + \frac{\partial \dot{H}_{\mathrm{obs}}}{\partial H_{\mathrm{obs}}} + \frac{\partial \ddot{I}}{\partial \dot{I}} + \frac{\partial \dot{\Psi}}{\partial \Psi}.
 \end{equation}
-Between any two consecutive upward crossings $t_{k-1} < t_k$ of the Poincar\'e section $\Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$, the exact oscillation period $T = t_k - t_{k-1}$, the \textbf{exact single-period time average} $\overline{\mathcal{P}}_{\mathrm{eff},T}$, and the \textbf{Liouville orbital divergence integral} $\Delta_{\mathrm{Liouville}}$ are:
+Between any two consecutive upward crossings $t_{k-1} < t_k$ of the Poincar\'e section $\Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$, the oscillation period $T = t_k - t_{k-1}$, the \textbf{single-period time average} $\overline{\mathcal{P}}_{\mathrm{eff},T}$, and the \textbf{Liouville orbital divergence integral} $\Delta_{\mathrm{Liouville}}$ are:
 \begin{equation}
 \label{eq:period_avg_def}
 \overline{\mathcal{P}}_{\mathrm{eff},T} = \frac{1}{T}\int_{t_{k-1}}^{t_k} \mathcal{P}_{\mathrm{eff}}(\gamma(t), \Psi(t))\,dt = \frac{z_5(t_k) - z_5(t_{k-1})}{t_k - t_{k-1}}, \qquad \Delta_{\mathrm{Liouville}} = \int_{t_{k-1}}^{t_k} \operatorname{div} F_{\mathrm{exist}}(x(t))\,dt.
 \end{equation}
 
-To make sure every difference between regimes comes purely from the control parameters and not from hand-picked starting points, \textbf{all six regimes in Tables~\ref{tab:four_regimes} and \ref{tab:tolerance_sweep} start from the exact same initial state} $x(0) = (2.05, 95.0, 4.0, 0.05)$ with fixed internal constants ($a=b=c=f=g=\mathcal{E}_{\mathrm{avail}}=1$, $\gamma_{\max}=10$, $H_{\max}=100$, $\dot{I}_{\mathrm{erase}}=10$, $\epsilon_H=\epsilon_I=0.05$, $\sigma_0=0.05$, $\mu_\Psi=0.60$, $r_{\mathrm{LRSC}}=1/9$, $e=3.60$).
+To ensure every difference between regimes comes purely from the control parameters and not from hand-picked starting points, \textbf{all seven benchmark slices in Table~\ref{tab:four_regimes} start from the exact same initial state} $x(0) = (2.05, 95.0, 4.0, 0.05)$ with unit-normalized dimensionless constants ($a=b=c=f=g=\mathcal{E}_{\mathrm{avail}}=1$, $\gamma_{\max}=10$, $H_{\max}=100$, $\dot{I}_{\mathrm{erase}}=10$, $\epsilon_H=\epsilon_I=0.05$, $\sigma_0=0.05$, $\mu_\Psi=0.60$, $r_{\mathrm{LRSC}}=1/9$, $e=3.60$).
 
 \begin{table}[ht!]
 \centering
-\caption{Summary of the six dynamical benchmark slices inside $\mathcal{B}_4$ from common initial state $x(0) = (2.05, 95.0, 4.0, 0.05)$ at fixed gain $e = 3.60$ ($\mathrm{rtol}=10^{-10}, \mathrm{atol}=10^{-13}$). Here $\Delta_{\Sigma} = \|x_{\mathrm{LSODA}} - x_{\mathrm{DOP853}}\|_2$ is the cross-solver discrepancy on the Poincar\'e section $\Sigma = \{\gamma=2.0, \dot{\gamma}>0\}$.}
+\caption{Summary of the seven dynamical benchmark slices inside $\mathcal{B}_4$ from common initial state $x(0) = (2.05, 95.0, 4.0, 0.05)$ at fixed gain $e = 3.60$ ($\mathrm{rtol}=10^{-10}, \mathrm{atol}=10^{-13}$). At $\mathcal{P}_0 = 0$ and $\Lambda_{\mathrm{eff}} \le 1$ (Regimes IVb and IVc), no positive interior equilibrium or Hopf bifurcation exists (\texttt{N/A (SNLC)}); the periodic orbit is sustained by $\Psi$-memory above the saddle-node of limit cycles threshold $\lambda_{\mathrm{lucid,SNLC}}$.}
 \label{tab:four_regimes}
 \vspace{4pt}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccccccccc}
 \toprule
-\textbf{Regime Slice} & $\mathcal{P}_0$ & $\lambda_{\mathrm{sim}}$ & $\lambda_{\mathrm{lucid}}$ & $\kappa_{\mathrm{meta}}$ & $e_c^{\mathrm{CL}}$ & \textbf{Period $T$ (s)} & \textbf{1-Period $\overline{\mathcal{P}}_{\mathrm{eff},T}$} & $\max_t \Psi(t)$ & \textbf{Poincar\'e $\Delta_{\Sigma}$} & \textbf{Liouville $\int_0^T \operatorname{div} F\,dt$} \\
+\textbf{Regime Slice} & $\mathcal{P}_0$ & $\lambda_{\mathrm{sim}}$ & $\lambda_{\mathrm{lucid}}$ & $\kappa_{\mathrm{meta}}$ & $e_c^{\mathrm{CL}}$ & \textbf{Period $T$} & \textbf{1-Period $\overline{\mathcal{P}}_{\mathrm{eff},T}$} & $[\min_t \Psi, \max_t \Psi]$ & \textbf{Poincar\'e $\Delta_{\Sigma}$} & \textbf{Liouville $\int_0^T \operatorname{div} F\,dt$} \\
 \midrule
-I. Waking Fixed Pt & $5.00$ & $0.00$ & $0.00$ & $0.20$ & $4.4881$ & Fixed Pt & $5.000000$ & $0.0000$ & $5.62 \times 10^{-10}$ & --- \\
-II. Low-$\Psi$ Cycle & $4.00$ & $0.00$ & $0.00$ & $0.20$ & $2.9985$ & $18.828014$ & $4.000000$ & $0.1902$ & $3.06 \times 10^{-9}$ & $-6929.8$ \\
-IIIa. High-$\Psi$ Readout & $4.00$ & $0.00$ & $0.00$ & $2.50$ & $2.9985$ & $18.828014$ & $4.000000$ & $0.7913$ & $2.35 \times 10^{-9}$ & $-6948.1$ \\
-IIIb. Coupled High-$\Psi$ & $4.00$ & $0.00$ & $0.30$ & $2.50$ & $2.9985$ & $18.962844$ & $4.180763$ & $0.7919$ & $3.13 \times 10^{-9}$ & $-6924.5$ \\
-IVa. Autopoietic ($\mathcal{P}_0=1$) & $1.00$ & $7.20$ & $0.30$ & $2.50$ & $1.3938$ & $19.685223$ & $3.266554$ & $0.7996$ & $2.60 \times 10^{-9}$ & $-7122.3$ \\
-IVb. Zero-Drive ($\mathcal{P}_0=0$) & $0.00$ & $7.20$ & $0.30$ & $2.50$ & $0.0000$ & $19.387103$ & $2.190321$ & $0.8064$ & $2.68 \times 10^{-9}$ & $-7276.6$ \\
+I. High-Drive Fixed Pt & $5.00$ & $0.00$ & $0.00$ & $0.20$ & $4.4881$ & Fixed Pt & $5.000000$ & $[0.0000, 0.0000]$ & $5.62 \times 10^{-10}$ & --- \\
+II. Low-$\Psi$ Cycle & $4.00$ & $0.00$ & $0.00$ & $0.20$ & $2.9985$ & $18.828014$ & $4.000000$ & $[0.1650, 0.1902]$ & $3.06 \times 10^{-9}$ & $-6929.8$ \\
+IIIa. High-$\Psi$ Readout & $4.00$ & $0.00$ & $0.00$ & $2.50$ & $2.9985$ & $18.828014$ & $4.000000$ & $[0.7069, 0.7913]$ & $2.35 \times 10^{-9}$ & $-6948.1$ \\
+IIIb. Coupled High-$\Psi$ & $4.00$ & $0.00$ & $0.30$ & $2.50$ & $2.9985$ & $18.962844$ & $4.180763$ & $[0.7073, 0.7919]$ & $3.13 \times 10^{-9}$ & $-6924.5$ \\
+IVa. Low-Drive Coupled ($\mathcal{P}_0=1$) & $1.00$ & $7.20$ & $0.30$ & $2.50$ & $1.3938$ & $19.685223$ & $3.266554$ & $[0.7224, 0.7996]$ & $2.60 \times 10^{-9}$ & $-7122.3$ \\
+IVb. Zero-Drive Coupled ($\mathcal{P}_0=0$) & $0.00$ & $7.20$ & $0.30$ & $2.50$ & \texttt{N/A (SNLC)} & $19.387103$ & $2.190321$ & $[0.7309, 0.8064]$ & $2.68 \times 10^{-9}$ & $-7276.6$ \\
+IVc. Pure $\Psi$-Memory ($\mathcal{P}_0=0$) & $0.00$ & $0.00$ & $0.30$ & $2.50$ & \texttt{N/A (SNLC)} & $17.936755$ & $0.239590$ & $[0.7305, 0.8064]$ & $1.74 \times 10^{-9}$ & $-7325.8$ \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
-Look at the story Table~\ref{tab:four_regimes} and Theorem~\ref{thm:dream_bifurcation} tell across these regimes:
+Three structural mechanisms emerge from Table~\ref{tab:four_regimes}, the 20D variational monodromy analysis (Table~\ref{tab:floquet_all}), and the zero-drive $2\times 2$ ablation and continuation in $\lambda_{\mathrm{lucid}}$ (Table~\ref{tab:p0_zero_ablation}):
 \begin{enumerate}
-  \item \textbf{Watching the Rhythm vs.\ Steering It (Regime IIIa vs.\ Regime IIIb):} Going from Regime II to Regime IIIa changes only one knob: the self-tracking weight $\kappa_{\mathrm{meta}}$ increases from $0.20$ to $2.50$, while the feedback wire $\lambda_{\mathrm{lucid}} = 0$ stays unplugged. Because $\Psi$ does not feed back into $\dot{I}$ when $\lambda_{\mathrm{lucid}} = 0$, the underlying 3D cycle in IIIa is identical to Regime II ($T = 18.828014\,\mathrm{s}$, $\gamma \in [0.0059, 9.6348]$), while the readout $\Psi(t)$ climbs from $\max \Psi = 0.1902 < 0.50$ to $\max \Psi = 0.7913 > 0.50$. Crossing $0.50$ in IIIa simply means the quadratic feedback ratio $R_{\mathrm{self}}$ is large enough during the entropy-drop stroke that production $\kappa_{\mathrm{meta}}R_{\mathrm{self}}(1-\Psi)$ exceeds decay $\mu_\Psi\Psi$. When we plug in the feedback wire $\lambda_{\mathrm{lucid}} = 0.30$ in Regime IIIb, $\Psi(t)$ actively pushes on $d\dot{I}/dt$, stretching the period by $+\Delta T = +0.134830\,\mathrm{s}$ to $T = 18.962844\,\mathrm{s}$ and lifting the period-averaged drive to $\overline{\mathcal{P}}_{\mathrm{eff},T} = 4.180763$---while the equilibrium tipping point $e_c^{\mathrm{CL}} = 12069/4025 \approx 2.9985$ stays untouched by Theorem~\ref{thm:dream_bifurcation}(1).
-  \item \textbf{Self-Sustaining Loop at $\mathcal{P}_0 = 1$ (IVa) and the Two Fates of Zero Drive at $\mathcal{P}_0 = 0$ (IVb):} At $\mathcal{P}_0 = 1.0$ with $\lambda_{\mathrm{sim}} = 7.20$ ($\Lambda_{\mathrm{eff}} = 0.80$), the closed-loop quadratic Eq.~\eqref{eq:closed_loop_quad} becomes $4(\gamma^*)^2 + 15\gamma^* - 50 = 0$, giving the interior balance point $\gamma^* = (-15 + 5\sqrt{41})/8 \approx 2.126953$ and tipping threshold $e_c^{\mathrm{CL}}(1.0, 0.80) = 1.393762 < e = 3.60$ ($e/e_c^{\mathrm{CL}} = 2.5829 > 1$). Because the interior balance is unstable, the trajectory settles into an ongoing cycle with $T = 19.685223\,\mathrm{s}$ and $\overline{\mathcal{P}}_{\mathrm{eff},T} = 3.266554$. When external input is shut off completely ($\mathcal{P}_0 = 0.0$, Regime IVb, $\Lambda_{\mathrm{eff}} = 0.80 < 1$), Theorem~\ref{thm:dream_bifurcation}(4) shows that the silent origin $(0,0,0,0)$ is locally asymptotically stable (eigenvalues $\{-0.105573, -1.894427, -200.0, -0.60\}$). Layer 4 of \texttt{verification\_existence\_v1\_0.py} confirms that a trajectory starting very close to zero, $x_{\mathrm{near}}(0) = (10^{-3}, 10^{-3}, 10^{-3}, 10^{-3})$, quietly dies out to the origin ($\|x(320)\|_2 = 1.75 \times 10^{-17} < 10^{-12}$). By contrast, all three widely separated interior starting states $x(0) \in \{(2.05, 95, 4, 0.05), (0.50, 20, 2, 0.40), (7.50, 60, 25, 0.80)\}$ sit inside the basin of the self-sustaining periodic rhythm ($T = 19.387103\,\mathrm{s}$, $\overline{\mathcal{P}}_{\mathrm{eff},T} = 2.190321$, 3-IC spread $\Delta_{\mathrm{IC}} = 3.66 \times 10^{-11}$).
-  \item \textbf{Why Transverse Floquet Multipliers Are Reported as Inequalities (Table~\ref{tab:floquet_all}):} By Liouville's trace formula, the product of the three transverse Floquet multipliers on $\Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$ equals the orbital divergence exponential $\exp\!\left(\int_0^T \operatorname{div} F_{\mathrm{exist}}(x(t))\,dt\right) \approx e^{-6930} \sim 10^{-3010} \ll 1$. Because the true $(H_{\mathrm{obs}}, \dot{I})$ contraction is thousands of orders of magnitude below IEEE-754 double-precision resolution, any finite-difference return-map Jacobian $DP_3$ evaluated at tolerance $\mathrm{rtol}$ and step $\Delta h$ measures the numerical truncation noise floor ($\sim \mathrm{rtol}/(2\Delta h) \sim 10^{-11}$ to $10^{-9}$, whose exact digits vary across CPU/libm runners). Accordingly, Table~\ref{tab:floquet_all} reports finite-difference transverse Floquet radii and 3-IC spreads strictly as \textbf{certified upper-bound inequalities} ($\Delta_{\mathrm{IC}} < 10^{-8}$, $\rho_{\mathrm{FD,tight}}(DP_{2,H\dot{I}}) < 10^{-7}$ at $\mathrm{rtol}=10^{-12}, \Delta h = 2\times 10^{-2}$). The third direction along $\Psi$ has an exact, runner-invariant analytical integral multiplier:
+  \item \textbf{Passive Readout Scaling ($\kappa_{\mathrm{meta}}$) vs.\ Closed-Loop Modulation ($\lambda_{\mathrm{lucid}}$):} Going from Regime II to Regime IIIa changes only the production weight $\kappa_{\mathrm{meta}}$ from $0.20$ to $2.50$ while keeping $\lambda_{\mathrm{lucid}} = 0$. Because $\Psi$ does not feed back into $\dot{I}$ when $\lambda_{\mathrm{lucid}} = 0$, the 3D $(\gamma, H_{\mathrm{obs}}, \dot{I})$ orbit in IIIa is identical to Regime II ($T = 18.828014$), while $\max \Psi(t)$ scales up from $0.1902$ to $0.7913$. Turning on $\lambda_{\mathrm{lucid}} = 0.30$ in Regime IIIb closes the feedback loop: $\lambda_{\mathrm{lucid}}\Psi(t)$ injects additional drive during the oscillation, lengthening the period by $+\Delta T = +0.134830$ to $T = 18.962844$ and raising $\overline{\mathcal{P}}_{\mathrm{eff},T}$ to $4.180763$, while leaving the equilibrium Hopf threshold $e_c^{\mathrm{CL}} = 12069/4025 \approx 2.9985$ unchanged by Theorem~\ref{thm:dream_bifurcation}(1).
+
+  \item \textbf{Why $\Psi$-Memory---Not the Instantaneous $\Lambda_{\mathrm{eff}}\gamma$ Loop---Sustains the Zero-Drive Cycle at $\mathcal{P}_0 = 0$ (Table~\ref{tab:p0_zero_ablation}):} At $\mathcal{P}_0 = 0$ with $0 \le \Lambda_{\mathrm{eff}} < 1$, substituting $\mathcal{P}_0 = 0$ into Eq.~\eqref{eq:closed_loop_quad} yields $\Lambda_{\mathrm{eff}}(\gamma^*)^2 + 10(1 - \Lambda_{\mathrm{eff}})\gamma^* = 0$, whose roots are $\gamma^* = 0$ and $\gamma^* = -10(1-\Lambda_{\mathrm{eff}})/\Lambda_{\mathrm{eff}} < 0$ (equal to $-2.5 < 0$ at $\Lambda_{\mathrm{eff}} = 0.80$). Thus \textbf{no positive interior equilibrium or Hopf bifurcation exists at $\mathcal{P}_0 = 0$ for $\Lambda_{\mathrm{eff}} < 1$}, and the origin $(0,0,0,0)$ is locally asymptotically stable (Theorem~\ref{thm:dream_bifurcation}(4)). A $2\times 2$ ablation of $(\lambda_{\mathrm{sim}}, \lambda_{\mathrm{lucid}})$ at $\mathcal{P}_0 = 0$ (Table~\ref{tab:p0_zero_ablation}) reveals the exact physical mechanism that sustains the interior periodic orbit:
+  \begin{itemize}
+    \item \emph{Memoryless Proportional Loop Alone Collapses ($\lambda_{\mathrm{sim}} = 7.20, \lambda_{\mathrm{lucid}} = 0$):} During the deep erasure trough of the relaxation oscillation, $\gamma(t)$ drops to $\gamma_{\min} \approx 3.6 \times 10^{-4}$ and $\dot{I}(t)$ drops near zero. Because $\Lambda_{\mathrm{eff}}\gamma(t)$ is purely proportional to the current state $\gamma(t)$, its feedback drive vanishes right at the trough ($\Lambda_{\mathrm{eff}}\gamma_{\min} \approx 2.9 \times 10^{-4}$), allowing the locally stable origin to capture the trajectory ($\|x(400)\|_2 = 1.84 \times 10^{-16} < 10^{-12}$).
+    \item \emph{Slow $\Psi$-Memory Reservoir Bridges the Trough ($\lambda_{\mathrm{sim}} = 0, \lambda_{\mathrm{lucid}} = 0.30$, Regime IVc):} Because $\Psi(t)$ decays slowly at rate $\mu_\Psi = 0.60$ and is pumped toward $1$ whenever $|\mathrm{fb}| \gg \sigma_0 = 0.05$, $\Psi(t)$ never drops below $\Psi_{\min} = 0.7305$ across the brief $\gamma \approx 0$ trough. The stored memory drive $\lambda_{\mathrm{lucid}}\Psi(t) \ge 0.219 > 0$ acts as a capacitive buffer that keeps $d\dot{I}/dt > 0$ at the trough and sustains the periodic cycle ($T = 17.936755$, $\max \dot{I} = 265.85$, $\overline{\mathcal{P}}_{\mathrm{eff},T} = 0.239590$).
+    \item \emph{Saddle-Node of Limit Cycles (SNLC) Continuation \& Synergistic Flux Amplification:} Bisecting $\lambda_{\mathrm{lucid}}$ at $\mathcal{P}_0 = 0$ shows that the zero-drive cycle is born via a \textbf{saddle-node bifurcation of limit cycles (SNLC)} at $\lambda_{\mathrm{lucid,SNLC}}(0) = 0.080341$ when $\Lambda_{\mathrm{eff}} = 0$. When the proportional loop $\Lambda_{\mathrm{eff}} = 0.80$ ($\lambda_{\mathrm{sim}} = 7.20$, Regime IVb) is coupled alongside $\lambda_{\mathrm{lucid}}\Psi$, $\Lambda_{\mathrm{eff}}\gamma(t)$ amplifies the high-$\gamma$ recovery stroke, increasing the period-averaged flux by $9.14\times$ (from $\overline{\mathcal{P}}_{\mathrm{eff},T} = 0.239590$ to $2.190321$) and lowering the critical SNLC threshold by $27.8\%$ to $\lambda_{\mathrm{lucid,SNLC}}(0.80) = 0.057974$.
+  \end{itemize}
+
+  \item \textbf{20D First-Variation Monodromy Matrix $\Phi(T)$ \& Saltation-Projected Transverse Floquet Multipliers (Table~\ref{tab:floquet_all}):} Rather than relying solely on finite-difference perturbations of the return map, Layer 4 of \texttt{verification\_existence\_v1\_0.py} integrates the 20-dimensional first-variation monodromy system over one full period $T$ from $x_\Sigma \in \Sigma = \{\gamma = 2.0, \dot{\gamma} > 0\}$:
+  \begin{equation}
+  \label{eq:variational_ode}
+  \frac{dx}{dt} = F_{\mathrm{exist}}(x), \qquad \frac{d\Phi}{dt} = J_4(x(t))\,\Phi(t), \qquad \Phi(0) = I_4,
+  \end{equation}
+  where $J_4(x) = \partial F_{\mathrm{exist}}/\partial x$ is verified against \texttt{SymPy} to $1.65 \times 10^{-17}$. At $t = T$, the monodromy matrix $M = \Phi(T)$ satisfies the periodic-orbit tangent eigenvector identity $\|M F_{\mathrm{exist}}(x_\Sigma) - F_{\mathrm{exist}}(x_\Sigma)\|_2 / \|F_{\mathrm{exist}}(x_\Sigma)\|_2 \le 1.72 \times 10^{-9}$ (confirming the trivial tangent Floquet multiplier $\mu_{\mathrm{tangent}} = 1$). Projecting $M$ onto the tangent space of the Poincar\'e section $\Sigma$ (normal $n = (1,0,0,0)^\top$) via the exact saltation/Poincar\'e projection matrix:
+  \begin{equation}
+  \label{eq:saltation_proj}
+  P_{\Sigma} = I_4 - \frac{F_{\mathrm{exist}}(x(T))\,n^\top}{n^\top F_{\mathrm{exist}}(x(T))}, \qquad DP_{\mathrm{var}} = \bigl(P_{\Sigma}\,\Phi(T)\bigr)_{1:4, 1:4},
+  \end{equation}
+  yields the $3\times 3$ transverse return-map Jacobian $DP_{\mathrm{var}}$ directly from the variational equations. Because strong dissipation during the soft-wall boundary-layer stroke ($\int_0^T \operatorname{div} F_{\mathrm{exist}}\,dt \approx -6930 \implies \det M \approx 10^{-3010} \ll 1$) contracts the $(H_{\mathrm{obs}}, \dot{I})$ plane below IEEE-754 double-precision resolution ($\sim 10^{-12}$), the computed variational spectral radii $\rho_{\mathrm{var}}(DP_{2,H\dot{I}}) \approx 5.0 \times 10^{-12}$ to $6.6 \times 10^{-12}$ represent strong double-precision numerical evidence of orbital contraction (whereas a formal computer-assisted proof would require interval-arithmetic ODE enclosures such as CAPD). In Regime II ($\lambda_{\mathrm{lucid}} = 0, \kappa_{\mathrm{meta}} = 0.20$), $\Psi$ decouples from $(\gamma, H_{\mathrm{obs}}, \dot{I})$ and $(DP_{\mathrm{var}})_{3,3}$ matches the analytical orbital integral:
   \begin{equation}
   \label{eq:mu_psi_floquet}
-  \mu_{\Psi,\mathrm{exact}} = \exp\!\left(-\int_0^T \bigl(\kappa_{\mathrm{meta}}R_{\mathrm{self}}(t) + \mu_\Psi\bigr)\,dt\right) \le e^{-\mu_\Psi T}.
+  \mu_{\Psi,\mathrm{exact}} = \exp\!\left(-\int_0^T \bigl(\kappa_{\mathrm{meta}}R_{\mathrm{self}}(t) + \mu_\Psi\bigr)\,dt\right) = 2.537698 \times 10^{-6}
   \end{equation}
-  In Regime II ($\lambda_{\mathrm{lucid}} = 0, \kappa_{\mathrm{meta}} = 0.20, T = 18.828014\,\mathrm{s}$), $\Psi$ decouples from $(\gamma, H_{\mathrm{obs}}, \dot{I})$ and Eq.~\eqref{eq:mu_psi_floquet} gives the exact eigenvalue $\mu_{\Psi,\mathrm{exact}}^{\mathrm{(II)}} = 2.537698 \times 10^{-6}$ (matching $(DP_3)_{3,3}$ to $< 10^{-8}$). In Regimes IIIb, IVa, and IVb ($\kappa_{\mathrm{meta}} = 2.50$), $\mu_{\Psi,\mathrm{exact}} \le 1.19 \times 10^{-14}$ also lies below the finite-difference floor, so the full $3\times 3$ spectral radius satisfies $\rho_{\mathrm{FD,tight}}(DP_3) < 10^{-7} \ll 1$.
+  to $< 10^{-11}$.
 \end{enumerate}
 
 \begin{table}[ht!]
 \centering
-\caption{Tolerance-convergence audit across $\mathrm{rtol} \in \{10^{-8}, 10^{-10}, 10^{-12}\}$ ($\mathrm{atol} \in \{10^{-11}, 10^{-13}, 10^{-14}\}$) for Regimes IIIb, IVa, and IVb, showing 6-digit convergence of the single-period integral $\overline{\mathcal{P}}_{\mathrm{eff},T}$ and oscillation period $T$, cross-solver agreement $\Delta_{\Sigma}$ (\texttt{LSODA} vs.\ \texttt{DOP853}), and the certified inequality gates for 3-IC convergence ($\Delta_{\mathrm{IC}}$), tightened Floquet contraction ($\rho_{\mathrm{FD,tight}}$), and Liouville trace contraction $\exp(\int_0^T \operatorname{div} F\,dt)$.}
+\caption{Tolerance-convergence audit across $\mathrm{rtol} \in \{10^{-8}, 10^{-10}, 10^{-12}\}$ ($\mathrm{atol} \in \{10^{-11}, 10^{-13}, 10^{-14}\}$) for Regimes IIIb, IVa, and IVb, showing 6-digit convergence of the single-period integral $\overline{\mathcal{P}}_{\mathrm{eff},T}$ and oscillation period $T$, cross-solver agreement $\Delta_{\Sigma}$ (\texttt{LSODA} vs.\ \texttt{DOP853}), and 20D variational Floquet contraction.}
 \label{tab:tolerance_sweep}
 \vspace{4pt}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llcccccc}
 \toprule
-\textbf{Regime} & \textbf{Solver Tolerance} & \textbf{Period $T$ (s)} & $|T_{\mathrm{LS}} - T_{\mathrm{DP}}|$ (s) & \textbf{1-Period $\overline{\mathcal{P}}_{\mathrm{eff},T}$} & $|\Delta \overline{\mathcal{P}}_{\mathrm{eff},T}|$ & \textbf{Poincar\'e $\Delta_{\Sigma}$} & \textbf{Certified Inequality Gate / Liouville Trace} \\
+\textbf{Regime} & \textbf{Solver Tolerance} & \textbf{Period $T$} & $|T_{\mathrm{LS}} - T_{\mathrm{DP}}|$ & \textbf{1-Period $\overline{\mathcal{P}}_{\mathrm{eff},T}$} & $|\Delta \overline{\mathcal{P}}_{\mathrm{eff},T}|$ & \textbf{Poincar\'e $\Delta_{\Sigma}$} & \textbf{Observed Multi-IC / Variational Floquet Bound} \\
 \midrule
-IIIb ($\mathcal{P}_0=4, \lambda_{\mathrm{luc}}=0.3$) & $\mathrm{rtol}=10^{-8}$  & $18.962844$ & $< 5 \times 10^{-7}$  & $4.180763$ & $< 10^{-8}$  & $< 5 \times 10^{-7}$  & 3-IC Spread $\Delta_{\mathrm{IC}} < 10^{-8}$ \\
-IIIb ($\mathcal{P}_0=4, \lambda_{\mathrm{luc}}=0.3$) & $\mathrm{rtol}=10^{-10}$ & $18.962844$ & $< 5 \times 10^{-8}$  & $4.180763$ & $< 10^{-9}$  & $< 5 \times 10^{-8}$  & $\rho_{\mathrm{FD,tight}}(DP_3) < 10^{-7}$ \\
+IIIb ($\mathcal{P}_0=4, \lambda_{\mathrm{luc}}=0.3$) & $\mathrm{rtol}=10^{-8}$  & $18.962844$ & $< 5 \times 10^{-7}$  & $4.180763$ & $< 10^{-8}$  & $< 5 \times 10^{-7}$  & 3-IC Spread $\Delta_{\mathrm{IC}} = 4.08 \times 10^{-11}$ \\
+IIIb ($\mathcal{P}_0=4, \lambda_{\mathrm{luc}}=0.3$) & $\mathrm{rtol}=10^{-10}$ & $18.962844$ & $< 5 \times 10^{-8}$  & $4.180763$ & $< 10^{-9}$  & $< 5 \times 10^{-8}$  & Variational $\rho_{\mathrm{var}}(DP_3) = 1.87 \times 10^{-11}$ \\
 IIIb ($\mathcal{P}_0=4, \lambda_{\mathrm{luc}}=0.3$) & $\mathrm{rtol}=10^{-12}$ & $18.962844$ & $< 5 \times 10^{-10}$ & $4.180763$ & $< 10^{-11}$ & $< 5 \times 10^{-10}$ & Liouville $\exp(\int_0^T \operatorname{div} F\,dt) \approx 10^{-3007} \ll 1$ \\
 \midrule
-IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-8}$  & $19.685224$ & $< 5 \times 10^{-7}$  & $3.266554$ & $< 5 \times 10^{-8}$  & $< 5 \times 10^{-7}$  & 3-IC Spread $\Delta_{\mathrm{IC}} < 10^{-8}$ \\
-IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-10}$ & $19.685223$ & $< 5 \times 10^{-8}$  & $3.266554$ & $< 10^{-9}$  & $< 5 \times 10^{-8}$  & $\rho_{\mathrm{FD,tight}}(DP_3) < 10^{-7}$ \\
+IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-8}$  & $19.685224$ & $< 5 \times 10^{-7}$  & $3.266554$ & $< 5 \times 10^{-8}$  & $< 5 \times 10^{-7}$  & 3-IC Spread $\Delta_{\mathrm{IC}} = 2.58 \times 10^{-11}$ \\
+IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-10}$ & $19.685223$ & $< 5 \times 10^{-8}$  & $3.266554$ & $< 10^{-9}$  & $< 5 \times 10^{-8}$  & Variational $\rho_{\mathrm{var}}(DP_3) = 4.96 \times 10^{-12}$ \\
 IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-12}$ & $19.685223$ & $< 5 \times 10^{-10}$ & $3.266554$ & $< 10^{-10}$ & $< 5 \times 10^{-10}$ & Liouville $\exp(\int_0^T \operatorname{div} F\,dt) \approx 10^{-3093} \ll 1$ \\
 \midrule
-IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-8}$  & $19.387103$ & $< 10^{-6}$  & $2.190321$ & $< 10^{-7}$  & $< 5 \times 10^{-7}$  & 3-IC Spread $\Delta_{\mathrm{IC}} < 10^{-8}$ \\
-IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-10}$ & $19.387103$ & $< 5 \times 10^{-8}$  & $2.190321$ & $< 10^{-9}$  & $< 5 \times 10^{-8}$  & $\rho_{\mathrm{FD,tight}}(DP_3) < 10^{-7}$ \\
+IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-8}$  & $19.387103$ & $< 10^{-6}$  & $2.190321$ & $< 10^{-7}$  & $< 5 \times 10^{-7}$  & 3-IC Spread $\Delta_{\mathrm{IC}} = 3.66 \times 10^{-11}$ \\
+IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-10}$ & $19.387103$ & $< 5 \times 10^{-8}$  & $2.190321$ & $< 10^{-9}$  & $< 5 \times 10^{-8}$  & Variational $\rho_{\mathrm{var}}(DP_3) = 5.52 \times 10^{-12}$ \\
 IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-12}$ & $19.387103$ & $< 5 \times 10^{-10}$ & $2.190321$ & $< 10^{-10}$ & $< 5 \times 10^{-10}$ & Liouville $\exp(\int_0^T \operatorname{div} F\,dt) \approx 10^{-3160} \ll 1$ \\
 \bottomrule
 \end{tabular}%
@@ -603,18 +726,38 @@ IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.2$)  & $\mathrm{rtol}=10^{-12}$ 
 
 \begin{table}[ht!]
 \centering
-\caption{Certified inequality bounds for multi-initial-condition convergence ($\Delta_{\mathrm{IC}}$ and $|\Delta T|_{\mathrm{IC}}$ across 3 interior initial states in $\mathcal{B}_4$) and tightened finite-difference transverse Floquet spectral radii ($\mathrm{rtol}=10^{-12}, \mathrm{atol}=10^{-14}, \Delta h = 2\times 10^{-2}$), alongside the exact runner-invariant analytical integral $\mu_{\Psi,\mathrm{exact}} = \exp(-\int_0^T (\kappa_{\mathrm{meta}}R_{\mathrm{self}} + \mu_\Psi)\,dt)$ and Liouville trace contraction $\exp(\int_0^T \operatorname{div} F\,dt)$ (Layer 4 of \texttt{verification\_existence\_v1\_0.py}). Because finite-difference eigenvalues in the $(H_{\mathrm{obs}}, \dot{I})$ plane sit at the numerical truncation noise floor ($\sim 10^{-11}$ to $10^{-9}$), they are reported strictly as upper-bound inequalities ($< 10^{-7}$).}
+\caption{20D first-variation monodromy and saltation-projected transverse Floquet multiplier audit ($\mathrm{rtol}=10^{-12}, \mathrm{atol}=10^{-14}$, Layer 4 of \texttt{verification\_existence\_v1\_0.py}), alongside 3-initial-condition convergence $\Delta_{\mathrm{IC}}$ and the analytical integral $\mu_{\Psi,\mathrm{exact}} = \exp(-\int_0^T (\kappa_{\mathrm{meta}}R_{\mathrm{self}} + \mu_\Psi)\,dt)$. Here $\|\Phi(T)F(x_\Sigma) - F(x_\Sigma)\|_2 / \|F(x_\Sigma)\|_2$ verifies the unit tangent Floquet multiplier $\mu_{\mathrm{tangent}} = 1$.}
 \label{tab:floquet_all}
 \vspace{4pt}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccccc}
 \toprule
-\textbf{Oscillatory Regime} & \textbf{3-IC Spread $\Delta_{\mathrm{IC}}$} & \textbf{3-IC $|\Delta T|_{\mathrm{IC}}$ (s)} & \textbf{Tightened $\rho_{\mathrm{FD,tight}}(DP_{2,H\dot{I}})$} & \textbf{Exact Integral $\mu_{\Psi,\mathrm{exact}}$} & \textbf{Tightened $\rho_{\mathrm{FD,tight}}(DP_3)$} & \textbf{Liouville $\exp(\int_0^T \operatorname{div} F\,dt)$} \\
+\textbf{Oscillatory Regime} & \textbf{3-IC Spread $\Delta_{\mathrm{IC}}$} & \textbf{Tangent Residual $\|\Phi(T)F - F\|/\|F\|$} & \textbf{Variational $\rho_{\mathrm{var}}(DP_{2,H\dot{I}})$} & \textbf{Analytical $\mu_{\Psi,\mathrm{exact}}$} & \textbf{Variational $\rho_{\mathrm{var}}(DP_3)$} & \textbf{Liouville $\exp(\int_0^T \operatorname{div} F\,dt)$} \\
 \midrule
-II ($\mathcal{P}_0=4, \kappa_{\mathrm{meta}}=0.20, \lambda_{\mathrm{luc}}=0$)     & $< 10^{-8}$ (FD floor $\sim 10^{-11}$) & $< 10^{-8}$ & $< 10^{-7}$ (FD noise floor) & $2.537698 \times 10^{-6}$ (Exact) & $\approx 2.5377 \times 10^{-6}$ ($< 10^{-4}$) & $\approx 10^{-3010} \ll 1$ \\
-IIIb ($\mathcal{P}_0=4, \kappa_{\mathrm{meta}}=2.50, \lambda_{\mathrm{luc}}=0.3$)  & $< 10^{-8}$ (FD floor $\sim 10^{-11}$) & $< 10^{-8}$ & $< 10^{-7}$ (FD noise floor) & $1.188720 \times 10^{-14}$ & $< 10^{-7}$ (FD noise floor) & $\approx 10^{-3007} \ll 1$ \\
-IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.20, \lambda_{\mathrm{luc}}=0.3$)   & $< 10^{-8}$ (FD floor $\sim 10^{-11}$) & $< 10^{-8}$ & $< 10^{-7}$ (FD noise floor) & $5.805548 \times 10^{-19}$ & $< 10^{-7}$ (FD noise floor) & $\approx 10^{-3093} \ll 1$ \\
-IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.20, \lambda_{\mathrm{luc}}=0.3$)   & $< 10^{-8}$ (FD floor $\sim 10^{-11}$) & $< 10^{-8}$ & $< 10^{-7}$ (FD noise floor) & $4.458069 \times 10^{-26}$ & $< 10^{-7}$ (FD noise floor) & $\approx 10^{-3160} \ll 1$ \\
+II ($\mathcal{P}_0=4, \kappa_{\mathrm{meta}}=0.20, \lambda_{\mathrm{luc}}=0$)     & $4.01 \times 10^{-11}$ & $1.60 \times 10^{-9}$ & $6.20 \times 10^{-12}$ & $2.537698 \times 10^{-6}$ & $2.537698 \times 10^{-6}$ & $\approx 10^{-3010} \ll 1$ \\
+IIIb ($\mathcal{P}_0=4, \kappa_{\mathrm{meta}}=2.50, \lambda_{\mathrm{luc}}=0.3$)  & $4.08 \times 10^{-11}$ & $1.72 \times 10^{-9}$ & $6.64 \times 10^{-12}$ & $1.188720 \times 10^{-14}$ & $1.87 \times 10^{-11}$ & $\approx 10^{-3007} \ll 1$ \\
+IVa ($\mathcal{P}_0=1, \lambda_{\mathrm{sim}}=7.20, \lambda_{\mathrm{luc}}=0.3$)   & $2.58 \times 10^{-11}$ & $1.35 \times 10^{-9}$ & $5.03 \times 10^{-12}$ & $5.805548 \times 10^{-19}$ & $4.96 \times 10^{-12}$ & $\approx 10^{-3093} \ll 1$ \\
+IVb ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=7.20, \lambda_{\mathrm{luc}}=0.3$)   & $3.66 \times 10^{-11}$ & $1.32 \times 10^{-9}$ & $5.52 \times 10^{-12}$ & $4.458069 \times 10^{-26}$ & $5.52 \times 10^{-12}$ & $\approx 10^{-3160} \ll 1$ \\
+IVc ($\mathcal{P}_0=0, \lambda_{\mathrm{sim}}=0.00, \lambda_{\mathrm{luc}}=0.3$)   & $6.23 \times 10^{-11}$ & $9.05 \times 10^{-10}$ & $5.85 \times 10^{-12}$ & $5.451962 \times 10^{-24}$ & $5.85 \times 10^{-12}$ & $\approx 10^{-3182} \ll 1$ \\
+\bottomrule
+\end{tabular}%
+}\end{table}
+
+\begin{table}[ht!]
+\centering
+\caption{Zero-drive ($\mathcal{P}_0 = 0, e = 3.60, \kappa_{\mathrm{meta}} = 2.50$) $2\times 2$ feedback ablation and Saddle-Node of Limit Cycles (SNLC) continuation in $\lambda_{\mathrm{lucid}}$ from $x(0) = (2.05, 95.0, 4.0, 0.05)$ (Layer 4 of \texttt{verification\_existence\_v1\_0.py}).}
+\label{tab:p0_zero_ablation}
+\vspace{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccc}
+\toprule
+\textbf{Zero-Drive Configuration ($\mathcal{P}_0 = 0$)} & $\Lambda_{\mathrm{eff}} = \lambda_{\mathrm{sim}}/9$ & $\lambda_{\mathrm{lucid}}$ & \textbf{Asymptotic Fate} & \textbf{Period $T$} & \textbf{1-Period $\overline{\mathcal{P}}_{\mathrm{eff},T}$} & $[\min_t \Psi, \max_t \Psi]$ & \textbf{SNLC Threshold $\lambda_{\mathrm{lucid,SNLC}}$} \\
+\midrule
+1. Coupled Memory + Proportional (IVb) & $0.80$ & $0.30$ & Sustained Limit Cycle & $19.387103$ & $2.190321$ ($9.14\times$) & $[0.7309, 0.8064]$ & $\lambda_{\mathrm{lucid,SNLC}}(0.80) = 0.057974$ \\
+2. Pure $\Psi$-Memory Loop Only (IVc) & $0.00$ & $0.30$ & Sustained Limit Cycle & $17.936755$ & $0.239590$ ($1.00\times$) & $[0.7305, 0.8064]$ & $\lambda_{\mathrm{lucid,SNLC}}(0.00) = 0.080341$ \\
+3. Memoryless Proportional Only & $0.80$ & $0.00$ & Collapses to $(0,0,0,0)$ & --- ($\|x(400)\|_2 < 10^{-15}$) & $0.000000$ & $\Psi(t) \to 0$ & Fails ($\Lambda_{\mathrm{eff}}\gamma_{\min} \approx 3\times 10^{-4} \to 0$) \\
+4. Uncoupled Baseline & $0.00$ & $0.00$ & Collapses to $(0,0,0,0)$ & --- ($\|x(400)\|_2 < 10^{-20}$) & $0.000000$ & $\Psi(t) \to 0$ & --- \\
+5. Near-Origin Basin $x(0)=(10^{-3})^4$ & $0.80$ & $0.30$ & Collapses to $(0,0,0,0)$ & --- ($\|x(320)\|_2 < 10^{-16}$) & $0.000000$ & $\Psi(t) \to 0$ & Bistable with Interior Orbit \\
 \bottomrule
 \end{tabular}%
 }\end{table}
@@ -631,25 +774,25 @@ A good way to test whether a model truly holds together is to push all of its co
 \begin{figure}[ht!]
 \centering
 \vspace{4pt}
-\setlength{\fboxsep}{6pt}
-\setlength{\fboxrule}{0.7pt}
-\begin{tabular}{@{}c@{\hspace{5mm}}c@{}}
-  \fcolorbox{primary}{boxbg}{\parbox[c][60mm][t]{74mm}{%
-    \vspace{1mm}\centering\textbf{\color{primary}MINIMUM PARAMETER CORNER}\\
-    \scriptsize $(e=0.10,\; \mathcal{P}_0=0.10,\; \kappa_{\mathrm{meta}}=0.05,\; \lambda_{\mathrm{luc}}=0,\; \lambda_{\mathrm{sim}}=0)$\\[2mm]
+\setlength{\fboxsep}{6.5pt}
+\setlength{\fboxrule}{0.85pt}
+\begin{tabular}{@{}c@{\hspace{4mm}}c@{}}
+  \fcolorbox{primary}{boxbg}{\parbox[c][63mm][t]{73mm}{%
+    \vspace{1.2mm}\centering\textbf{\color{primary}MINIMUM PARAMETER CORNER}\\[1pt]
+    \tiny $(e=0.10,\;\mathcal{P}_0=0.10,\;\kappa_{\mathrm{meta}}=0.05,\;\lambda_{\mathrm{luc}}=0,\;\lambda_{\mathrm{sim}}=0)$\\[2.4mm]
     \raggedright\footnotesize
-    $\bullet$ \textbf{Unregularized v1.4 Breakdown:} $\gamma^* = \frac{10}{101} \approx 0.09901 < 0.10 \implies H_{\mathrm{v1.4}}^* = 100 - 101 = -1.0 < 0$ ($\mathcal{P}_0 = 0.10 < 10/99$).\\[1.2mm]
-    $\bullet$ \textbf{Soft-Wall Boundary-Layer Root:} $\tanh(H/\epsilon_H)$ rescues positivity at $H_{\mathrm{sw}}^* = +0.1295\,\mathrm{bits} > 0$ with $e_c^{\mathrm{CL}} = 0.099132 < e = 0.10$ ($e/e_c^{\mathrm{CL}} = 1.0088 > 1$).\\[1.2mm]
-    $\bullet$ \textbf{Dahlquist RK4 Stiffness Bound:} Wall stiffness $|\lambda_{\max}| = \frac{e\dot{I}_{\mathrm{erase}}}{\epsilon_I} + g$ requires sub-stepping $\Delta t = 0.0005\,\mathrm{s}$ in the boundary layer ($T = 24.665558\,\mathrm{s}$).
+    $\bullet$ \textbf{Unregularized v1.4 Breakdown:} $\gamma^* = \frac{10}{101} \approx 0.09901 < 0.10 \implies H_{\mathrm{v1.4}}^* = 100 - 101 = -1.0 < 0$ ($\mathcal{P}_0 = 0.10 < 10/99$).\\[1.8mm]
+    $\bullet$ \textbf{Soft-Wall Boundary-Layer Root:} $\tanh(H/\epsilon_H)$ rescues positivity at $H_{\mathrm{sw}}^* = +0.1295 > 0$ with $e_c^{\mathrm{CL}} = 0.099132 < e = 0.10$ ($e/e_c^{\mathrm{CL}} = 1.0088 > 1$).\\[1.8mm]
+    $\bullet$ \textbf{Dahlquist RK4 Stiffness Bound:} Wall stiffness $|\lambda_{\max}| = \frac{e\dot{I}_{\mathrm{erase}}}{\epsilon_I} + g$ requires sub-stepping $\Delta t = 0.0005$ in the boundary layer ($T = 24.665558$).
   }}
   &
-  \fcolorbox{accent}{accent!8}{\parbox[c][60mm][t]{74mm}{%
-    \vspace{1mm}\centering\textbf{\color{accent}MAXIMUM PARAMETER CORNER}\\
-    \scriptsize $(e=6.00,\; \mathcal{P}_0=6.00,\; \kappa_{\mathrm{meta}}=4.00,\; \lambda_{\mathrm{luc}}=1.00,\; \lambda_{\mathrm{sim}}=10.0)$\\[2mm]
+  \fcolorbox{accent}{accent!8}{\parbox[c][63mm][t]{73mm}{%
+    \vspace{1.2mm}\centering\textbf{\color{accent}MAXIMUM PARAMETER CORNER}\\[1pt]
+    \tiny $(e=6.00,\;\mathcal{P}_0=6.00,\;\kappa_{\mathrm{meta}}=4.00,\;\lambda_{\mathrm{luc}}=1.00,\;\lambda_{\mathrm{sim}}=10.0)$\\[2.4mm]
     \raggedright\footnotesize
-    $\bullet$ \textbf{Exact Closed-Loop Quadratic:} $5(\gamma^*)^2 + 22\gamma^* - 270 = 0$ yields the exact algebraic steady state:\\[1mm]
-    \centering $\gamma^* = \frac{-11 + \sqrt{1471}}{5} \approx 5.47072356$,\\[1mm]
-    $\mathcal{P}_{\mathrm{eff}}^* = \frac{32 + 2\sqrt{1471}}{9} \approx 12.07858174$.\\[1.2mm]
+    $\bullet$ \textbf{Exact Closed-Loop Quadratic:} $5(\gamma^*)^2 + 22\gamma^* - 270 = 0$ yields the exact algebraic steady state:\\[1.2mm]
+    \centering $\gamma^* = \frac{-11 + \sqrt{1471}}{5} \approx 5.47072356$,\\[1.2mm]
+    $\mathcal{P}_{\mathrm{eff}}^* = \frac{32 + 2\sqrt{1471}}{9} \approx 12.07858174$.\\[1.5mm]
     \raggedright\footnotesize
     $\bullet$ \textbf{Closed-Loop Stabilization:} Strong feedback $\Lambda_{\mathrm{eff}} = 10/9$ raises the closed-loop Hopf threshold to $e_c^{\mathrm{CL}} = 21.958110 \gg e = 6.00$ ($e/e_c^{\mathrm{CL}} = 0.2732 < 1$), locking the system to a stable fixed point ($\Psi^* \to 0$).
   }}
@@ -668,14 +811,14 @@ In the old unregularized model, because $\mathcal{P}_0 = 0.10 < \mathcal{P}_{\ma
 
 In our soft-wall model, the gate $\tanh(H_{\mathrm{obs}}/\epsilon_H)$ with $\epsilon_H = 0.05$ catches the entropy just above zero at a positive boundary-layer balance point $H_{\mathrm{obs},\mathrm{sw}}^* \in (0, H_{\max})$:
 \begin{equation}
-c\gamma^*(H_{\max} - H_{\mathrm{obs},\mathrm{sw}}^*) = \dot{I}_{\mathrm{erase}}\tanh\!\left(\frac{H_{\mathrm{obs},\mathrm{sw}}^*}{\epsilon_H}\right) \implies H_{\mathrm{obs},\mathrm{sw}}^* = 0.12951822\,\mathrm{bits} > 0.
+c\gamma^*(H_{\max} - H_{\mathrm{obs},\mathrm{sw}}^*) = \dot{I}_{\mathrm{erase}}\tanh\!\left(\frac{H_{\mathrm{obs},\mathrm{sw}}^*}{\epsilon_H}\right) \implies H_{\mathrm{obs},\mathrm{sw}}^* = 0.12951822 > 0.
 \end{equation}
-Evaluating the exact soft-wall threshold Eq.~\eqref{eq:ec_closed_loop} at this boundary-layer root gives $e_c^{\mathrm{CL}}(0.10, 0) = 0.09913224 < e = 0.10$ ($e/e_c^{\mathrm{CL}} = 1.0088 > 1$). Because $e = 0.10$ sits $0.88\%$ above the soft-wall threshold, the system enters a slow, gentle periodic cycle with period $T = 24.665558\,\mathrm{s}$, $\gamma(t) \in [0.0050, 2.3181]$, $H_{\mathrm{obs}}(t) \in [0.0025, 94.6536]$, $\dot{I}_{\min} = 4.95 \times 10^{-3} > 0$, and $\max \Psi(t) = 0.0707$, with \texttt{LSODA} and \texttt{DOP853} agreeing on the Poincar\'e section to $9.04 \times 10^{-9} < 10^{-7}$ at $\mathrm{rtol}=10^{-10}$ ($8.60 \times 10^{-11} < 10^{-8}$ at $\mathrm{rtol}=10^{-12}$).
+Evaluating the exact soft-wall threshold Eq.~\eqref{eq:ec_closed_loop} at this boundary-layer root gives $e_c^{\mathrm{CL}}(0.10, 0) = 0.09913224 < e = 0.10$ ($e/e_c^{\mathrm{CL}} = 1.0088 > 1$). Because $e = 0.10$ sits $0.88\%$ above the soft-wall threshold, the system enters a slow, gentle periodic cycle with period $T = 24.665558$, $\gamma(t) \in [0.0050, 2.3181]$, $H_{\mathrm{obs}}(t) \in [0.0025, 94.6536]$, $\dot{I}_{\min} = 4.95 \times 10^{-3} > 0$, and $\max \Psi(t) = 0.0707$, with \texttt{LSODA} and \texttt{DOP853} agreeing on the Poincar\'e section to $9.04 \times 10^{-9} < 10^{-7}$ at $\mathrm{rtol}=10^{-10}$ ($8.60 \times 10^{-11} < 10^{-8}$ at $\mathrm{rtol}=10^{-12}$).
 
 This corner also shows clearly why fixed-step Runge--Kutta (RK4) integrators need smaller steps near the walls:
 \begin{itemize}
-  \item \textbf{Entropy Wall Stiffness ($H_{\mathrm{obs}} \to 0^+$):} Near $H_{\mathrm{obs}} \approx 0$, the slope $\partial\dot{H}_{\mathrm{obs}}/\partial H_{\mathrm{obs}} = -c\gamma - (\dot{I}_{\mathrm{erase}}/\epsilon_H)\operatorname{sech}^2(H_{\mathrm{obs}}/\epsilon_H)$ reaches $-\dot{I}_{\mathrm{erase}}/\epsilon_H = -10/0.05 = -200\,\mathrm{s}^{-1}$. Since classical 4th-order RK4 is stable on $[-2.78529, 0]$, staying stable near $H_{\mathrm{obs}} \approx 0$ requires $\Delta t < 2.78529/200 \approx 0.01393\,\mathrm{s}$.
-  \item \textbf{Processing Wall Stiffness ($\dot{I} \to 0^+$):} Near $\dot{I} \approx 0$ when $\dot{H}_{\mathrm{obs}} \approx -\dot{I}_{\mathrm{erase}}$, the slope $\partial\ddot{I}/\partial\dot{I}$ reaches $-(e\dot{I}_{\mathrm{erase}}/\epsilon_I + g)$, which is $-721\,\mathrm{s}^{-1}$ at $e = 3.60$ ($\Delta t_{\mathrm{crit},\dot{I}} = 0.00386\,\mathrm{s}$) and $-1201\,\mathrm{s}^{-1}$ at $e = 6.00$ ($\Delta t_{\mathrm{crit},\dot{I}} = 0.00232\,\mathrm{s}$). Sub-stepping RK4 at $\Delta t = 0.0005\,\mathrm{s} \ll 0.00232\,\mathrm{s}$ whenever $\min(H_{\mathrm{obs}}, \dot{I}) < 2.5$ keeps trajectories strictly inside $\mathcal{B}_4$ everywhere.
+  \item \textbf{Entropy Wall Stiffness ($H_{\mathrm{obs}} \to 0^+$):} Near $H_{\mathrm{obs}} \approx 0$, the slope $\partial\dot{H}_{\mathrm{obs}}/\partial H_{\mathrm{obs}} = -c\gamma - (\dot{I}_{\mathrm{erase}}/\epsilon_H)\operatorname{sech}^2(H_{\mathrm{obs}}/\epsilon_H)$ reaches $-\dot{I}_{\mathrm{erase}}/\epsilon_H = -10/0.05 = -200$. Since classical 4th-order RK4 is stable on $[-2.78529, 0]$, staying stable near $H_{\mathrm{obs}} \approx 0$ requires $\Delta t < 2.78529/200 \approx 0.01393$.
+  \item \textbf{Processing Wall Stiffness ($\dot{I} \to 0^+$):} Near $\dot{I} \approx 0$ when $\dot{H}_{\mathrm{obs}} \approx -\dot{I}_{\mathrm{erase}}$, the slope $\partial\ddot{I}/\partial\dot{I}$ reaches $-(e\dot{I}_{\mathrm{erase}}/\epsilon_I + g)$, which is $-721$ at $e = 3.60$ ($\Delta t_{\mathrm{crit},\dot{I}} = 0.00386$) and $-1201$ at $e = 6.00$ ($\Delta t_{\mathrm{crit},\dot{I}} = 0.00232$). Sub-stepping RK4 at $\Delta t = 0.0005 \ll 0.00232$ whenever $\min(H_{\mathrm{obs}}, \dot{I}) < 2.5$ keeps trajectories strictly inside $\mathcal{B}_4$ everywhere.
 \end{itemize}
 
 \subsection{The Maximum Corner \texorpdfstring{($e=6, \mathcal{P}_0=6, \lambda_{\mathrm{sim}}=10$)}{(e=6, P0=6, lam\_sim=10)} and Closed-Loop Stabilization}
@@ -688,7 +831,7 @@ whose exact positive root and steady-state flux are:
 \begin{equation}
 \gamma_{\max\text{-corner}}^* = \frac{-11 + \sqrt{1471}}{5} \approx 5.47072356, \qquad \mathcal{P}_{\mathrm{eff}}^* = \dot{I}^* = 6 + \frac{10}{9}\gamma^* = \frac{32 + 2\sqrt{1471}}{9} \approx 12.07858174,
 \end{equation}
-with $H_{\mathrm{obs}}^* = 100 - 10/\gamma^* \approx 98.17208807\,\mathrm{bits}$. At this high-capacity balance point, Theorem~\ref{thm:dream_bifurcation}(2) gives the closed-loop threshold $e_c^{\mathrm{CL}}(6.0, 10/9) = 21.95810954$. Even with $e = 6.00$ at its maximum setting, the system sits well below the tipping point ($e/e_c^{\mathrm{CL}} = 0.273248 < 1$), so fluctuations damp out quickly and the state locks onto the steady point with $\Psi^* = 0$.
+with $H_{\mathrm{obs}}^* = 100 - 10/\gamma^* \approx 98.17208807$. At this high-capacity balance point, Theorem~\ref{thm:dream_bifurcation}(2) gives the closed-loop threshold $e_c^{\mathrm{CL}}(6.0, 10/9) = 21.95810954$. Even with $e = 6.00$ at its maximum setting, the system sits well below the tipping point ($e/e_c^{\mathrm{CL}} = 0.273248 < 1$), so fluctuations damp out quickly and the state locks onto the steady point with $\Psi^* = 0$.
 
 \begin{table}[ht!]
 \centering
@@ -700,75 +843,119 @@ with $H_{\mathrm{obs}}^* = 100 - 10/\gamma^* \approx 98.17208807\,\mathrm{bits}$
 \toprule
 \textbf{Parameter Corner} & $(e, \mathcal{P}_0, \kappa_{\mathrm{meta}}, \lambda_{\mathrm{luc}}, \lambda_{\mathrm{sim}})$ & $e_c^{\mathrm{CL}}$ & $e / e_c^{\mathrm{CL}}$ & \textbf{Asymptotic $\gamma(t)$} & \textbf{Asymptotic $H_{\mathrm{obs}}(t)$} & $\max_t \Psi(t)$ & \textbf{1-Period / Steady $\overline{\mathcal{P}}_{\mathrm{eff}}$} \\
 \midrule
-\textbf{Minimum Corner} & $(0.10, 0.10, 0.05, 0.00, 0.00)$ & $0.099132$ & $1.0088 > 1$ & $[0.0050, 2.3181]$ & $[0.0025, 94.6536]$ & $0.0707$ & $0.100000$ ($T = 24.6656\,\mathrm{s}$) \\
+\textbf{Minimum Corner} & $(0.10, 0.10, 0.05, 0.00, 0.00)$ & $0.099132$ & $1.0088 > 1$ & $[0.0050, 2.3181]$ & $[0.0025, 94.6536]$ & $0.0707$ & $0.100000$ ($T = 24.6656$) \\
 \textbf{Maximum Corner} & $(6.00, 6.00, 4.00, 1.00, 10.0)$ & $21.958110$ & $0.2732 < 1$ & $5.470724$ (Fixed Pt) & $98.172088$ (Fixed Pt) & $0.0000$ ($\Psi^* \to 0$) & $12.078582$ (Exact $\frac{32+2\sqrt{1471}}{9}$) \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
-\section{Complete Lean 4 Formalization (\texttt{ExistenceVerification.lean})}
+\section{Complete Lean 4 Pointwise Boundary \& Linear-Floor Module (\texttt{ExistenceVerification.lean})}
 \label{sec:lean_code}
 
-Below is the complete, self-contained Lean 4 proof module \texttt{ExistenceVerification.lean} (registered in \texttt{lakefile.lean} as default library target \texttt{ExistenceVerification} alongside \texttt{BoundaryVerification}), proving unconditional non-negativity of the state-dependent quadratic ratio \texttt{R\_self\_sq}, the Gr\"onwall linear comparison lower bound \texttt{dgamma\_dt\_4D\_ge\_neg\_decay}, the zero-drive boundary theorem \texttt{dIdot\_dt\_4D\_nonneg\_at\_boundary\_zero\_drive}, the derived Face 6 ceiling bound \texttt{dIdot\_dt\_4D\_nonpos\_at\_ceiling}, the unified 8-face certificate \texttt{existence\_box\_8face\_nagumo\_certificate}, and the \texttt{\#print axioms} audit commands.
+Below is the complete Lean 4 proof module \texttt{ExistenceVerification.lean} (17 theorems, registered in \texttt{lakefile.lean} as default library target \texttt{ExistenceVerification} alongside \texttt{BoundaryVerification}), proving unconditional non-negativity of the state-dependent quadratic ratio \texttt{R\_self\_sq}, the derived upper and lower entropy-rate bounds \texttt{dHobs\_dt\_4D\_le\_M\_H} and \texttt{dHobs\_dt\_4D\_ge\_neg\_M\_H}, the pointwise linear comparison bounds \texttt{dgamma\_dt\_4D\_ge\_neg\_decay} and \texttt{dIdot\_dt\_4D\_ge\_linear\_floor}, the zero-drive Face 5 theorem \texttt{dIdot\_dt\_4D\_nonneg\_at\_boundary\_zero\_drive}, the derived Face 6 ceiling bound \texttt{dIdot\_dt\_4D\_nonpos\_at\_ceiling}, the unified 8-face certificate \texttt{existence\_box\_8face\_nagumo\_certificate}, and the \texttt{\#print axioms} audit commands.
 
 \begin{lstlisting}[language=Lean4]
-import Mathlib.Data.Real.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.Tactic.Linarith
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+import Mathlib.Topology.MetricSpace.Basic
+import Mathlib.Tactic
+
+/-!
+# Pointwise Boundary-Face & Linear-Comparison Algebra for the 4D Soft-Wall ODE System (`B_4`)
+## Appendix B v1.0 --- Bounded Self-Referential Dynamics & Psi-Memory Persistence
+
+This Lean 4 module (`ExistenceVerification.lean`, registered as a default library target in
+`lakefile.lean` alongside `BoundaryVerification.lean` under `leanprover/lean4:v4.36.0-rc1`
+and Mathlib commit `10156080d0e7`) formalizes the algebraic vector field
+`F_exist = (dgamma_dt_4D, dHobs_dt_4D, dIdot_dt_4D, dPsi_dt_4D)` on the dimensionless 4D state
+`ExistenceState = (gamma, H_obs, I_dot, Psi)` with the smooth quadratic self-feedback ratio:
+`R_self_sq(s) = fb(s)^2 / (fb(s)^2 + (f * P_0)^2 + sigma_0^2)`.
+
+Scope of this module (17 machine-checked pointwise algebraic theorems, **zero `sorry` axioms,
+zero `nlinarith` tactics**):
+1. **Unconditional Non-Negativity of State-Dependent `R_self_sq`** (`R_self_sq_nonneg`):
+   Proves `0 <= R_self_sq ... s` from `sq_nonneg`, `add_nonneg`, and `div_nonneg`.
+2. **Derived Upper & Lower Entropy-Rate Bounds on `B_4`** (`dHobs_dt_4D_le_M_H` and
+   `dHobs_dt_4D_ge_neg_M_H`): Proves `-M_H_4D <= dHobs_dt_4D <= M_H_4D` directly from box
+   membership (`0 <= s.gamma <= gamma_max`, `0 <= s.H_obs <= H_max`).
+3. **All Eight Pointwise Boundary-Face Sign Conditions on `B_4`** (Faces 1--8, including both
+   `P_0 > 0` in `dIdot_dt_4D_pos_at_boundary` and `P_0 >= 0` in
+   `dIdot_dt_4D_nonneg_at_boundary_zero_drive`).
+4. **Pointwise Linear Comparison Lower Bounds for `gamma` and `I_dot`** (`dgamma_dt_4D_ge_neg_decay`
+   proving `dgamma/dt >= -b gamma`, and `dIdot_dt_4D_ge_linear_floor` proving
+   `dI_dot/dt >= f P_0 - e ((I_dot / eps_I) M_H_4D) - g I_dot` on `B_4`). Continuous-time forward invariance
+   and Gronwall / uniform `liminf` persistence follow from these pointwise inequalities via
+   classical ODE comparison theorems in the accompanying manuscript.
+5. **Unified 8-Face 4D Box Pointwise Certificate** (`existence_box_8face_nagumo_certificate`).
+-/
 
 noncomputable section
 
-/-- The 4-dimensional state space x = (gamma, H_obs, I_dot, Psi) in R^4. -/
+/-- Dimensionless 4D state-space coordinates `(gamma, H_obs, I_dot, Psi)` of the soft-wall ODE system. -/
 structure ExistenceState where
-  gamma : Real
-  H_obs : Real
-  I_dot : Real
-  Psi   : Real
+  gamma : Real  -- Dimensionless reconstruction capacity (gamma in [0, gamma_max])
+  H_obs : Real  -- Dimensionless internal entropy / uncertainty coordinate (H_obs in [0, H_max])
+  I_dot : Real  -- Dimensionless processing rate coordinate (I_dot in [0, I_dot_max_4D])
+  Psi   : Real  -- Dimensionless slow-memory / self-feedback coordinate (Psi in [0, 1])
 
-/-- Closed-loop effective sensory/internal processing drive:
-P_eff(gamma, Psi) = P_0 + lam_sim * r_lrsc * gamma + lam_lucid * Psi. -/
+/-- Effective input drive:
+`P_eff(gamma, Psi) = P_0 + lam_sim * r_lrsc * gamma + lam_lucid * Psi`.
+Note that `lam_sim` and `r_lrsc` enter solely through their product `Lam_eff = lam_sim * r_lrsc`. -/
 def P_eff (P_0 lam_sim r_lrsc lam_lucid : Real) (s : ExistenceState) : Real :=
   P_0 + lam_sim * r_lrsc * s.gamma + lam_lucid * s.Psi
 
-/-- Equation (B.1): Reconstruction capacity rate of change d(gamma)/dt. -/
+/-- Upper bound `P_eff_max = P_0 + lam_sim * r_lrsc * gamma_max + lam_lucid` on `[0, gamma_max] x [0, 1]`. -/
+def P_eff_max (P_0 lam_sim r_lrsc gamma_max lam_lucid : Real) : Real :=
+  P_0 + lam_sim * r_lrsc * gamma_max + lam_lucid
+
+/-- Eq. (B.1): Reconstruction capacity dynamics `dgamma/dt = a I_dot E_avail (1 - gamma / gamma_max) - b gamma`. -/
 def dgamma_dt_4D (a b E_avail gamma_max : Real) (s : ExistenceState) : Real :=
   a * s.I_dot * E_avail * (1 - s.gamma / gamma_max) - b * s.gamma
 
-/-- Equation (B.2): Observer entropy rate of change d(H_obs)/dt with soft-wall gate. -/
+/-- Eq. (B.2): Soft-wall entropy dynamics `dH_obs/dt = c gamma (H_max - H_obs) - I_dot_erase tanh(H_obs / eps_H)`. -/
 def dHobs_dt_4D (c H_max I_erase epsH : Real) (s : ExistenceState) : Real :=
   c * s.gamma * (H_max - s.H_obs) - I_erase * Real.tanh (s.H_obs / epsH)
 
-/-- Equation (B.3): Information processing acceleration d(I_dot)/dt with closed-loop P_eff. -/
-def dIdot_dt_4D (c e f g H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI : Real)
+/-- Eq. (B.3): Coupled processing dynamics
+`dI_dot/dt = e tanh(I_dot / eps_I) (dH_obs/dt) + f P_eff(gamma, Psi) - g I_dot`. -/
+def dIdot_dt_4D (e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI : Real)
     (s : ExistenceState) : Real :=
   e * Real.tanh (s.I_dot / epsI) * (dHobs_dt_4D c H_max I_erase epsH s) +
     f * (P_eff P_0 lam_sim r_lrsc lam_lucid s) - g * s.I_dot
 
-/-- Smooth (C^infty) quadratic self-feedback ratio:
-R_self_sq(s) = fb(s)^2 / (fb(s)^2 + (f * P_0)^2 + sigma_0^2). -/
+/-- Smooth (`C^infty`) quadratic self-feedback ratio:
+`R_self_sq(s) = fb(s)^2 / (fb(s)^2 + (f * P_0)^2 + sigma_0^2)`, where
+`fb(s) = e * tanh(I_dot / eps_I) * dH_obs/dt` and `sigma_0 > 0` guarantees smoothness for all `P_0 >= 0`. -/
 def R_self_sq (e f P_0 sigma_0 c H_max I_erase epsH epsI : Real) (s : ExistenceState) : Real :=
   let fb := e * Real.tanh (s.I_dot / epsI) * (dHobs_dt_4D c H_max I_erase epsH s)
   (fb ^ 2) / (fb ^ 2 + (f * P_0) ^ 2 + sigma_0 ^ 2)
 
-/-- Equation (B.4): Self-Modeling / Readout rate of change d(Psi)/dt with R_self_sq(s). -/
+/-- Eq. (B.4): Slow-memory / self-feedback readout (`Psi`) dynamics with
+the explicit state-dependent smooth quadratic ratio `R_self_sq`:
+`dPsi/dt = kappa_meta * R_self_sq(s) * (1 - Psi) - mu_Psi * Psi`. -/
 def dPsi_dt_4D (kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase epsH epsI : Real)
     (s : ExistenceState) : Real :=
   kappa_meta * (R_self_sq e f P_0 sigma_0 c H_max I_erase epsH epsI s) * (1 - s.Psi) - mu_Psi * s.Psi
 
-/-- Upper bound M_H on d(H_obs)/dt inside [0, gamma_max] x [0, H_max]. -/
+/-- Maximum entropy-rate magnitude bound `M_H_4D = c gamma_max H_max + I_dot_erase`. -/
 def M_H_4D (c gamma_max H_max I_erase : Real) : Real :=
   c * gamma_max * H_max + I_erase
 
-/-- Upper bound P_eff_max on effective input drive inside B_4. -/
-def P_eff_max (P_0 lam_sim r_lrsc gamma_max lam_lucid : Real) : Real :=
-  P_0 + lam_sim * r_lrsc * gamma_max + lam_lucid
-
-/-- 4D compact box ceiling I_dot_max_4D on the processing rate I_dot. -/
-def I_dot_max_4D (c e f g gamma_max H_max P_0 lam_sim r_lrsc lam_lucid I_erase : Real) : Real :=
+/-- Upper processing ceiling `I_dot_max_4D = (e M_H_4D + f P_eff_max) / g` of the 4D box `B_4`. -/
+def I_dot_max_4D (e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max I_erase : Real) : Real :=
   (e * M_H_4D c gamma_max H_max I_erase + f * P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid) / g
 
-/-- Theorem B.0 (Unconditional Non-Negativity of State-Dependent R_self_sq): -/
+/-- Unified 4D vector field `F_exist : ExistenceState -> ExistenceState`. -/
+def F_exist (a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+    I_erase epsH epsI kappa_meta mu_Psi : Real) (s : ExistenceState) : ExistenceState :=
+  { gamma := dgamma_dt_4D a b E_avail gamma_max s
+  , H_obs := dHobs_dt_4D c H_max I_erase epsH s
+  , I_dot := dIdot_dt_4D e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI s
+  , Psi   := dPsi_dt_4D kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase epsH epsI s }
+
+/-- Theorem B.0 (Unconditional Non-Negativity of State-Dependent `R_self_sq`):
+For all real parameters and every state `s : ExistenceState`, `0 <= R_self_sq ... s`. -/
 theorem R_self_sq_nonneg
     (e f P_0 sigma_0 c H_max I_erase epsH epsI : Real) (s : ExistenceState) :
     0 <= R_self_sq e f P_0 sigma_0 c H_max I_erase epsH epsI s := by
@@ -782,7 +969,7 @@ theorem R_self_sq_nonneg
     add_nonneg h_den1 (sq_nonneg _)
   exact div_nonneg h_num h_den
 
-/-- Theorem B.1 (Face 1 --- Lower gamma-Boundary Invariance, gamma = 0): -/
+/-- Theorem B.1 (Face 1 --- Lower gamma-Boundary Condition, gamma = 0): -/
 theorem dgamma_dt_4D_nonneg_at_boundary
     (a b E_avail gamma_max : Real) (ha : 0 <= a) (hE : 0 <= E_avail)
     (s : ExistenceState) (hgamma : s.gamma = 0) (hI : 0 <= s.I_dot) :
@@ -791,7 +978,9 @@ theorem dgamma_dt_4D_nonneg_at_boundary
   rw [hgamma, zero_div, sub_zero, mul_one, mul_zero, sub_zero]
   exact mul_nonneg (mul_nonneg ha hI) hE
 
-/-- Theorem B.1b (Gronwall Linear Comparison Lower Bound for Strict Interior gamma-Positivity): -/
+/-- Theorem B.1b (Pointwise Linear Decay Lower Bound for gamma on `B_4`):
+For any state `s` in the box (`0 <= s.I_dot`, `s.gamma <= gamma_max`, `0 < gamma_max`), the production
+term `a * s.I_dot * E_avail * (1 - s.gamma / gamma_max)` is non-negative, so `dgamma_dt_4D >= -b * s.gamma`. -/
 theorem dgamma_dt_4D_ge_neg_decay
     (a b E_avail gamma_max : Real)
     (ha : 0 <= a) (hE : 0 <= E_avail) (hgmax : 0 < gamma_max)
@@ -806,17 +995,17 @@ theorem dgamma_dt_4D_ge_neg_decay
     mul_nonneg h_prod2 h_one_sub
   linarith
 
-/-- Theorem B.2 (Face 2 --- Upper gamma-Ceiling Confinement, gamma = gamma_max): -/
+/-- Theorem B.2 (Face 2 --- Upper gamma-Ceiling Condition, gamma = gamma_max): -/
 theorem dgamma_dt_4D_neg_at_ceiling
     (a b E_avail gamma_max : Real) (hb : 0 < b) (hgmax : 0 < gamma_max)
     (s : ExistenceState) (hgamma : s.gamma = gamma_max) :
     dgamma_dt_4D a b E_avail gamma_max s < 0 := by
   unfold dgamma_dt_4D
-  have h_ne : gamma_max != 0 := ne_of_gt hgmax
-  rw [hgamma, div_self h_ne, sub_self, mul_zero, zero_sub]
+  have hdiv : gamma_max / gamma_max = 1 := div_self (ne_of_gt hgmax)
+  rw [hgamma, hdiv, sub_self, mul_zero, zero_sub]
   exact neg_lt_zero.mpr (mul_pos hb hgmax)
 
-/-- Theorem B.3 (Face 3 --- Lower H_obs-Boundary Invariance, H_obs = 0): -/
+/-- Theorem B.3 (Face 3 --- Lower H_obs-Boundary Condition, H_obs = 0): -/
 theorem dHobs_dt_4D_nonneg_at_boundary
     (c H_max I_erase epsH : Real) (hc : 0 <= c) (hHmax : 0 <= H_max)
     (s : ExistenceState) (hH : s.H_obs = 0) (hgamma : 0 <= s.gamma) :
@@ -825,133 +1014,220 @@ theorem dHobs_dt_4D_nonneg_at_boundary
   rw [hH, zero_div, Real.tanh_zero, mul_zero, sub_zero, sub_zero]
   exact mul_nonneg (mul_nonneg hc hgamma) hHmax
 
-/-- Theorem B.4 (Face 4 --- Upper H_obs-Ceiling Confinement, H_obs = H_max): -/
+/-- Theorem B.4 (Face 4 --- Upper H_obs-Ceiling Condition, H_obs = H_max): -/
 theorem dHobs_dt_4D_neg_at_ceiling
-    (c H_max I_erase epsH : Real) (hIerase : 0 < I_erase)
-    (htanh_pos : 0 < Real.tanh (H_max / epsH))
+    (c H_max I_erase epsH : Real) (hIe : 0 < I_erase) (htanh : 0 < Real.tanh (H_max / epsH))
     (s : ExistenceState) (hH : s.H_obs = H_max) :
     dHobs_dt_4D c H_max I_erase epsH s < 0 := by
   unfold dHobs_dt_4D
   rw [hH, sub_self, mul_zero, zero_sub]
-  exact neg_lt_zero.mpr (mul_pos hIerase htanh_pos)
+  exact neg_lt_zero.mpr (mul_pos hIe htanh)
 
-/-- Lemma B.5a: Positivity of P_eff on B_4 when P_0 > 0. -/
+/-- Lemma B.5a (Positivity of Effective Flux `P_eff` for `P_0 > 0`): -/
 theorem P_eff_pos_on_box
     (P_0 lam_sim r_lrsc lam_lucid : Real)
-    (hP0 : 0 < P_0) (hlsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hlluc : 0 <= lam_lucid)
+    (hP0 : 0 < P_0) (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
     (s : ExistenceState) (hgamma : 0 <= s.gamma) (hPsi : 0 <= s.Psi) :
     0 < P_eff P_0 lam_sim r_lrsc lam_lucid s := by
   unfold P_eff
-  have h1 : 0 <= lam_sim * r_lrsc := mul_nonneg hlsim hr
+  have h1 : 0 <= lam_sim * r_lrsc := mul_nonneg hsim hr
   have h2 : 0 <= lam_sim * r_lrsc * s.gamma := mul_nonneg h1 hgamma
-  have h3 : 0 <= lam_lucid * s.Psi := mul_nonneg hlluc hPsi
+  have h3 : 0 <= lam_lucid * s.Psi := mul_nonneg hluc hPsi
   linarith
 
-/-- Theorem B.5 (Face 5 --- Lower I_dot-Boundary Strict Repulsion, I_dot = 0, P_0 > 0): -/
+/-- Theorem B.5 (Face 5 --- Lower I_dot-Boundary Strict Positivity for `P_0 > 0`, I_dot = 0): -/
 theorem dIdot_dt_4D_pos_at_boundary
-    (c e f g H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI : Real)
-    (hf : 0 < f) (hP0 : 0 < P_0) (hlsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hlluc : 0 <= lam_lucid)
+    (e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI : Real)
+    (hf : 0 < f) (hP0 : 0 < P_0) (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
     (s : ExistenceState) (hI : s.I_dot = 0) (hgamma : 0 <= s.gamma) (hPsi : 0 <= s.Psi) :
-    0 < dIdot_dt_4D c e f g H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI s := by
+    0 < dIdot_dt_4D e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI s := by
   unfold dIdot_dt_4D
   rw [hI, zero_div, Real.tanh_zero, mul_zero, zero_mul, zero_add, mul_zero, sub_zero]
   have hPeff : 0 < P_eff P_0 lam_sim r_lrsc lam_lucid s :=
-    P_eff_pos_on_box P_0 lam_sim r_lrsc lam_lucid hP0 hlsim hr hlluc s hgamma hPsi
+    P_eff_pos_on_box P_0 lam_sim r_lrsc lam_lucid hP0 hsim hr hluc s hgamma hPsi
   exact mul_pos hf hPeff
 
-/-- Theorem B.5b (Face 5 Zero-Drive Autopoietic Boundary Invariance, I_dot = 0, P_0 >= 0): -/
+/-- Theorem B.5b (Face 5 Zero-Drive Extension --- Non-Negativity for `P_0 >= 0`, including `P_0 = 0`): -/
 theorem dIdot_dt_4D_nonneg_at_boundary_zero_drive
-    (c e f g H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI : Real)
-    (hf : 0 <= f) (hP0 : 0 <= P_0) (hlsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hlluc : 0 <= lam_lucid)
+    (e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI : Real)
+    (hf : 0 <= f) (hP0 : 0 <= P_0) (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
     (s : ExistenceState) (hI : s.I_dot = 0) (hgamma : 0 <= s.gamma) (hPsi : 0 <= s.Psi) :
-    0 <= dIdot_dt_4D c e f g H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI s := by
+    0 <= dIdot_dt_4D e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI s := by
   unfold dIdot_dt_4D P_eff
   rw [hI, zero_div, Real.tanh_zero, mul_zero, zero_mul, zero_add, mul_zero, sub_zero]
-  have h1 : 0 <= lam_sim * r_lrsc := mul_nonneg hlsim hr
+  have h1 : 0 <= lam_sim * r_lrsc := mul_nonneg hsim hr
   have h2 : 0 <= lam_sim * r_lrsc * s.gamma := mul_nonneg h1 hgamma
-  have h3 : 0 <= lam_lucid * s.Psi := mul_nonneg hlluc hPsi
+  have h3 : 0 <= lam_lucid * s.Psi := mul_nonneg hluc hPsi
   have h4 : 0 <= P_0 + lam_sim * r_lrsc * s.gamma + lam_lucid * s.Psi := by linarith
   exact mul_nonneg hf h4
 
-/-- Lemma B.6a: Upper bound dHobs_dt_4D <= M_H_4D derived from box membership. -/
+/-- Lemma B.6a (Derived Entropy-Rate Upper Bound `dHobs_dt_4D <= M_H_4D` on the Box): -/
 theorem dHobs_dt_4D_le_M_H
     (c gamma_max H_max I_erase epsH : Real)
-    (hc : 0 <= c) (hHmax : 0 <= H_max) (hIerase : 0 <= I_erase)
-    (s : ExistenceState) (hgamma_nonneg : 0 <= s.gamma) (hgamma_le : s.gamma <= gamma_max)
-    (hH_nonneg : 0 <= s.H_obs) (htanh_H_nonneg : 0 <= Real.tanh (s.H_obs / epsH)) :
+    (hc : 0 <= c) (hHmax : 0 <= H_max) (hIe : 0 <= I_erase)
+    (s : ExistenceState)
+    (hgamma_nonneg : 0 <= s.gamma) (hgamma_le : s.gamma <= gamma_max)
+    (hH_nonneg : 0 <= s.H_obs)
+    (htanh_H_nonneg : 0 <= Real.tanh (s.H_obs / epsH)) :
     dHobs_dt_4D c H_max I_erase epsH s <= M_H_4D c gamma_max H_max I_erase := by
   unfold dHobs_dt_4D M_H_4D
-  have h_sub_le : H_max - s.H_obs <= H_max := by linarith
-  have h_cg_nonneg : 0 <= c * s.gamma := mul_nonneg hc hgamma_nonneg
-  have h_cg_le : c * s.gamma <= c * gamma_max := mul_le_mul_of_nonneg_left hgamma_le hc
-  have h_prod1 : c * s.gamma * (H_max - s.H_obs) <= c * s.gamma * H_max :=
-    mul_le_mul_of_nonneg_left h_sub_le h_cg_nonneg
-  have h_prod2 : c * s.gamma * H_max <= c * gamma_max * H_max :=
-    mul_le_mul_of_nonneg_right h_cg_le hHmax
-  have h_erase_nonneg : 0 <= I_erase * Real.tanh (s.H_obs / epsH) :=
-    mul_nonneg hIerase htanh_H_nonneg
+  have hc_gamma_nonneg : 0 <= c * s.gamma := mul_nonneg hc hgamma_nonneg
+  have h1 : H_max - s.H_obs <= H_max := sub_le_self H_max hH_nonneg
+  have h_step1 : c * s.gamma * (H_max - s.H_obs) <= c * s.gamma * H_max :=
+    mul_le_mul_of_nonneg_left h1 hc_gamma_nonneg
+  have h2 : c * s.gamma <= c * gamma_max := mul_le_mul_of_nonneg_left hgamma_le hc
+  have h_step2 : c * s.gamma * H_max <= c * gamma_max * H_max :=
+    mul_le_mul_of_nonneg_right h2 hHmax
+  have h4 : 0 <= I_erase * Real.tanh (s.H_obs / epsH) := mul_nonneg hIe htanh_H_nonneg
   linarith
 
-/-- Lemma B.6b: Upper bound P_eff <= P_eff_max on B_4. -/
+/-- Lemma B.6a' (Derived Entropy-Rate Lower Bound `-M_H_4D <= dHobs_dt_4D` on the Box):
+On `B_4` (`0 <= s.gamma`, `s.H_obs <= H_max`, `Real.tanh (s.H_obs / epsH) <= 1`), the production term
+`c * s.gamma * (H_max - s.H_obs)` is non-negative and the erasure sink is at most `I_erase <= M_H_4D`,
+so `-M_H_4D <= -I_erase <= dHobs_dt_4D`. -/
+theorem dHobs_dt_4D_ge_neg_M_H
+    (c gamma_max H_max I_erase epsH : Real)
+    (hc : 0 <= c) (hgmax : 0 <= gamma_max) (hHmax : 0 <= H_max) (hIe : 0 <= I_erase)
+    (s : ExistenceState)
+    (hgamma_nonneg : 0 <= s.gamma) (hH_le : s.H_obs <= H_max)
+    (htanh_H_le_one : Real.tanh (s.H_obs / epsH) <= 1) :
+    -M_H_4D c gamma_max H_max I_erase <= dHobs_dt_4D c H_max I_erase epsH s := by
+  unfold dHobs_dt_4D M_H_4D
+  have hc_gamma : 0 <= c * s.gamma := mul_nonneg hc hgamma_nonneg
+  have hH_sub : 0 <= H_max - s.H_obs := sub_nonneg.mpr hH_le
+  have h_prod : 0 <= c * s.gamma * (H_max - s.H_obs) := mul_nonneg hc_gamma hH_sub
+  have h_erase : I_erase * Real.tanh (s.H_obs / epsH) <= I_erase * 1 :=
+    mul_le_mul_of_nonneg_left htanh_H_le_one hIe
+  have h_cmax : 0 <= c * gamma_max * H_max := mul_nonneg (mul_nonneg hc hgmax) hHmax
+  linarith
+
+/-- Theorem B.5c (Uniform Linear Comparison Lower Bound on `dIdot_dt_4D` for `liminf I_dot > 0`):
+Using `0 <= tanh(I_dot / eps_I) <= I_dot / eps_I` and `-M_H_4D <= dHobs_dt_4D` on `B_4`, the processing rate obeys
+`f P_0 - e ((I_dot / eps_I) M_H_4D) - g I_dot <= dIdot_dt_4D`, supplying the uniform linear differential lower
+bound that forces `liminf_{t -> infty} I_dot(t) >= f P_0 / (g + e M_H_4D / eps_I) > 0` whenever `P_0 > 0`. -/
+theorem dIdot_dt_4D_ge_linear_floor
+    (e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max I_erase epsH epsI : Real)
+    (hc : 0 <= c) (he : 0 <= e) (hf : 0 <= f)
+    (hgmax : 0 <= gamma_max) (hHmax : 0 <= H_max) (hIe : 0 <= I_erase)
+    (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
+    (hMH : 0 <= M_H_4D c gamma_max H_max I_erase)
+    (s : ExistenceState)
+    (hgamma_nonneg : 0 <= s.gamma) (hH_le : s.H_obs <= H_max) (hPsi_nonneg : 0 <= s.Psi)
+    (htanh_H_le_one : Real.tanh (s.H_obs / epsH) <= 1)
+    (htanh_I_nonneg : 0 <= Real.tanh (s.I_dot / epsI))
+    (htanh_I_le_lin : Real.tanh (s.I_dot / epsI) <= s.I_dot / epsI) :
+    f * P_0 - e * ((s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase) - g * s.I_dot <=
+      dIdot_dt_4D e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI s := by
+  have hdH_lo : -M_H_4D c gamma_max H_max I_erase <= dHobs_dt_4D c H_max I_erase epsH s :=
+    dHobs_dt_4D_ge_neg_M_H c gamma_max H_max I_erase epsH hc hgmax hHmax hIe s
+      hgamma_nonneg hH_le htanh_H_le_one
+  unfold dIdot_dt_4D P_eff
+  have hdH_sum : 0 <= dHobs_dt_4D c H_max I_erase epsH s + M_H_4D c gamma_max H_max I_erase := by
+    linarith
+  have h_step1 :
+      0 <= Real.tanh (s.I_dot / epsI) *
+        (dHobs_dt_4D c H_max I_erase epsH s + M_H_4D c gamma_max H_max I_erase) :=
+    mul_nonneg htanh_I_nonneg hdH_sum
+  have h_step2 :
+      Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase <=
+      (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase :=
+    mul_le_mul_of_nonneg_right htanh_I_le_lin hMH
+  have h_step3 :
+      0 <= Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s +
+        (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase := by
+    linarith
+  have h_step4 :
+      0 <= e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s +
+        (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase) :=
+    mul_nonneg he h_step3
+  have h_assoc :
+      e * Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s =
+      e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s) :=
+    mul_assoc e (Real.tanh (s.I_dot / epsI)) (dHobs_dt_4D c H_max I_erase epsH s)
+  have h_sr : 0 <= lam_sim * r_lrsc := mul_nonneg hsim hr
+  have h_gam_term : 0 <= lam_sim * r_lrsc * s.gamma := mul_nonneg h_sr hgamma_nonneg
+  have h_psi_term : 0 <= lam_lucid * s.Psi := mul_nonneg hluc hPsi_nonneg
+  have h_Peff_lo : P_0 <= P_0 + lam_sim * r_lrsc * s.gamma + lam_lucid * s.Psi := by
+    linarith
+  have h_fPeff_lo : f * P_0 <= f * (P_0 + lam_sim * r_lrsc * s.gamma + lam_lucid * s.Psi) :=
+    mul_le_mul_of_nonneg_left h_Peff_lo hf
+  linarith
+
+/-- Lemma B.6b (Upper Bound on Effective Flux `P_eff <= P_eff_max` on `B_4`): -/
 theorem P_eff_le_P_eff_max
     (P_0 lam_sim r_lrsc gamma_max lam_lucid : Real)
-    (hlsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hlluc : 0 <= lam_lucid)
+    (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
     (s : ExistenceState) (hgamma_le : s.gamma <= gamma_max) (hPsi_le : s.Psi <= 1) :
     P_eff P_0 lam_sim r_lrsc lam_lucid s <= P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid := by
   unfold P_eff P_eff_max
-  have h_lr : 0 <= lam_sim * r_lrsc := mul_nonneg hlsim hr
-  have h_g : lam_sim * r_lrsc * s.gamma <= lam_sim * r_lrsc * gamma_max :=
-    mul_le_mul_of_nonneg_left hgamma_le h_lr
-  have h_p : lam_lucid * s.Psi <= lam_lucid * 1 :=
-    mul_le_mul_of_nonneg_left hPsi_le hlluc
+  have h_sr_nonneg : 0 <= lam_sim * r_lrsc := mul_nonneg hsim hr
+  have h_term1 : lam_sim * r_lrsc * s.gamma <= lam_sim * r_lrsc * gamma_max :=
+    mul_le_mul_of_nonneg_left hgamma_le h_sr_nonneg
+  have h_term2 : lam_lucid * s.Psi <= lam_lucid * 1 :=
+    mul_le_mul_of_nonneg_left hPsi_le hluc
   linarith
 
-/-- Theorem B.6 (Face 6 --- Upper I_dot-Ceiling Confinement, I_dot = I_dot_max_4D): -/
+/-- Theorem B.6 (Face 6 --- Upper I_dot-Ceiling Condition with Derived `dHobs_dt_4D <= M_H_4D`, I_dot = I_dot_max_4D):
+Here `dHobs_dt_4D <= M_H_4D` is derived internally from box membership (`0 <= s.gamma <= gamma_max`,
+`0 <= s.H_obs`) via `dHobs_dt_4D_le_M_H`. -/
 theorem dIdot_dt_4D_nonpos_at_ceiling
-    (c e f g gamma_max H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI : Real)
+    (e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max I_erase epsH epsI : Real)
     (hc : 0 <= c) (he : 0 <= e) (hf : 0 <= f) (hg : 0 < g)
-    (hgmax : 0 <= gamma_max) (hHmax : 0 <= H_max) (hIerase : 0 <= I_erase)
-    (hlsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hlluc : 0 <= lam_lucid)
+    (hHmax : 0 <= H_max) (hIe : 0 <= I_erase)
+    (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
+    (hMH : 0 <= M_H_4D c gamma_max H_max I_erase)
     (s : ExistenceState)
-    (hI_ceil : s.I_dot = I_dot_max_4D c e f g gamma_max H_max P_0 lam_sim r_lrsc lam_lucid I_erase)
     (hgamma_nonneg : 0 <= s.gamma) (hgamma_le : s.gamma <= gamma_max)
     (hH_nonneg : 0 <= s.H_obs) (hPsi_le : s.Psi <= 1)
+    (hI : s.I_dot = I_dot_max_4D e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max I_erase)
     (htanh_H_nonneg : 0 <= Real.tanh (s.H_obs / epsH))
     (htanh_I_nonneg : 0 <= Real.tanh (s.I_dot / epsI))
     (htanh_I_le_one : Real.tanh (s.I_dot / epsI) <= 1) :
-    dIdot_dt_4D c e f g H_max P_0 lam_sim r_lrsc lam_lucid I_erase epsH epsI s <= 0 := by
-  unfold dIdot_dt_4D
-  have hdH_le_MH : dHobs_dt_4D c H_max I_erase epsH s <= M_H_4D c gamma_max H_max I_erase :=
-    dHobs_dt_4D_le_M_H c gamma_max H_max I_erase epsH hc hHmax hIerase s hgamma_nonneg hgamma_le hH_nonneg htanh_H_nonneg
-  have hMH_nonneg : 0 <= M_H_4D c gamma_max H_max I_erase := by
-    unfold M_H_4D
-    have h1 : 0 <= c * gamma_max := mul_nonneg hc hgmax
-    have h2 : 0 <= c * gamma_max * H_max := mul_nonneg h1 hHmax
-    linarith
-  have h_etanh_nonneg : 0 <= e * Real.tanh (s.I_dot / epsI) := mul_nonneg he htanh_I_nonneg
-  have h_etanh_le_e : e * Real.tanh (s.I_dot / epsI) <= e * 1 :=
-    mul_le_mul_of_nonneg_left htanh_I_le_one he
-  have h_term1 : e * Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s <=
-      e * Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase :=
-    mul_le_mul_of_nonneg_left hdH_le_MH h_etanh_nonneg
-  have h_term2 : e * Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase <=
-      (e * 1) * M_H_4D c gamma_max H_max I_erase :=
-    mul_le_mul_of_nonneg_right h_etanh_le_e hMH_nonneg
-  have hPeff_le : P_eff P_0 lam_sim r_lrsc lam_lucid s <=
-      P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid :=
-    P_eff_le_P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid hlsim hr hlluc s hgamma_le hPsi_le
-  have h_fPeff : f * P_eff P_0 lam_sim r_lrsc lam_lucid s <=
-      f * P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid :=
-    mul_le_mul_of_nonneg_left hPeff_le hf
+    dIdot_dt_4D e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI s <= 0 := by
+  have hdH : dHobs_dt_4D c H_max I_erase epsH s <= M_H_4D c gamma_max H_max I_erase :=
+    dHobs_dt_4D_le_M_H c gamma_max H_max I_erase epsH hc hHmax hIe s
+      hgamma_nonneg hgamma_le hH_nonneg htanh_H_nonneg
+  unfold dIdot_dt_4D I_dot_max_4D at *
   have hg_ne : g != 0 := ne_of_gt hg
-  have h_gI : g * s.I_dot =
-      e * M_H_4D c gamma_max H_max I_erase + f * P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid := by
-    rw [hI_ceil]
-    unfold I_dot_max_4D
-    exact mul_div_cancel0 _ hg_ne
+  have h_g_mul :
+      g * s.I_dot =
+      e * M_H_4D c gamma_max H_max I_erase +
+        f * P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid := by
+    rw [hI]
+    exact mul_div_cancel0
+      (e * M_H_4D c gamma_max H_max I_erase +
+        f * P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid) hg_ne
+  have h_step1 :
+      Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s <=
+      Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase :=
+    mul_le_mul_of_nonneg_left hdH htanh_I_nonneg
+  have h_step2 :
+      Real.tanh (s.I_dot / epsI) * M_H_4D c gamma_max H_max I_erase <=
+      1 * M_H_4D c gamma_max H_max I_erase :=
+    mul_le_mul_of_nonneg_right htanh_I_le_one hMH
+  have h_step3 :
+      Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s <=
+      M_H_4D c gamma_max H_max I_erase := by
+    linarith
+  have h_step4 :
+      e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s) <=
+      e * M_H_4D c gamma_max H_max I_erase :=
+    mul_le_mul_of_nonneg_left h_step3 he
+  have h_assoc :
+      e * Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s =
+      e * (Real.tanh (s.I_dot / epsI) * dHobs_dt_4D c H_max I_erase epsH s) :=
+    mul_assoc e (Real.tanh (s.I_dot / epsI)) (dHobs_dt_4D c H_max I_erase epsH s)
+  have h_P_bound :
+      P_eff P_0 lam_sim r_lrsc lam_lucid s <=
+      P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid :=
+    P_eff_le_P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid hsim hr hluc s hgamma_le hPsi_le
+  have h_fP_bound :
+      f * P_eff P_0 lam_sim r_lrsc lam_lucid s <=
+      f * P_eff_max P_0 lam_sim r_lrsc gamma_max lam_lucid :=
+    mul_le_mul_of_nonneg_left h_P_bound hf
   linarith
 
-/-- Theorem B.7 (Face 7 --- Lower Psi-Boundary Invariance with State-Dependent R_self_sq, Psi = 0): -/
+/-- Theorem B.7 (Face 7 --- Lower Psi-Boundary Condition with State-Dependent `R_self_sq`, Psi = 0): -/
 theorem dPsi_dt_4D_nonneg_at_boundary
     (kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase epsH epsI : Real)
     (hkappa : 0 <= kappa_meta)
@@ -963,57 +1239,132 @@ theorem dPsi_dt_4D_nonneg_at_boundary
     R_self_sq_nonneg e f P_0 sigma_0 c H_max I_erase epsH epsI s
   exact mul_nonneg hkappa hR
 
-/-- Theorem B.8 (Face 8 --- Upper Psi-Ceiling Confinement, Psi = 1): -/
+/-- Theorem B.8 (Face 8 --- Upper Psi-Ceiling Condition with State-Dependent `R_self_sq`, Psi = 1): -/
 theorem dPsi_dt_4D_neg_at_ceiling
     (kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase epsH epsI : Real)
     (hmu : 0 < mu_Psi)
     (s : ExistenceState) (hPsi : s.Psi = 1) :
     dPsi_dt_4D kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase epsH epsI s < 0 := by
   unfold dPsi_dt_4D
-  rw [hPsi, sub_self, mul_zero, mul_one, zero_sub]
+  rw [hPsi, sub_self, mul_zero, zero_sub, mul_one]
   exact neg_lt_zero.mpr hmu
+
+/-- Theorem B.9 (Unified 8-Face 4D Box Pointwise Boundary Certificate):
+Simultaneous formal verification of all eight pointwise boundary and ceiling sign conditions of
+`B_4 = [0, gamma_max] x [0, H_max] x [0, I_dot_max_4D] x [0, 1]` with the explicit state-dependent
+smooth quadratic `R_self_sq` and derived `dHobs_dt_4D <= M_H_4D`. -/
+theorem existence_box_8face_nagumo_certificate
+    (a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+     I_erase epsH epsI kappa_meta mu_Psi : Real)
+    (ha : 0 <= a) (hb : 0 < b) (hc : 0 <= c) (he : 0 <= e) (hf : 0 < f) (hg : 0 < g)
+    (hgmax : 0 < gamma_max) (hHmax : 0 < H_max) (hE : 0 <= E_avail) (hP0 : 0 < P_0)
+    (hsim : 0 <= lam_sim) (hr : 0 <= r_lrsc) (hluc : 0 <= lam_lucid)
+    (hIe : 0 < I_erase) (htanh_Hmax : 0 < Real.tanh (H_max / epsH))
+    (hMH : 0 <= M_H_4D c gamma_max H_max I_erase)
+    (hkappa : 0 <= kappa_meta) (hmu : 0 < mu_Psi) :
+    -- Face 1: Lower gamma-boundary (gamma = 0)
+    (forall  s : ExistenceState, s.gamma = 0 -> 0 <= s.I_dot ->
+      0 <= (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+            I_erase epsH epsI kappa_meta mu_Psi s).gamma) /\
+    -- Face 2: Upper gamma-ceiling (gamma = gamma_max)
+    (forall  s : ExistenceState, s.gamma = gamma_max ->
+      (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+        I_erase epsH epsI kappa_meta mu_Psi s).gamma < 0) /\
+    -- Face 3: Lower H_obs-boundary (H_obs = 0)
+    (forall  s : ExistenceState, s.H_obs = 0 -> 0 <= s.gamma ->
+      0 <= (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+            I_erase epsH epsI kappa_meta mu_Psi s).H_obs) /\
+    -- Face 4: Upper H_obs-ceiling (H_obs = H_max)
+    (forall  s : ExistenceState, s.H_obs = H_max ->
+      (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+        I_erase epsH epsI kappa_meta mu_Psi s).H_obs < 0) /\
+    -- Face 5: Lower I_dot-boundary (I_dot = 0)
+    (forall  s : ExistenceState, s.I_dot = 0 -> 0 <= s.gamma -> 0 <= s.Psi ->
+      0 < (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+            I_erase epsH epsI kappa_meta mu_Psi s).I_dot) /\
+    -- Face 6: Upper I_dot-ceiling (I_dot = I_dot_max_4D, with dHobs_dt_4D <= M_H_4D derived from box membership)
+    (forall  s : ExistenceState,
+      0 <= s.gamma -> s.gamma <= gamma_max -> 0 <= s.H_obs -> s.Psi <= 1 ->
+      s.I_dot = I_dot_max_4D e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max I_erase ->
+      0 <= Real.tanh (s.H_obs / epsH) ->
+      0 <= Real.tanh (s.I_dot / epsI) ->
+      Real.tanh (s.I_dot / epsI) <= 1 ->
+      (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+        I_erase epsH epsI kappa_meta mu_Psi s).I_dot <= 0) /\
+    -- Face 7: Lower Psi-boundary (Psi = 0, state-dependent R_self_sq >= 0 derived automatically)
+    (forall  s : ExistenceState, s.Psi = 0 ->
+      0 <= (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+            I_erase epsH epsI kappa_meta mu_Psi s).Psi) /\
+    -- Face 8: Upper Psi-ceiling (Psi = 1)
+    (forall  s : ExistenceState, s.Psi = 1 ->
+      (F_exist a b c e f g gamma_max H_max E_avail P_0 sigma_0 lam_sim r_lrsc lam_lucid
+        I_erase epsH epsI kappa_meta mu_Psi s).Psi < 0) := by
+  refine <?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_>
+  . intro s hgamma hI
+    exact dgamma_dt_4D_nonneg_at_boundary a b E_avail gamma_max ha hE s hgamma hI
+  . intro s hgamma
+    exact dgamma_dt_4D_neg_at_ceiling a b E_avail gamma_max hb hgmax s hgamma
+  . intro s hH hgamma
+    exact dHobs_dt_4D_nonneg_at_boundary c H_max I_erase epsH hc (le_of_lt hHmax) s hH hgamma
+  . intro s hH
+    exact dHobs_dt_4D_neg_at_ceiling c H_max I_erase epsH hIe htanh_Hmax s hH
+  . intro s hI hgamma hPsi
+    exact dIdot_dt_4D_pos_at_boundary e f g P_0 lam_sim r_lrsc lam_lucid c H_max I_erase epsH epsI
+      hf hP0 hsim hr hluc s hI hgamma hPsi
+  . intro s hgamma_nonneg hgamma_le hH_nonneg hPsi_le hI htH htI0 htI1
+    exact dIdot_dt_4D_nonpos_at_ceiling e f g P_0 lam_sim r_lrsc lam_lucid c gamma_max H_max
+      I_erase epsH epsI hc he (le_of_lt hf) hg (le_of_lt hHmax) (le_of_lt hIe) hsim hr hluc hMH
+      s hgamma_nonneg hgamma_le hH_nonneg hPsi_le hI htH htI0 htI1
+  . intro s hPsi
+    exact dPsi_dt_4D_nonneg_at_boundary kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase
+      epsH epsI hkappa s hPsi
+  . intro s hPsi
+    exact dPsi_dt_4D_neg_at_ceiling kappa_meta mu_Psi e f P_0 sigma_0 c H_max I_erase
+      epsH epsI hmu s hPsi
 
 #print axioms R_self_sq_nonneg
 #print axioms dgamma_dt_4D_ge_neg_decay
+#print axioms dHobs_dt_4D_ge_neg_M_H
+#print axioms dIdot_dt_4D_ge_linear_floor
 #print axioms dIdot_dt_4D_nonneg_at_boundary_zero_drive
 #print axioms existence_box_8face_nagumo_certificate
 
 end
 \end{lstlisting}
 
-\section{Six-Layer Verification Architecture, Epistemic Claim Matrix \& Certificate Digest}
+\section{Six-Layer Verification Architecture \& Quantitative Reproducibility Digest}
 \label{sec:audit_ledger}
 
-In accordance with the \textbf{Build, Attack, Falsify, Preserve} protocol and the epistemic type system of the IntentSeal Verifiable Research Kernel (VRK v0.3.1, \href{https://doi.org/10.5281/zenodo.23018459}{DOI: 10.5281/zenodo.23018459}), Table~\ref{tab:vrk_matrix} summarizes the six non-hardcoded verification layers executed by \texttt{verification\_existence\_v1\_0.py}, the three separated \texttt{intentseal-vrk-claim-v2} claims with their mandatory \texttt{scope.applies\_to} and \texttt{scope.does\_not\_imply} firewalls, and the tolerance-independent deterministic certificate digest.
+Table~\ref{tab:vrk_matrix} summarizes the six verification layers executed by \texttt{verification\_existence\_v1\_0.py} and the exact mathematical or numerical scope of each layer.
 
 \begin{table}[ht!]
 \centering
-\caption{Six-layer mechanical verification architecture and VRK v0.3.1 epistemic claim matrix for Appendix B v1.0 (\texttt{verification\_existence\_v1\_0.py}).}
+\caption{Six-layer verification architecture for Appendix B v1.0 (\texttt{verification\_existence\_v1\_0.py}).}
 \label{tab:vrk_matrix}
 \vspace{4pt}
 {\footnotesize
-\begin{tabularx}{\textwidth}{@{}p{34mm}p{34mm}X@{}}
+\begin{tabularx}{\textwidth}{@{}p{36mm}p{32mm}X@{}}
 \toprule
-\textbf{Verification Layer} & \textbf{VRK Claim Class} & \textbf{Verified Mathematical / Numerical Gate \& Scope Boundary} \\
+\textbf{Verification Layer} & \textbf{Method / Tool} & \textbf{Verified Mathematical / Numerical Result \& Scope Boundary} \\
 \midrule
-1. Rational Hopf Locus \& Domain ($\mathcal{P}_0 > 10/99$) & \texttt{ANALYTIC\_THEOREM} & Exact $e_c(5)=377/84$, $e_c(4)=12069/4025$, $e_c(1)=97461/364100$; proves $H_{\mathrm{obs},\mathrm{v1.4}}^* > 0 \iff \mathcal{P}_0 > 10/99 \approx 0.1010$ ($\epsilon \to 0^+$ limit, valid at $\epsilon=0.05$ for $\mathcal{P}_0 \ge 0.105$) and $de_c/d\mathcal{P}_0 > 0$ via positivity of all 8 numerator and 7 denominator polynomial coefficients. \\
+1. Rational Hopf Locus \& Domain ($\mathcal{P}_0 > 10/99$) & Exact \texttt{Fraction} \& \texttt{SymPy} & Exact $e_c(5)=377/84$, $e_c(4)=12069/4025$, $e_c(1)=97461/364100$; proves $H_{\mathrm{obs},\mathrm{v1.4}}^* > 0 \iff \mathcal{P}_0 > 10/99 \approx 0.1010$ ($\epsilon \to 0^+$ limit, accurate at $\epsilon=0.05$ for $\mathcal{P}_0 \ge 0.105$) and $de_c/d\mathcal{P}_0 > 0$ via positivity of all 8 primitive numerator and 7 denominator polynomial coefficients. \\
 \addlinespace[2pt]
-2. 4D \texttt{SymPy} Jacobian \& $\mathcal{P}_0=0$ Origin Audit & \texttt{ANALYTIC\_THEOREM} & Proves $R_{\mathrm{self}}|_{*} = 0$ and $\nabla R_{\mathrm{self}}|_{*} = (0,0,0,0)$ at any steady state ($\dot{H}_{\mathrm{obs}}^*=0$), row 4 of $J_4$ is $[0,0,0,-\mu_\Psi]$, $\partial_{\lambda_{\mathrm{lucid}}}\det(\lambda I_4 - J_4) \equiv 0$, closed-loop $e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$, and local asymptotic stability of $(0,0,0,0)$ at $\mathcal{P}_0 = 0$ for $0 \le \Lambda_{\mathrm{eff}} < 1$ (eigenvalues $\{-0.105573, -1.894427, -200, -0.60\}$ at $\Lambda_{\mathrm{eff}}=0.80$). \\
+2. 4D \texttt{SymPy} Jacobian, $\mathcal{P}_0=0$ Origin \& Variational $J_4(x)$ & Symbolic \texttt{SymPy} & Proves $R_{\mathrm{self}}|_{*} = 0$ and $\nabla R_{\mathrm{self}}|_{*} = (0,0,0,0)$ at any steady state ($\dot{H}_{\mathrm{obs}}^*=0$), row 4 of $J_4$ is $[0,0,0,-\mu_\Psi]$, closed-loop $e_c^{\mathrm{CL}}(\mathcal{P}_0, \Lambda_{\mathrm{eff}})$ for $\mathcal{P}_0 > 0$, non-existence of positive interior equilibria at $\mathcal{P}_0 = 0, \Lambda_{\mathrm{eff}} < 1$ (roots $\gamma^* \in \{0, -2.5\}$ at $\Lambda_{\mathrm{eff}}=0.80$), local stability of $(0,0,0,0)$, and $\max |J_{\mathrm{analytic}}(x) - J_{\mathrm{SymPy}}(x)| = 1.65 \times 10^{-17}$. \\
 \addlinespace[2pt]
-3. 8-Face Nagumo Grid \& Multi-Tolerance Poincar\'e & \texttt{REPRODUCED\_RESULT} & Verifies all 8 face inequalities on $\mathcal{B}_4$, \texttt{LSODA} vs.\ \texttt{DOP853} agreement on $\Sigma = \{\gamma=2.0, \dot{\gamma}>0\}$ across $\mathrm{rtol} \in \{10^{-8}, 10^{-10}, 10^{-12}\}$, whole-period integral $\overline{\mathcal{P}}_{\mathrm{eff},T} = 3.266554$ (IVa) and $2.190321$ (IVb), and single-period Liouville integral $\int_0^T \operatorname{div} F\,dt < -6900$. \\
+3. 8-Face Box Check, Uniform Floors \& Poincar\'e Integrals & \texttt{SciPy} \texttt{LSODA} \& \texttt{DOP853} & Verifies all 8 face inequalities on $\mathcal{B}_4$, uniform positive floors $\dot{I}_{\mathrm{floor}}(\mathcal{P}_0) > 0$ and $\gamma_{\mathrm{floor}}(\mathcal{P}_0) > 0$ for $\mathcal{P}_0 > 0$, \texttt{LSODA} vs.\ \texttt{DOP853} agreement on $\Sigma = \{\gamma=2.0, \dot{\gamma}>0\}$ across $\mathrm{rtol} \in \{10^{-8}, 10^{-10}, 10^{-12}\}$, and whole-period integrals across Regimes I--IVc. \\
 \addlinespace[2pt]
-4. 3-IC Convergence, Floquet \& $\mathcal{P}_0=0$ Bistability & \texttt{REPRODUCED\_RESULT} & Verifies 3-IC convergence $< 10^{-8}$ across Regimes II, IIIb, IVa, and IVb; tightened $(H_{\mathrm{obs}}, \dot{I})$ Floquet radius $\rho_{\mathrm{FD,tight}}(DP_{2,H\dot{I}}) < 10^{-7}$ ($\mathrm{rtol}=10^{-12}, \Delta h = 2\times 10^{-2}$); exact decoupled $\Psi$ multiplier $\mu_{\Psi,\mathrm{exact}} = 2.537698\times 10^{-6}$ in Regime II; and $\mathcal{P}_0=0$ bistability ($x(0)=(10^{-3})^4 \to (0,0,0,0)$ vs.\ 3 interior ICs $\to$ limit cycle). \\
+4. 20D Variational Floquet, $2\times 2$ Ablation \& SNLC & 20D Monodromy ODE \& Bisection & Integrates $\dot{\Phi} = J_4(x)\Phi(t)$ over one period $T$, verifying $\|\Phi(T)F - F\|/\|F\| \le 1.72 \times 10^{-9}$, saltation-projected $\rho_{\mathrm{var}}(DP_{2,H\dot{I}}) < 10^{-9}$, $\mu_{\Psi,\mathrm{exact}} = 2.537698\times 10^{-6}$ in Regime II, $2\times 2$ zero-drive ablation (showing $\Psi$-memory sustains the $\mathcal{P}_0=0$ cycle while memoryless $\Lambda_{\mathrm{eff}}\gamma$ collapses at the $\gamma_{\min}\approx 3.6\times 10^{-4}$ trough), and SNLC thresholds $\lambda_{\mathrm{lucid,SNLC}}(0) = 0.080341 \to \lambda_{\mathrm{lucid,SNLC}}(0.80) = 0.057974$. \\
 \addlinespace[2pt]
-5. Minimum \& Maximum Parameter Cube Extremes & \texttt{REPRODUCED\_RESULT} & Verifies Minimum Corner ($e=0.10, \mathcal{P}_0=0.10 < 10/99$, soft-wall root $H_{\mathrm{sw}}^* = 0.1295\,\mathrm{bits}$, $e_c^{\mathrm{CL}}=0.099132$, solver diff $< 10^{-7}$ at $\mathrm{rtol}=10^{-10}$ and $< 10^{-8}$ at $\mathrm{rtol}=10^{-12}$) and Maximum Corner ($\gamma^* = (-11+\sqrt{1471})/5$, $\mathcal{P}_{\mathrm{eff}}^* = (32+2\sqrt{1471})/9$, $e_c^{\mathrm{CL}}=21.958110$). \\
+5. Minimum \& Maximum Parameter Cube Corners & \texttt{brentq}, \texttt{LSODA} \& \texttt{DOP853} & Verifies Minimum Corner ($e=0.10, \mathcal{P}_0=0.10 < 10/99$, soft-wall root $H_{\mathrm{sw}}^* = 0.1295$, $e_c^{\mathrm{CL}}=0.099132$, solver diff $< 10^{-8}$ at $\mathrm{rtol}=10^{-12}$) and Maximum Corner ($\gamma^* = (-11+\sqrt{1471})/5$, $\mathcal{P}_{\mathrm{eff}}^* = (32+2\sqrt{1471})/9$, $e_c^{\mathrm{CL}}=21.958110$). \\
 \addlinespace[2pt]
-6. Lean 4 Static/CI Gate \& VRK v0.3.1 Manifest & \texttt{SCHEMA\_AND\_MANIFEST} & Offline Python static scan of \texttt{ExistenceVerification.lean} (15/15 pointwise boundary/slope theorem declarations, \texttt{lakefile.lean} target registration, \texttt{\#print axioms}, 0 \texttt{sorry}, 0 \texttt{nlinarith}; full \texttt{lake build} compilation executed in \href{https://github.com/reggaesharkk/theory-of-bounded-existence/actions}{GitHub Actions CI}), 4/4 adversarial promotion rejections, and archival consistency digest below. \\
+6. Lean 4 Pointwise Algebra (17 Thms) \& Reproducibility Hash & Lean 4 Lake (\texttt{lake build}) \& Static Check & Offline source check of all 17 pointwise theorems in \texttt{ExistenceVerification.lean} (\texttt{0 sorry}, \texttt{0 nlinarith}, full compilation via \texttt{lake build} in \href{https://github.com/reggaesharkk/theory-of-bounded-existence/actions}{GitHub Actions CI}) and quantitative reproducibility digest below. \\
 \bottomrule
 \end{tabularx}%
 }
 \end{table}
 
-\takeaway{Tolerance-Free VRK v0.3.1 Archival Consistency Digest}{The VRK certificate digest below is a \textbf{tamper-evident archival consistency and reproducibility fingerprint}: it hashes the exact rational Hopf thresholds, integer polynomial coefficients of $de_c/d\mathcal{P}_0$, boolean pass/fail gates, claim-schema records, and SHA-256 hashes of \texttt{ExistenceVerification.lean} and \texttt{lakefile.lean} (excluding floating-point solver digits so the hash is invariant across CPU architectures). While mathematical correctness rests on the symbolic, numerical, and Lean proofs themselves, this digest guarantees that any copy of the archive is byte-for-byte consistent with the verified release:\\[4pt]
-\centering\texttt{597b9ae3679dcd2e2bf17cf7c1616c463f48424ff1fd8453395936ecba066bbc}}
+\takeaway{Quantitative Archival Reproducibility Digest}{The SHA-256 digest below hashes the computed exact rational Hopf thresholds ($377/84, 12069/4025, 97461/364100$), the positivity domain $\mathcal{P}_{\mathrm{crit}} = 10/99$, the primitive polynomial coefficients of $de_c/d\mathcal{P}_0$, the bisected $\mathcal{P}_0 = 0$ SNLC thresholds ($\lambda_{\mathrm{lucid,SNLC}}(0) = 0.080341, \lambda_{\mathrm{lucid,SNLC}}(0.80) = 0.057974$), and the SHA-256 digests of \texttt{ExistenceVerification.lean} (17 theorems) and \texttt{lakefile.lean}:\\[4pt]
+\centering\texttt{de998b2fa755830ef45864614776390eba573aa1323c61a9d8c65f1c0688bd18}}
 
 \begin{thebibliography}{9}
 \bibitem{vrk031} P.\ Upadhyay, \emph{IntentSeal Verifiable Research Kernel (VRK v0.3.1)}, Zenodo (2026), \href{https://doi.org/10.5281/zenodo.23018459}{DOI: 10.5281/zenodo.23018459} (Lineage: \href{https://doi.org/10.5281/zenodo.23016445}{10.5281/zenodo.23016445}; Ecosystem: \href{https://doi.org/10.5281/zenodo.23474505}{10.5281/zenodo.23474505}).

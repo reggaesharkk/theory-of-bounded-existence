@@ -1,592 +1,95 @@
 #!/usr/bin/env python3
 """
-The Theory of Bounded Existence (Appendix B v1.0) — Standalone Interactive 4D ODE Sandbox Server
-Serves the self-contained interactive simulator (`dashboard.html`) on http://127.0.0.1:8085/
-(with embedded HTML fallback so this script runs standalone from any directory or zip extraction).
-Integrates the smooth (C^infty) 4D system Eqs. (B.1)-(B.4) with the quadratic self-feedback ratio
-R_self = fb^2 / (fb^2 + (f*P_0)^2 + sigma_0^2), boundary-layer adaptive sub-stepped RK4,
-exact closed-loop Routh-Hurwitz Hopf thresholds e_c^CL(P_0, Lambda_eff), and 1-period Poincare averages.
+Appendix B v1.0 — Interactive 4D Soft-Wall & Psi-Memory ODE Sandbox Server
+Author: Prince Upadhyay
+
+Serves `dashboard.html` on http://localhost:8085/ (and provides a `/api/regimes` JSON endpoint
+computed via SciPy LSODA using the smooth C^infty quadratic ratio R_self = fb^2 / (fb^2 + (f*P_0)^2 + sigma_0^2)).
 """
-from http.server import SimpleHTTPRequestHandler
+import json
 from pathlib import Path
-from socketserver import TCPServer
 import sys
-from threading import Timer
 import webbrowser
+from http.server import SimpleHTTPRequestHandler
+from socketserver import TCPServer
+from threading import Timer
+import numpy as np
+from scipy.integrate import solve_ivp
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-DASHBOARD_PATH = Path(__file__).resolve().parent / "dashboard.html"
+PARAMS = {
+    "a": 1.0, "b": 1.0, "c": 1.0, "e": 3.60, "f": 1.0, "g": 1.0,
+    "E_avail": 1.0, "I_erase": 10.0, "gamma_max": 10.0, "H_max": 100.0,
+    "eps_H": 0.05, "eps_I": 0.05, "sigma_0": 0.05, "r_lrsc": 1.0 / 9.0, "mu_Psi": 0.60,
+}
 
-EMBEDDED_DASHBOARD_HTML = r"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theory of Bounded Existence (Appendix B v1.0) — 4D ODE Simulator</title>
-  <style>
-    :root {
-      --bg-body: #090d16;
-      --bg-main: #111827;
-      --bg-panel: #0b1120;
-      --border-color: #1e293b;
-      --text-main: #e2e8f0;
-      --text-muted: #94a3b8;
-      --color-gamma: #4ade80;
-      --color-entropy: #facc15;
-      --color-processing: #38bdf8;
-      --color-psi: #f43f5e;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 20px;
-      background-color: var(--bg-body);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      justify-content: center;
-    }
-    .dashboard-container {
-      background: var(--bg-main);
-      padding: 22px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 1020px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-    }
-    .header h2 {
-      margin: 0 0 6px 0;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #f8fafc;
-    }
-    .header p {
-      margin: 0 0 14px 0;
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-    .presets {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .presets button {
-      background: var(--bg-panel);
-      color: var(--text-main);
-      border: 1px solid #334155;
-      padding: 7px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .presets button:hover, .presets button.active {
-      background: #0284c7;
-      border-color: #38bdf8;
-      color: #ffffff;
-    }
-    .control-panel {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-      gap: 14px;
-      margin-bottom: 16px;
-      background: var(--bg-panel);
-      padding: 14px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-    }
-    .control-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .control-group label {
-      font-size: 10.5px;
-      color: var(--text-muted);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .control-group input[type="range"] {
-      width: 100%;
-      accent-color: var(--color-processing);
-      cursor: pointer;
-    }
-    .value-display {
-      font-size: 13.5px;
-      font-weight: 700;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      color: #f8fafc;
-    }
-    .status-banner {
-      background: var(--bg-panel);
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      font-size: 12.5px;
-      line-height: 1.45;
-      border-left: 4px solid var(--color-psi);
-      border-top: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-    }
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .metric-card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 10px 12px;
-    }
-    .metric-card .m-label {
-      font-size: 10px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .metric-card .m-val {
-      font-size: 13.5px;
-      font-weight: 700;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      margin-top: 4px;
-      color: #f8fafc;
-    }
-    .plots-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .subplot {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 8px 12px;
-    }
-    svg {
-      width: 100%;
-      height: 112px;
-      display: block;
-    }
-    .footer-note {
-      margin-top: 14px;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-  </style>
-</head>
-<body>
 
-<div class="dashboard-container">
-  <div class="header">
-    <h2>The Theory of Bounded Existence (Appendix B v1.0) — 4D ODE Simulator</h2>
-    <p>
-      Integrates the smooth (C<sup>∞</sup>) 4D system Eqs. (B.1)–(B.4) with quadratic self-feedback ratio
-      R<sub>self</sub> = fb² / (fb² + (fP₀)² + σ₀²) using boundary-layer adaptive sub-stepped RK4 (Δt = 0.0005 s near soft walls, Δt = 0.005 s in bulk).
-      Computes exact closed-loop Routh–Hurwitz Hopf thresholds e<sub>c</sub><sup>CL</sup>(P₀, Λ<sub>eff</sub>) and single-period Poincaré integrals.
-    </p>
-  </div>
+def existence_4d_field(t, y, P_0, lam_sim, lam_lucid, kappa_meta):
+    gamma, H_obs, I_dot, Psi = y
+    P_eff = P_0 + lam_sim * PARAMS["r_lrsc"] * gamma + lam_lucid * Psi
+    dgamma = PARAMS["a"] * I_dot * PARAMS["E_avail"] * (1.0 - gamma / PARAMS["gamma_max"]) - PARAMS["b"] * gamma
+    dHobs = PARAMS["c"] * gamma * (PARAMS["H_max"] - H_obs) - PARAMS["I_erase"] * np.tanh(H_obs / PARAMS["eps_H"])
+    fb = PARAMS["e"] * np.tanh(I_dot / PARAMS["eps_I"]) * dHobs
+    dIdot = fb + PARAMS["f"] * P_eff - PARAMS["g"] * I_dot
+    R_self = (fb * fb) / (fb * fb + (PARAMS["f"] * P_0) ** 2 + PARAMS["sigma_0"] ** 2)
+    dPsi = kappa_meta * R_self * (1.0 - Psi) - PARAMS["mu_Psi"] * Psi
+    return [dgamma, dHobs, dIdot, dPsi]
 
-  <div class="presets">
-    <button onclick="setPreset('waking')" id="btn-waking">I. Waking (P₀=5, e=3.6)</button>
-    <button onclick="setPreset('low_psi')" id="btn-low_psi">II. Low-Ψ Cycle (P₀=4, κ=0.2)</button>
-    <button onclick="setPreset('high_psi_readout')" id="btn-high_psi_readout">IIIa. High-Ψ Readout (λ_luc=0)</button>
-    <button onclick="setPreset('high_psi_coupled')" id="btn-high_psi_coupled" class="active">IIIb. Coupled High-Ψ (λ_luc=0.3)</button>
-    <button onclick="setPreset('autopoietic')" id="btn-autopoietic">IVa. Autopoietic (P₀=1, λ_sim=7.2)</button>
-    <button onclick="setPreset('zero_drive')" id="btn-zero_drive">IVb. Zero-Drive (P₀=0, λ_sim=7.2)</button>
-    <button onclick="setPreset('min_all')" id="btn-min_all">Minimum Corner (e=0.1, P₀=0.1)</button>
-    <button onclick="setPreset('max_all')" id="btn-max_all">Maximum Corner (e=6, P₀=6, λ_sim=10)</button>
-  </div>
 
-  <div class="control-panel">
-    <div class="control-group">
-      <label for="ctrl-e">Self-Referential Gain (e)</label>
-      <input type="range" id="ctrl-e" min="0.10" max="6.00" step="0.05" value="3.60">
-      <div class="value-display" id="val-e">3.60</div>
-    </div>
-    <div class="control-group">
-      <label for="ctrl-p">Basal Sensory Drive (P₀)</label>
-      <input type="range" id="ctrl-p" min="0.00" max="6.00" step="0.05" value="4.00">
-      <div class="value-display" id="val-p">4.00</div>
-    </div>
-    <div class="control-group">
-      <label for="ctrl-kap">Metacognitive Weight (κ_meta)</label>
-      <input type="range" id="ctrl-kap" min="0.05" max="4.00" step="0.05" value="2.50">
-      <div class="value-display" id="val-kap">2.50</div>
-    </div>
-    <div class="control-group">
-      <label for="ctrl-lluc">Ψ Feedback Coupling (λ_lucid)</label>
-      <input type="range" id="ctrl-lluc" min="0.00" max="1.00" step="0.05" value="0.30">
-      <div class="value-display" id="val-lluc">0.30</div>
-    </div>
-    <div class="control-group">
-      <label for="ctrl-lsim">Autopoietic Gain (λ_sim)</label>
-      <input type="range" id="ctrl-lsim" min="0.00" max="10.00" step="0.10" value="0.00">
-      <div class="value-display" id="val-lsim">0.00</div>
-    </div>
-  </div>
-
-  <div class="status-banner" id="status-banner">
-    <div id="status-title" style="font-weight: 700; font-size: 13.5px; margin-bottom: 3px;">Initializing...</div>
-    <div id="status-sub" style="color: var(--text-muted);"></div>
-  </div>
-
-  <div class="metrics-row">
-    <div class="metric-card">
-      <div class="m-label">γ(t) Range (Asymptotic)</div>
-      <div class="m-val" id="m-gamma">[0.0000, 0.0000]</div>
-    </div>
-    <div class="metric-card">
-      <div class="m-label">Peak Readout max Ψ(t)</div>
-      <div class="m-val" id="m-psi">0.0000</div>
-    </div>
-    <div class="metric-card">
-      <div class="m-label">Period Average P̄_eff,T</div>
-      <div class="m-val" id="m-peff">0.0000</div>
-    </div>
-    <div class="metric-card">
-      <div class="m-label">Period T / Regime</div>
-      <div class="m-val" id="m-period">—</div>
-    </div>
-    <div class="metric-card">
-      <div class="m-label">8-Face 4D Box B₄ Check</div>
-      <div class="m-val" id="m-box">✓ inside B₄</div>
-    </div>
-  </div>
-
-  <div class="plots-stack">
-    <div class="subplot"><svg id="svg-gamma" viewBox="0 0 900 110" preserveAspectRatio="none"></svg></div>
-    <div class="subplot"><svg id="svg-hobs" viewBox="0 0 900 110" preserveAspectRatio="none"></svg></div>
-    <div class="subplot"><svg id="svg-idot" viewBox="0 0 900 110" preserveAspectRatio="none"></svg></div>
-    <div class="subplot"><svg id="svg-psi" viewBox="0 0 900 110" preserveAspectRatio="none"></svg></div>
-  </div>
-
-  <div class="footer-note">
-    Fixed structural parameters: a=b=c=f=g=E<sub>avail</sub>=1, γ<sub>max</sub>=10, H<sub>max</sub>=100, İ<sub>erase</sub>=10, ε<sub>H</sub>=ε<sub>I</sub>=0.05, σ₀=0.05, μ<sub>Ψ</sub>=0.60, r<sub>LRSC</sub>=1/9.
-    Common initial condition: x(0) = (2.05, 95.0, 4.0, 0.05). Boundary-layer RK4 sub-stepping (Δt = 0.0005 s whenever H<sub>obs</sub> &lt; 2.0 or İ &lt; 2.0) satisfies the explicit RK4 Dahlquist stability bound Δt &lt; 2.785 / (e·İ<sub>erase</sub>/ε<sub>I</sub> + g) across all parameter settings.
-  </div>
-</div>
-
-<script>
-  const PARAMS = {
-    a: 1.0, b: 1.0, c: 1.0, f: 1.0, g: 1.0, E_avail: 1.0,
-    gamma_max: 10.0, H_max: 100.0, I_erase: 10.0,
-    eps_H: 0.05, eps_I: 0.05, sigma_0: 0.05, r_lrsc: 1.0 / 9.0, mu_Psi: 0.60
-  };
-
-  const PRESETS = {
-    waking:           { e: 3.60, P0: 5.00, kap: 0.20, lluc: 0.00, lsim: 0.00 },
-    low_psi:          { e: 3.60, P0: 4.00, kap: 0.20, lluc: 0.00, lsim: 0.00 },
-    high_psi_readout: { e: 3.60, P0: 4.00, kap: 2.50, lluc: 0.00, lsim: 0.00 },
-    high_psi_coupled: { e: 3.60, P0: 4.00, kap: 2.50, lluc: 0.30, lsim: 0.00 },
-    autopoietic:      { e: 3.60, P0: 1.00, kap: 2.50, lluc: 0.30, lsim: 7.20 },
-    zero_drive:       { e: 3.60, P0: 0.00, kap: 2.50, lluc: 0.30, lsim: 7.20 },
-    min_all:          { e: 0.10, P0: 0.10, kap: 0.05, lluc: 0.00, lsim: 0.00 },
-    max_all:          { e: 6.00, P0: 6.00, kap: 4.00, lluc: 1.00, lsim: 10.00 }
-  };
-
-  function setPreset(name) {
-    document.querySelectorAll('.presets button').forEach(b => b.classList.remove('active'));
-    const btn = document.getElementById('btn-' + name);
-    if (btn) btn.classList.add('active');
-    const p = PRESETS[name];
-    document.getElementById('ctrl-e').value = p.e;
-    document.getElementById('ctrl-p').value = p.P0;
-    document.getElementById('ctrl-kap').value = p.kap;
-    document.getElementById('ctrl-lluc').value = p.lluc;
-    document.getElementById('ctrl-lsim').value = p.lsim;
-    runSimulator();
-  }
-
-  function computeClosedLoopHopf(P0, lsim) {
-    const Lam = lsim * PARAMS.r_lrsc;
-    let g_star = 0.0;
-    if (Lam === 0) {
-      g_star = (10.0 * P0) / (10.0 + P0);
-    } else {
-      const A = Lam;
-      const B = 10.0 + P0 - 10.0 * Lam;
-      const C = -10.0 * P0;
-      g_star = (-B + Math.sqrt(Math.max(0, B * B - 4 * A * C))) / (2 * A);
+def simulate_benchmark_regimes():
+    t_eval = np.linspace(0, 160, 1200)
+    y0_common = [2.05, 95.0, 4.0, 0.05]
+    configs = {
+        "I_waking":         (5.00, 0.00, 0.00, 0.20),
+        "II_low_psi":       (4.00, 0.00, 0.00, 0.20),
+        "IIIa_readout":     (4.00, 0.00, 0.00, 2.50),
+        "IIIb_coupled":     (4.00, 0.00, 0.30, 2.50),
+        "IVa_low_drive":    (1.00, 7.20, 0.30, 2.50),
+        "IVb_zero_coupled": (0.00, 7.20, 0.30, 2.50),
+        "IVc_pure_psi_mem": (0.00, 0.00, 0.30, 2.50),
     }
-    const I_star = P0 + Lam * g_star;
-    if (g_star <= 1e-12) {
-      return { g_star: 0, H_star: 0, I_star: 0, ec_cl: 0, ec_open: 0 };
-    }
-    let lo = 0.0, hi = 100.0;
-    for (let iter = 0; iter < 60; iter++) {
-      const mid = 0.5 * (lo + hi);
-      const val = g_star * (100.0 - mid) - 10.0 * Math.tanh(mid / PARAMS.eps_H);
-      if (val > 0) lo = mid; else hi = mid;
-    }
-    const H_sw = 0.5 * (lo + hi);
-    const alpha = 1.0 + I_star / 10.0;
-    const beta = 1.0 - g_star / 10.0;
-    const uH = Math.min(H_sw / PARAMS.eps_H, 300.0);
-    const sech2_H = Math.pow(1.0 / Math.cosh(uH), 2);
-    const mu_sw = g_star + (10.0 / PARAMS.eps_H) * sech2_H;
-    const delta_sw = 100.0 - H_sw;
-    const s = alpha + mu_sw + 1.0;
-    const tanh_I = Math.tanh(I_star / PARAMS.eps_I);
-    const ec_cl = (((alpha + 1.0) * (alpha + mu_sw) * (1.0 + mu_sw) - beta * Lam * (alpha + 1.0)) / (beta * delta_sw * s)) / Math.max(tanh_I, 1e-15);
-
-    let ec_open = 0.0;
-    if (P0 > 0) {
-      ec_open = (P0 * (P0 + 20) * (11 * P0 + 10) * (P0 * P0 + 120 * P0 + 100)) / (100 * (P0 + 10) * (P0 * P0 + 130 * P0 + 200));
-    }
-    return { g_star, H_star: H_sw, I_star, ec_cl, ec_open };
-  }
-
-  function deriv4D(y, e, P0, kap, lluc, lsim) {
-    const gamma = y[0], H_obs = y[1], I_dot = y[2], Psi = y[3];
-    const P_eff = P0 + lsim * PARAMS.r_lrsc * gamma + lluc * Psi;
-    const dgamma = PARAMS.a * I_dot * PARAMS.E_avail * (1.0 - gamma / PARAMS.gamma_max) - PARAMS.b * gamma;
-    const dHobs = PARAMS.c * gamma * (PARAMS.H_max - H_obs) - PARAMS.I_erase * Math.tanh(H_obs / PARAMS.eps_H);
-    const fb = e * Math.tanh(I_dot / PARAMS.eps_I) * dHobs;
-    const dIdot = fb + PARAMS.f * P_eff - PARAMS.g * I_dot;
-    const denom = fb * fb + (PARAMS.f * P0) * (PARAMS.f * P0) + PARAMS.sigma_0 * PARAMS.sigma_0;
-    const R_self = (fb * fb) / denom;
-    const dPsi = kap * R_self * (1.0 - Psi) - PARAMS.mu_Psi * Psi;
-    return [dgamma, dHobs, dIdot, dPsi, P_eff];
-  }
-
-  function runSimulator() {
-    const e = parseFloat(document.getElementById('ctrl-e').value);
-    const P0 = parseFloat(document.getElementById('ctrl-p').value);
-    const kap = parseFloat(document.getElementById('ctrl-kap').value);
-    const lluc = parseFloat(document.getElementById('ctrl-lluc').value);
-    const lsim = parseFloat(document.getElementById('ctrl-lsim').value);
-
-    document.getElementById('val-e').innerText = e.toFixed(2);
-    document.getElementById('val-p').innerText = P0.toFixed(2);
-    document.getElementById('val-kap').innerText = kap.toFixed(2);
-    document.getElementById('val-lluc').innerText = lluc.toFixed(2);
-    document.getElementById('val-lsim').innerText = lsim.toFixed(2);
-
-    const hopf = computeClosedLoopHopf(P0, lsim);
-    const M_H = PARAMS.c * PARAMS.gamma_max * PARAMS.H_max + PARAMS.I_erase;
-    const P_eff_max = P0 + lsim * PARAMS.r_lrsc * PARAMS.gamma_max + lluc;
-    const I_max_4D = (e * M_H + PARAMS.f * P_eff_max) / PARAMS.g;
-
-    // Boundary-layer adaptive sub-stepped RK4 over T_total = 240 s:
-    // Base step dtBase = 0.005 s (48,000 macro steps), subdivided into 10 micro-steps (dt = 0.0005 s)
-    // whenever the trajectory enters the stiff soft-wall boundary layer (H_obs < 2.0 or I_dot < 2.0).
-    const dtBase = 0.005;
-    const nMacro = 48000;
-    const sampleStride = 48; // 1000 plotted points
-    let y = [2.05, 95.0, 4.0, 0.05];
-    let cumPeff = 0.0;
-    let t = 0.0;
-
-    const tArr = [], gArr = [], hArr = [], iArr = [], pArr = [];
-    let insideBox = true;
-    const crossings = [];
-    const g_sec = (P0 < 0.5 && lsim === 0) ? 1.0 : 2.0;
-
-    for (let macro = 0; macro <= nMacro; macro++) {
-      if (macro % sampleStride === 0) {
-        tArr.push(t);
-        gArr.push(y[0]);
-        hArr.push(y[1]);
-        iArr.push(y[2]);
-        pArr.push(y[3]);
-      }
-      if (macro === nMacro) break;
-
-      const nSub = (y[0] < 0.5 || y[1] < 2.5 || y[2] < 2.5) ? 10 : 1;
-      const dt = dtBase / nSub;
-
-      for (let sub = 0; sub < nSub; sub++) {
-        const k1 = deriv4D(y, e, P0, kap, lluc, lsim);
-        const y2 = [y[0] + 0.5*dt*k1[0], y[1] + 0.5*dt*k1[1], y[2] + 0.5*dt*k1[2], y[3] + 0.5*dt*k1[3]];
-        const k2 = deriv4D(y2, e, P0, kap, lluc, lsim);
-        const y3 = [y[0] + 0.5*dt*k2[0], y[1] + 0.5*dt*k2[1], y[2] + 0.5*dt*k2[2], y[3] + 0.5*dt*k2[3]];
-        const k3 = deriv4D(y3, e, P0, kap, lluc, lsim);
-        const y4 = [y[0] + dt*k3[0], y[1] + dt*k3[1], y[2] + dt*k3[2], y[3] + dt*k3[3]];
-        const k4 = deriv4D(y4, e, P0, kap, lluc, lsim);
-
-        const gPrev = y[0];
-        const peffStep = (k1[4] + 2*k2[4] + 2*k3[4] + k4[4]) / 6.0;
-        const nextCumPeff = cumPeff + dt * peffStep;
-
-        y[0] += (dt / 6.0) * (k1[0] + 2*k2[0] + 2*k3[0] + k4[0]);
-        y[1] += (dt / 6.0) * (k1[1] + 2*k2[1] + 2*k3[1] + k4[1]);
-        y[2] += (dt / 6.0) * (k1[2] + 2*k2[2] + 2*k3[2] + k4[2]);
-        y[3] += (dt / 6.0) * (k1[3] + 2*k2[3] + 2*k3[3] + k4[3]);
-
-        if (y[0] < 0.0 || y[0] > PARAMS.gamma_max ||
-            y[1] < 0.0 || y[1] > PARAMS.H_max ||
-            y[2] < 0.0 || y[2] > I_max_4D ||
-            y[3] < -1e-12 || y[3] > 1.0) {
-          insideBox = false;
+    out = {"t": np.round(t_eval, 3).tolist()}
+    for key, (P0, lsim, lluc, kap) in configs.items():
+        sol = solve_ivp(
+            existence_4d_field, (0, 160), y0_common,
+            args=(P0, lsim, lluc, kap), t_eval=t_eval,
+            method="LSODA", rtol=1e-9, atol=1e-12
+        )
+        out[key] = {
+            "gamma": np.round(sol.y[0], 4).tolist(),
+            "H_obs": np.round(sol.y[1], 4).tolist(),
+            "I_dot": np.round(sol.y[2], 4).tolist(),
+            "Psi":   np.round(sol.y[3], 4).tolist(),
         }
-
-        if (t > 120.0 && gPrev < g_sec && y[0] >= g_sec) {
-          const frac = (g_sec - gPrev) / Math.max(y[0] - gPrev, 1e-15);
-          crossings.push({
-            t: t + frac * dt,
-            cumPeff: cumPeff + frac * dt * peffStep
-          });
-        }
-        cumPeff = nextCumPeff;
-        t += dt;
-      }
-    }
-
-    const tailStart = Math.floor(gArr.length * 0.625);
-    const gTail = gArr.slice(tailStart);
-    const pTail = pArr.slice(tailStart);
-    const minG = Math.min(...gTail), maxG = Math.max(...gTail);
-    const maxPsi = Math.max(...pTail);
-    const isOscillating = (maxG - minG) > 0.05;
-
-    let peffDisplay = '';
-    let periodDisplay = '';
-    if (isOscillating && crossings.length >= 2) {
-      const cLast = crossings[crossings.length - 1];
-      const cPrev = crossings[crossings.length - 2];
-      const T_est = cLast.t - cPrev.t;
-      const peffPeriodAvg = (cLast.cumPeff - cPrev.cumPeff) / T_est;
-      peffDisplay = peffPeriodAvg.toFixed(4) + ' (1-period ∫)';
-      periodDisplay = 'T = ' + T_est.toFixed(3) + ' s';
-    } else {
-      const peffEq = P0 + lsim * PARAMS.r_lrsc * gTail[gTail.length - 1] + lluc * pTail[pTail.length - 1];
-      peffDisplay = peffEq.toFixed(4) + ' (steady)';
-      periodDisplay = 'Fixed Point';
-    }
-
-    document.getElementById('m-gamma').innerText = `[${minG.toFixed(4)}, ${maxG.toFixed(4)}]`;
-    document.getElementById('m-psi').innerText = maxPsi.toFixed(4);
-    document.getElementById('m-peff').innerText = peffDisplay;
-    document.getElementById('m-period').innerText = periodDisplay;
-    document.getElementById('m-box').innerText = insideBox ? '✓ inside B₄ (γ,H,İ,Ψ)' : '✗ left box';
-    document.getElementById('m-box').style.color = insideBox ? '#4ade80' : '#f43f5e';
-
-    const banner = document.getElementById('status-banner');
-    const titleEl = document.getElementById('status-title');
-    const subEl = document.getElementById('status-sub');
-    const ratioCL = hopf.ec_cl > 0 ? (e / hopf.ec_cl) : Infinity;
-
-    if (!isOscillating) {
-      banner.style.borderLeftColor = '#4ade80';
-      titleEl.innerText = `I-Type: Asymptotically Stable Fixed Point (γ* = ${hopf.g_star.toFixed(4)}, Ψ* → 0)`;
-    } else if (lsim > 0 && P0 <= 1.5) {
-      banner.style.borderLeftColor = '#38bdf8';
-      titleEl.innerText = `IV-Type: Closed-Loop Autopoietic Oscillation (${maxPsi >= 0.5 ? 'Ψ ≥ 0.5' : 'Ψ < 0.5'})`;
-    } else if (maxPsi >= 0.5) {
-      banner.style.borderLeftColor = '#f43f5e';
-      titleEl.innerText = `III-Type: Post-Hopf Relaxation Cycle with High Self-Modeling Readout (max Ψ = ${maxPsi.toFixed(4)} > 0.50)`;
-    } else {
-      banner.style.borderLeftColor = '#facc15';
-      titleEl.innerText = `II-Type: Post-Hopf Relaxation Cycle with Low Self-Modeling Readout (max Ψ = ${maxPsi.toFixed(4)} < 0.50)`;
-    }
-
-    subEl.innerText = `Exact Soft-Wall Closed-Loop Hopf Threshold: e_c^CL(P₀=${P0.toFixed(2)}, Λ_eff=${(lsim/9).toFixed(3)}) = ${hopf.ec_cl.toFixed(4)} | Ratio e / e_c^CL = ${isFinite(ratioCL) ? ratioCL.toFixed(4) : '∞'} (${ratioCL > 1 ? 'equilibrium linearly unstable' : 'equilibrium linearly stable'}; λ_lucid=${lluc.toFixed(2)} decouples from J₄ equilibrium spectrum since ∇R_self|_* = 0).`;
-
-    drawSubplot('svg-gamma', tArr, gArr, 0, 10, '#4ade80', 'γ(t) Reconstruction Capacity [0, 10]', null);
-    drawSubplot('svg-hobs',  tArr, hArr, 0, 100, '#facc15', 'H_obs(t) Internal Entropy [0, 100 bits]', null);
-    drawSubplot('svg-idot',  tArr, iArr.map(v => Math.log10(Math.max(v, 1e-4))), -4, 2.2, '#38bdf8', 'log₁₀ İ(t) Processing Rate [10⁻⁴ to 10²]', null);
-    drawSubplot('svg-psi',   tArr, pArr, 0, 1, '#f43f5e', 'Ψ(t) Self-Modeling Readout [0, 1]', 0.5);
-  }
-
-  function drawSubplot(svgId, tArr, yArr, yMin, yMax, color, label, threshVal) {
-    const svg = document.getElementById(svgId);
-    const W = 900, H = 110, padL = 45, padR = 15, padT = 16, padB = 18;
-    const plotW = W - padL - padR, plotH = H - padT - padB;
-    const tMax = tArr[tArr.length - 1] || 240;
-
-    let d = '';
-    for (let i = 0; i < tArr.length; i++) {
-      const x = padL + (tArr[i] / tMax) * plotW;
-      const clamped = Math.max(yMin, Math.min(yMax, yArr[i]));
-      const y = padT + plotH - ((clamped - yMin) / (yMax - yMin)) * plotH;
-      d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
-    }
-
-    let threshHtml = '';
-    if (threshVal !== null) {
-      const yTh = padT + plotH - ((threshVal - yMin) / (yMax - yMin)) * plotH;
-      threshHtml = `<line x1="${padL}" y1="${yTh.toFixed(1)}" x2="${W - padR}" y2="${yTh.toFixed(1)}" stroke="#f43f5e" stroke-width="1" stroke-dasharray="5,5" opacity="0.75"/>
-                    <text x="${padL + 6}" y="${(yTh - 4).toFixed(1)}" fill="#f43f5e" font-size="10" font-family="monospace">Ψ = 0.50 threshold</text>`;
-    }
-
-    svg.innerHTML = `
-      <rect x="${padL}" y="${padT}" width="${plotW}" height="${plotH}" fill="none" stroke="#1e293b" stroke-width="1"/>
-      <text x="${padL + 6}" y="${padT + 12}" fill="#94a3b8" font-size="11" font-family="monospace">${label}</text>
-      <text x="${padL - 6}" y="${padT + 9}" fill="#64748b" font-size="10" font-family="monospace" text-anchor="end">${yMax}</text>
-      <text x="${padL - 6}" y="${padT + plotH}" fill="#64748b" font-size="10" font-family="monospace" text-anchor="end">${yMin}</text>
-      ${threshHtml}
-      <path d="${d}" fill="none" stroke="${color}" stroke-width="1.8"/>
-    `;
-  }
-
-  ['ctrl-e', 'ctrl-p', 'ctrl-kap', 'ctrl-lluc', 'ctrl-lsim'].forEach(id => {
-    document.getElementById(id).addEventListener('input', () => {
-      document.querySelectorAll('.presets button').forEach(b => b.classList.remove('active'));
-      runSimulator();
-    });
-  });
-
-  runSimulator();
-</script>
-
-</body>
-</html>"""
+    return out
 
 
 class ExistenceDashboardHandler(SimpleHTTPRequestHandler):
-    def log_message(self, format, *args):
-        pass
-
     def do_GET(self):
+        base_dir = Path(__file__).resolve().parent
         if self.path in ("/", "/index.html", "/dashboard.html"):
+            dash_path = base_dir / "dashboard.html"
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=utf-8")
             self.end_headers()
-            if DASHBOARD_PATH.exists():
-                self.wfile.write(DASHBOARD_PATH.read_bytes())
-            else:
-                self.wfile.write(EMBEDDED_DASHBOARD_HTML.encode("utf-8"))
-        elif self.path == "/favicon.ico":
-            self.send_response(204)
+            self.wfile.write(dash_path.read_bytes())
+        elif self.path == "/api/regimes":
+            self.send_response(200)
+            self.send_header("Content-type", "application/json; charset=utf-8")
             self.end_headers()
+            self.wfile.write(json.dumps(simulate_benchmark_regimes()).encode("utf-8"))
         else:
             self.send_error(404, "File Not Found")
 
 
-def start_server():
-    TCPServer.allow_reuse_address = True
-    for port in range(8085, 8096):
-        try:
-            server = TCPServer(("127.0.0.1", port), ExistenceDashboardHandler)
-            url = f"http://127.0.0.1:{port}/"
-            print("=" * 78)
-            print("The Theory of Bounded Existence (Appendix B v1.0) — 4D ODE Simulator")
-            print(f"Serving interactive simulator at: {url}")
-            print("Press Ctrl+C to stop the server.")
-            print("=" * 78)
-            Timer(0.8, lambda: webbrowser.open_new(url)).start()
-            try:
-                server.serve_forever()
-            except KeyboardInterrupt:
-                print("\nShutting down sandbox safely.")
-            finally:
-                server.server_close()
-            return
-        except OSError:
-            continue
-    print("Could not bind any port in range 8085..8095.")
-
-
 if __name__ == "__main__":
-    start_server()
+    print("Launching 4D Soft-Wall & Psi-Memory Sandbox on http://localhost:8085/")
+    Timer(1.0, lambda: webbrowser.open_new("http://localhost:8085/")).start()
+    TCPServer.allow_reuse_address = True
+    with TCPServer(("", 8085), ExistenceDashboardHandler) as server:
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            print("\nShutting down sandbox safely.")

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theory of Bounded Existence (Appendix B v1.0) — 4D ODE Simulator</title>
+  <title>Bounded Self-Referential 4D ODE Simulator (Appendix B v1.0)</title>
   <style>
     :root {
       --bg-body: #090d16;
@@ -32,7 +32,7 @@
       padding: 22px;
       border-radius: 12px;
       width: 100%;
-      max-width: 1020px;
+      max-width: 1040px;
       border: 1px solid var(--border-color);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
     }
@@ -58,9 +58,9 @@
       background: var(--bg-panel);
       color: var(--text-main);
       border: 1px solid #334155;
-      padding: 7px 12px;
+      padding: 7px 11px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -168,21 +168,22 @@
 
 <div class="dashboard-container">
   <div class="header">
-    <h2>The Theory of Bounded Existence (Appendix B v1.0) — 4D ODE Simulator</h2>
+    <h2>Bounded Self-Referential Dynamics in a 4D Soft-Wall ODE System (Appendix B v1.0)</h2>
     <p>
-      Integrates the smooth (C<sup>∞</sup>) 4D system Eqs. (B.1)–(B.4) with quadratic self-feedback ratio
-      R<sub>self</sub> = fb² / (fb² + (fP₀)² + σ₀²) using boundary-layer adaptive sub-stepped RK4 (Δt = 0.0005 s near soft walls, Δt = 0.005 s in bulk).
-      Computes exact closed-loop Routh–Hurwitz Hopf thresholds e<sub>c</sub><sup>CL</sup>(P₀, Λ<sub>eff</sub>) and single-period Poincaré integrals.
+      Integrates the dimensionless smooth (C<sup>∞</sup>) 4D system Eqs. (4)–(7) with quadratic self-feedback ratio
+      R<sub>self</sub> = fb² / (fb² + (fP₀)² + σ₀²) using boundary-layer adaptive sub-stepped RK4 (Δt = 0.0005 near soft walls, Δt = 0.005 in bulk).
+      Evaluates closed-loop Routh–Hurwitz Hopf thresholds e<sub>c</sub><sup>CL</sup>(P₀, Λ<sub>eff</sub>) for P₀ &gt; 0, zero-drive Ψ-memory SNLC persistence at P₀ = 0, and single-period Poincaré integrals.
     </p>
   </div>
 
   <div class="presets">
-    <button onclick="setPreset('waking')" id="btn-waking">I. Waking (P₀=5, e=3.6)</button>
+    <button onclick="setPreset('waking')" id="btn-waking">I. High-Drive Fixed Pt (P₀=5)</button>
     <button onclick="setPreset('low_psi')" id="btn-low_psi">II. Low-Ψ Cycle (P₀=4, κ=0.2)</button>
     <button onclick="setPreset('high_psi_readout')" id="btn-high_psi_readout">IIIa. High-Ψ Readout (λ_luc=0)</button>
     <button onclick="setPreset('high_psi_coupled')" id="btn-high_psi_coupled" class="active">IIIb. Coupled High-Ψ (λ_luc=0.3)</button>
-    <button onclick="setPreset('autopoietic')" id="btn-autopoietic">IVa. Autopoietic (P₀=1, λ_sim=7.2)</button>
-    <button onclick="setPreset('zero_drive')" id="btn-zero_drive">IVb. Zero-Drive (P₀=0, λ_sim=7.2)</button>
+    <button onclick="setPreset('autopoietic')" id="btn-autopoietic">IVa. Low-Drive Coupled (P₀=1, λ_sim=7.2)</button>
+    <button onclick="setPreset('zero_drive')" id="btn-zero_drive">IVb. Zero-Drive Coupled (P₀=0, λ_sim=7.2, λ_luc=0.3)</button>
+    <button onclick="setPreset('pure_psi_mem')" id="btn-pure_psi_mem">IVc. Pure Ψ-Memory (P₀=0, λ_sim=0, λ_luc=0.3)</button>
     <button onclick="setPreset('min_all')" id="btn-min_all">Minimum Corner (e=0.1, P₀=0.1)</button>
     <button onclick="setPreset('max_all')" id="btn-max_all">Maximum Corner (e=6, P₀=6, λ_sim=10)</button>
   </div>
@@ -194,22 +195,22 @@
       <div class="value-display" id="val-e">3.60</div>
     </div>
     <div class="control-group">
-      <label for="ctrl-p">Basal Sensory Drive (P₀)</label>
+      <label for="ctrl-p">External Drive (P₀)</label>
       <input type="range" id="ctrl-p" min="0.00" max="6.00" step="0.05" value="4.00">
       <div class="value-display" id="val-p">4.00</div>
     </div>
     <div class="control-group">
-      <label for="ctrl-kap">Metacognitive Weight (κ_meta)</label>
+      <label for="ctrl-kap">Ψ Production Weight (κ_meta)</label>
       <input type="range" id="ctrl-kap" min="0.05" max="4.00" step="0.05" value="2.50">
       <div class="value-display" id="val-kap">2.50</div>
     </div>
     <div class="control-group">
-      <label for="ctrl-lluc">Ψ Feedback Coupling (λ_lucid)</label>
-      <input type="range" id="ctrl-lluc" min="0.00" max="1.00" step="0.05" value="0.30">
+      <label for="ctrl-lluc">Ψ-Memory Coupling (λ_lucid)</label>
+      <input type="range" id="ctrl-lluc" min="0.00" max="1.00" step="0.02" value="0.30">
       <div class="value-display" id="val-lluc">0.30</div>
     </div>
     <div class="control-group">
-      <label for="ctrl-lsim">Autopoietic Gain (λ_sim)</label>
+      <label for="ctrl-lsim">Proportional Gain (λ_sim)</label>
       <input type="range" id="ctrl-lsim" min="0.00" max="10.00" step="0.10" value="0.00">
       <div class="value-display" id="val-lsim">0.00</div>
     </div>
@@ -226,8 +227,8 @@
       <div class="m-val" id="m-gamma">[0.0000, 0.0000]</div>
     </div>
     <div class="metric-card">
-      <div class="m-label">Peak Readout max Ψ(t)</div>
-      <div class="m-val" id="m-psi">0.0000</div>
+      <div class="m-label">Ψ(t) Range [min, max]</div>
+      <div class="m-val" id="m-psi">[0.0000, 0.0000]</div>
     </div>
     <div class="metric-card">
       <div class="m-label">Period Average P̄_eff,T</div>
@@ -251,8 +252,8 @@
   </div>
 
   <div class="footer-note">
-    Fixed structural parameters: a=b=c=f=g=E<sub>avail</sub>=1, γ<sub>max</sub>=10, H<sub>max</sub>=100, İ<sub>erase</sub>=10, ε<sub>H</sub>=ε<sub>I</sub>=0.05, σ₀=0.05, μ<sub>Ψ</sub>=0.60, r<sub>LRSC</sub>=1/9.
-    Common initial condition: x(0) = (2.05, 95.0, 4.0, 0.05). Boundary-layer RK4 sub-stepping (Δt = 0.0005 s whenever H<sub>obs</sub> &lt; 2.0 or İ &lt; 2.0) satisfies the explicit RK4 Dahlquist stability bound Δt &lt; 2.785 / (e·İ<sub>erase</sub>/ε<sub>I</sub> + g) across all parameter settings.
+    Dimensionless unit-normalized parameters: a=b=c=f=g=E<sub>avail</sub>=1, γ<sub>max</sub>=10, H<sub>max</sub>=100, İ<sub>erase</sub>=10, ε<sub>H</sub>=ε<sub>I</sub>=0.05, σ₀=0.05, μ<sub>Ψ</sub>=0.60, r<sub>LRSC</sub>=1/9.
+    Common initial condition: x(0) = (2.05, 95.0, 4.0, 0.05). Boundary-layer RK4 sub-stepping (Δt = 0.0005 whenever H<sub>obs</sub> &lt; 2.5 or İ &lt; 2.5) satisfies the explicit RK4 Dahlquist stability bound Δt &lt; 2.785 / (e·İ<sub>erase</sub>/ε<sub>I</sub> + g) across all parameter settings.
   </div>
 </div>
 
@@ -270,6 +271,7 @@
     high_psi_coupled: { e: 3.60, P0: 4.00, kap: 2.50, lluc: 0.30, lsim: 0.00 },
     autopoietic:      { e: 3.60, P0: 1.00, kap: 2.50, lluc: 0.30, lsim: 7.20 },
     zero_drive:       { e: 3.60, P0: 0.00, kap: 2.50, lluc: 0.30, lsim: 7.20 },
+    pure_psi_mem:     { e: 3.60, P0: 0.00, kap: 2.50, lluc: 0.30, lsim: 0.00 },
     min_all:          { e: 0.10, P0: 0.10, kap: 0.05, lluc: 0.00, lsim: 0.00 },
     max_all:          { e: 6.00, P0: 6.00, kap: 4.00, lluc: 1.00, lsim: 10.00 }
   };
@@ -289,6 +291,9 @@
 
   function computeClosedLoopHopf(P0, lsim) {
     const Lam = lsim * PARAMS.r_lrsc;
+    if (P0 === 0 && Lam <= 1.0) {
+      return { g_star: 0, H_star: 0, I_star: 0, ec_cl: null, ec_open: null };
+    }
     let g_star = 0.0;
     if (Lam === 0) {
       g_star = (10.0 * P0) / (10.0 + P0);
@@ -300,7 +305,7 @@
     }
     const I_star = P0 + Lam * g_star;
     if (g_star <= 1e-12) {
-      return { g_star: 0, H_star: 0, I_star: 0, ec_cl: 0, ec_open: 0 };
+      return { g_star: 0, H_star: 0, I_star: 0, ec_cl: null, ec_open: null };
     }
     let lo = 0.0, hi = 100.0;
     for (let iter = 0; iter < 60; iter++) {
@@ -319,8 +324,8 @@
     const tanh_I = Math.tanh(I_star / PARAMS.eps_I);
     const ec_cl = (((alpha + 1.0) * (alpha + mu_sw) * (1.0 + mu_sw) - beta * Lam * (alpha + 1.0)) / (beta * delta_sw * s)) / Math.max(tanh_I, 1e-15);
 
-    let ec_open = 0.0;
-    if (P0 > 0) {
+    let ec_open = null;
+    if (P0 > 10.0 / 99.0) {
       ec_open = (P0 * (P0 + 20) * (11 * P0 + 10) * (P0 * P0 + 120 * P0 + 100)) / (100 * (P0 + 10) * (P0 * P0 + 130 * P0 + 200));
     }
     return { g_star, H_star: H_sw, I_star, ec_cl, ec_open };
@@ -357,12 +362,9 @@
     const P_eff_max = P0 + lsim * PARAMS.r_lrsc * PARAMS.gamma_max + lluc;
     const I_max_4D = (e * M_H + PARAMS.f * P_eff_max) / PARAMS.g;
 
-    // Boundary-layer adaptive sub-stepped RK4 over T_total = 240 s:
-    // Base step dtBase = 0.005 s (48,000 macro steps), subdivided into 10 micro-steps (dt = 0.0005 s)
-    // whenever the trajectory enters the stiff soft-wall boundary layer (H_obs < 2.0 or I_dot < 2.0).
     const dtBase = 0.005;
     const nMacro = 48000;
-    const sampleStride = 48; // 1000 plotted points
+    const sampleStride = 48;
     let y = [2.05, 95.0, 4.0, 0.05];
     let cumPeff = 0.0;
     let t = 0.0;
@@ -426,7 +428,7 @@
     const gTail = gArr.slice(tailStart);
     const pTail = pArr.slice(tailStart);
     const minG = Math.min(...gTail), maxG = Math.max(...gTail);
-    const maxPsi = Math.max(...pTail);
+    const minPsi = Math.min(...pTail), maxPsi = Math.max(...pTail);
     const isOscillating = (maxG - minG) > 0.05;
 
     let peffDisplay = '';
@@ -437,15 +439,15 @@
       const T_est = cLast.t - cPrev.t;
       const peffPeriodAvg = (cLast.cumPeff - cPrev.cumPeff) / T_est;
       peffDisplay = peffPeriodAvg.toFixed(4) + ' (1-period ∫)';
-      periodDisplay = 'T = ' + T_est.toFixed(3) + ' s';
+      periodDisplay = 'T = ' + T_est.toFixed(3);
     } else {
       const peffEq = P0 + lsim * PARAMS.r_lrsc * gTail[gTail.length - 1] + lluc * pTail[pTail.length - 1];
       peffDisplay = peffEq.toFixed(4) + ' (steady)';
-      periodDisplay = 'Fixed Point';
+      periodDisplay = maxG < 1e-4 ? 'Origin (0,0,0,0)' : 'Fixed Point';
     }
 
     document.getElementById('m-gamma').innerText = `[${minG.toFixed(4)}, ${maxG.toFixed(4)}]`;
-    document.getElementById('m-psi').innerText = maxPsi.toFixed(4);
+    document.getElementById('m-psi').innerText = `[${minPsi.toFixed(4)}, ${maxPsi.toFixed(4)}]`;
     document.getElementById('m-peff').innerText = peffDisplay;
     document.getElementById('m-period').innerText = periodDisplay;
     document.getElementById('m-box').innerText = insideBox ? '✓ inside B₄ (γ,H,İ,Ψ)' : '✗ left box';
@@ -454,28 +456,38 @@
     const banner = document.getElementById('status-banner');
     const titleEl = document.getElementById('status-title');
     const subEl = document.getElementById('status-sub');
-    const ratioCL = hopf.ec_cl > 0 ? (e / hopf.ec_cl) : Infinity;
 
-    if (!isOscillating) {
-      banner.style.borderLeftColor = '#4ade80';
-      titleEl.innerText = `I-Type: Asymptotically Stable Fixed Point (γ* = ${hopf.g_star.toFixed(4)}, Ψ* → 0)`;
-    } else if (lsim > 0 && P0 <= 1.5) {
-      banner.style.borderLeftColor = '#38bdf8';
-      titleEl.innerText = `IV-Type: Closed-Loop Autopoietic Oscillation (${maxPsi >= 0.5 ? 'Ψ ≥ 0.5' : 'Ψ < 0.5'})`;
-    } else if (maxPsi >= 0.5) {
-      banner.style.borderLeftColor = '#f43f5e';
-      titleEl.innerText = `III-Type: Post-Hopf Relaxation Cycle with High Self-Modeling Readout (max Ψ = ${maxPsi.toFixed(4)} > 0.50)`;
+    if (P0 === 0 && (lsim * PARAMS.r_lrsc) <= 1.0) {
+      if (isOscillating) {
+        banner.style.borderLeftColor = '#38bdf8';
+        titleEl.innerText = `IVb/c-Type: Zero-Drive Ψ-Memory-Sustained Cycle (min Ψ = ${minPsi.toFixed(4)}, λ_lucid·Ψ ≥ ${(lluc*minPsi).toFixed(3)})`;
+      } else {
+        banner.style.borderLeftColor = '#94a3b8';
+        titleEl.innerText = `Zero-Drive Origin Collapse: Trajectory Decays to Locally Stable Origin (0,0,0,0)`;
+      }
+      subEl.innerText = `At P₀ = 0 and Λ_eff = ${(lsim/9).toFixed(3)} ≤ 1, no positive interior equilibrium or Hopf bifurcation exists (roots γ* ∈ {0, −10(1−Λ_eff)/Λ_eff}). Self-sustained oscillation requires Ψ-memory coupling λ_lucid > λ_lucid,SNLC (0.0803 at Λ_eff=0; 0.0580 at Λ_eff=0.80) to bridge the γ_min ≈ 0.00036 trough.`;
     } else {
-      banner.style.borderLeftColor = '#facc15';
-      titleEl.innerText = `II-Type: Post-Hopf Relaxation Cycle with Low Self-Modeling Readout (max Ψ = ${maxPsi.toFixed(4)} < 0.50)`;
+      const ratioCL = hopf.ec_cl !== null ? (e / hopf.ec_cl) : Infinity;
+      if (!isOscillating) {
+        banner.style.borderLeftColor = '#4ade80';
+        titleEl.innerText = `I-Type: Asymptotically Stable Fixed Point (γ* = ${hopf.g_star.toFixed(4)}, Ψ* → 0)`;
+      } else if (lsim > 0 && P0 <= 1.5) {
+        banner.style.borderLeftColor = '#38bdf8';
+        titleEl.innerText = `IVa-Type: Low-Drive Closed-Loop Oscillation (${maxPsi >= 0.5 ? 'max Ψ ≥ 0.5' : 'max Ψ < 0.5'})`;
+      } else if (maxPsi >= 0.5) {
+        banner.style.borderLeftColor = '#f43f5e';
+        titleEl.innerText = `III-Type: Post-Hopf Relaxation Cycle with High Ψ-Readout (max Ψ = ${maxPsi.toFixed(4)} > 0.50)`;
+      } else {
+        banner.style.borderLeftColor = '#facc15';
+        titleEl.innerText = `II-Type: Post-Hopf Relaxation Cycle with Low Ψ-Readout (max Ψ = ${maxPsi.toFixed(4)} < 0.50)`;
+      }
+      subEl.innerText = `Exact Soft-Wall Closed-Loop Hopf Threshold: e_c^CL(P₀=${P0.toFixed(2)}, Λ_eff=${(lsim/9).toFixed(3)}) = ${hopf.ec_cl.toFixed(4)} | Ratio e / e_c^CL = ${ratioCL.toFixed(4)} (${ratioCL > 1 ? 'interior equilibrium linearly unstable' : 'interior equilibrium linearly stable'}; λ_lucid=${lluc.toFixed(2)} decouples from J₄ equilibrium spectrum since ∇R_self|_* = 0).`;
     }
 
-    subEl.innerText = `Exact Soft-Wall Closed-Loop Hopf Threshold: e_c^CL(P₀=${P0.toFixed(2)}, Λ_eff=${(lsim/9).toFixed(3)}) = ${hopf.ec_cl.toFixed(4)} | Ratio e / e_c^CL = ${isFinite(ratioCL) ? ratioCL.toFixed(4) : '∞'} (${ratioCL > 1 ? 'equilibrium linearly unstable' : 'equilibrium linearly stable'}; λ_lucid=${lluc.toFixed(2)} decouples from J₄ equilibrium spectrum since ∇R_self|_* = 0).`;
-
     drawSubplot('svg-gamma', tArr, gArr, 0, 10, '#4ade80', 'γ(t) Reconstruction Capacity [0, 10]', null);
-    drawSubplot('svg-hobs',  tArr, hArr, 0, 100, '#facc15', 'H_obs(t) Internal Entropy [0, 100 bits]', null);
-    drawSubplot('svg-idot',  tArr, iArr.map(v => Math.log10(Math.max(v, 1e-4))), -4, 2.2, '#38bdf8', 'log₁₀ İ(t) Processing Rate [10⁻⁴ to 10²]', null);
-    drawSubplot('svg-psi',   tArr, pArr, 0, 1, '#f43f5e', 'Ψ(t) Self-Modeling Readout [0, 1]', 0.5);
+    drawSubplot('svg-hobs',  tArr, hArr, 0, 100, '#facc15', 'H_obs(t) Internal Entropy Coordinate [0, 100]', null);
+    drawSubplot('svg-idot',  tArr, iArr.map(v => Math.log10(Math.max(v, 1e-4))), -4, 2.5, '#38bdf8', 'log₁₀ İ(t) Processing Rate [10⁻⁴ to 10²·⁵]', null);
+    drawSubplot('svg-psi',   tArr, pArr, 0, 1, '#f43f5e', 'Ψ(t) Slow-Memory / Self-Feedback Coordinate [0, 1]', 0.5);
   }
 
   function drawSubplot(svgId, tArr, yArr, yMin, yMax, color, label, threshVal) {
@@ -496,7 +508,7 @@
     if (threshVal !== null) {
       const yTh = padT + plotH - ((threshVal - yMin) / (yMax - yMin)) * plotH;
       threshHtml = `<line x1="${padL}" y1="${yTh.toFixed(1)}" x2="${W - padR}" y2="${yTh.toFixed(1)}" stroke="#f43f5e" stroke-width="1" stroke-dasharray="5,5" opacity="0.75"/>
-                    <text x="${padL + 6}" y="${(yTh - 4).toFixed(1)}" fill="#f43f5e" font-size="10" font-family="monospace">Ψ = 0.50 threshold</text>`;
+                    <text x="${padL + 6}" y="${(yTh - 4).toFixed(1)}" fill="#f43f5e" font-size="10" font-family="monospace">Ψ = 0.50 reference</text>`;
     }
 
     svg.innerHTML = `
