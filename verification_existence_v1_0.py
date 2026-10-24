@@ -50,7 +50,7 @@ This script performs six verification layers on the dimensionless 4D soft-wall O
      lam_lucid,crit(x_0), at P_0 = 0 both without proportional feedback (lam_lucid,crit(x_0; 0) = 0.080341)
      and with Lam_eff = 0.80 (lam_lucid,crit(x_0; 0.80) = 0.057974, a 27.8% reduction from x_0 accompanied
      by a 9.14x increase in P_bar_eff,T; note that forward bisection from fixed x_0 measures a basin-dependent
-     persistence threshold rather than a continuation-tracked saddle-node of limit cycles).
+     persistence threshold where x_0 crosses the origin's basin separatrix rather than a continuation-tracked periodic-orbit fold).
 5. Parameter Cube Minimum vs. Maximum Corner & RK4 Soft-Wall Stiffness Audit.
 6. Offline Lean 4 Source Check (17 Theorems in `ExistenceVerification.lean`) & Quantitative Archival Digest.
 """

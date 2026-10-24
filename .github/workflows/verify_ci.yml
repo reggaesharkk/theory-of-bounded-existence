@@ -3,6 +3,7 @@ name: Verify Theory of Bounded Existence (Appendix B v1.0)
 on:
   push:
     branches: [ main, master ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
@@ -18,13 +19,16 @@ jobs:
         run: |
           sha256sum -c MANIFEST_SHA256.txt
 
-      - name: Install elan and build Lean 4 modules (BoundaryVerification & ExistenceVerification)
+      - name: Install elan, build Lean 4 modules, and verify #print axioms output
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
           export PATH="$HOME/.elan/bin:$PATH"
           lake exe cache get || true
-          lake build BoundaryVerification ExistenceVerification
+          lake build BoundaryVerification ExistenceVerification | tee lean_build.log
+          grep -q "Build completed successfully" lean_build.log
+          grep -q "existence_box_8face_nagumo_certificate.*propext.*Classical.choice.*Quot.sound" lean_build.log
+          ! grep -q "sorryAx" lean_build.log
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
